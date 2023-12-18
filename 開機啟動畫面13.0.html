@@ -255,12 +255,13 @@
                 // 在這裡設定跳轉的目標頁面的URL
                 var targetUrl = 'https://www.ana.co.jp/';
                 
-                // 使用window.location.href屬性進行跳轉
-                window.location.href = targetUrl;
+                // 使用window.open()方法在新視窗中打開目標頁面
+                window.open(targetUrl, '_blank');
 
                 // 關閉當前頁面（可選）
                 window.close();
-            }, 55000);
+            }, 50500);
+
         </script>
         <script>
             function startProgressBar() {

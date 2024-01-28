@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=0.25">    
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+
+        <meta charset="utf-8">
+        <title>2023 — 日本自由行_九天八夜行程表</title>
+        <!--當前時間-->
+        <script language="JavaScript">
+            function startTime(){
+                var today=new Date();//定義日期物件   
+                var yyyy = today.getFullYear();//通過日期物件的getFullYear()方法返回年    
+                var MM = today.getMonth()+1;//通過日期物件的getMonth()方法返回年    
+                var dd = today.getDate();//通過日期物件的getDate()方法返回年     
+                var hh=today.getHours();//通過日期物件的getHours方法返回小時   
+                var mm=today.getMinutes();//通過日期物件的getMinutes方法返回分鐘   
+                var ss=today.getSeconds();//通過日期物件的getSeconds方法返回秒   
+                // 如果分鐘或小時的值小於10，則在其值前加0，比如如果時間是下午3點20分9秒的話，則顯示15：20：09   
+                MM=checkTime(MM);
+                dd=checkTime(dd);
+                mm=checkTime(mm);   
+                ss=checkTime(ss);    
+                var day; //用於儲存星期（getDay()方法得到星期編號）
+                if(today.getDay()==0)   day   =   "星期日 " 
+                if(today.getDay()==1)   day   =   "星期一 " 
+                if(today.getDay()==2)   day   =   "星期二 " 
+                if(today.getDay()==3)   day   =   "星期三 " 
+                if(today.getDay()==4)   day   =   "星期四 " 
+                if(today.getDay()==5)   day   =   "星期五 " 
+                if(today.getDay()==6)   day   =   "星期六 " 
+                document.getElementById('nowDateTimeSpan').innerHTML=yyyy+"-"+MM +"-"+ dd +" " + hh+":"+mm+":"+ss+"   " + day;   
+                setTimeout('startTime()',1000);//每一秒中重新載入startTime()方法 
+            }   
+
+            function checkTime(i){
+                if (i<10){
+                    i="0" + i;
+                }   
+                  return i;
+            }  
+        </script>
+        <!--世界時鐘-->
+        <script>
+            function updateClock(city, timeZone) {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('en-US', { timeZone: timeZone, hour12: false });
+    
+                document.getElementById(city + 'Time').textContent = `現在時間：${timeString} `;
+            }
+    
+            function updateAllClocks() {
+                updateClock('taipei', 'Asia/Taipei'); //台北
+                updateClock('tokyo', 'Asia/Tokyo'); //東京
+                // Add more cities as needed
+            }
+    
+            setInterval(updateAllClocks, 1000);
+            updateAllClocks();  // Initial update
+        </script>
+        <!--複製文字-->
+        <script language="JavaScript">
+            function copyEvent(id) {
+                var str = document.getElementById(id);
+                window.getSelection().selectAllChildren(str);
+                document.execCommand("Copy")
+                alert("複製成功")
+            }
+
+        </script>
+        <!--超連結並且在新分頁中開啟-->
+        <script>
+            function openLinkInNewTab(url) {
+                window.open(url, "_blank");
+            }
+
+        </script>
+        <!--機型選單-->
+        <script>
+            // JavaScript程式碼
+            document.addEventListener("DOMContentLoaded", function() {
+                var imagePaths = {
+                "#A321neo": "https://i.imgur.com/utsBQKH.jpg",
+                "#A330neo": "https://i.imgur.com/jnxQjuF.jpg",
+                "#A350-900": "https://i.imgur.com/ElJ4lX6.jpg",
+                };
+        
+                var menuItems = document.querySelectorAll("#menu li a");
+                for (var i = 0; i < menuItems.length; i++) {
+                    menuItems[i].addEventListener("click", function(event) {
+                        event.preventDefault();
+                        var target = this.getAttribute("href");
+                        showContent(target);
+                        setActiveMenuItem(this);
+                        updateUpperDiv(target);
+                    });
+                }
+        
+                function showContent(target) {
+                    var contents = document.querySelectorAll(".content");
+                    for (var i = 0; i < contents.length; i++) {
+                        contents[i].style.display = "none";
+                }
+                var selectedContent = document.querySelector(target);
+                    if (selectedContent) {
+                        selectedContent.style.display = "block";
+                    }
+                }
+        
+                function setActiveMenuItem(selectedItem) {
+                    var menuItems = document.querySelectorAll("#menu li a");
+                    for (var i = 0; i < menuItems.length; i++) {
+                        menuItems[i].classList.remove("active");
+                    }
+                    selectedItem.classList.add("active");
+                }
+        
+                function updateUpperDiv(target) {
+                    var upperDiv = document.querySelector("#upperDiv");
+                    upperDiv.innerHTML = "";
+                    var image = document.createElement("img");
+                    image.src = imagePaths[target];
+                    image.alt = "圖片";
+                    image.style.maxWidth = "100%";
+                    image.style.maxHeight = "";
+                    upperDiv.appendChild(image);
+                }
+        
+                showContent("#A321neo");
+                setActiveMenuItem(document.querySelector("#menu li a[href='#A321neo']"));
+                updateUpperDiv("#A321neo");
+            });
+        </script>
+        <!--日期進度條-->
+        <script>
+            window.addEventListener('DOMContentLoaded', function() {
+                var startDateTime = new Date('2024-01-30T08:30:00');
+                var endDateTime = new Date('2024-02-07T13:55:00');
+                var progressBar = document.getElementById('progress-bar');
+                var progressText = document.getElementById('progress-text');
+
+                function updateProgressBar() {
+                    var currentTime = new Date();
+                    var totalMilliseconds = endDateTime - startDateTime;
+                    var currentMilliseconds = currentTime - startDateTime;
+                    var progressPercentage = Math.min((currentMilliseconds / totalMilliseconds) * 100, 100);
+                    progressPercentage = Math.max(progressPercentage, 0);
+
+                    var stage = Math.ceil(progressPercentage / 10);
+                    progressBar.style.width = stage * 10 + '%';
+                    progressText.textContent = progressPercentage.toFixed(3) + '%';
+
+                    if (progressPercentage < 100) {
+                        requestAnimationFrame(updateProgressBar);
+                    }
+                }
+
+                requestAnimationFrame(updateProgressBar);
+            });
+        </script>
+        <!--<script>
+            // 設定起始日期和結束日期
+            var startDate = new Date("2023-01-01");
+            var endDate = new Date("2023-12-31");
+            
+            function updateProgressBar() {
+                // 取得當前日期
+                var currentDate = new Date();
+                
+                // 計算日期進度百分比
+                var totalDays = (endDate - startDate) / (1000 * 60 * 60 * 24);
+                var currentDays = (currentDate - startDate) / (1000 * 60 * 60 * 24);
+                var progressPercent = (currentDays / totalDays) * 100;
+                
+                // 更新進度條的值
+                var progressBar = document.getElementById("progress-bar");
+                progressBar.value = progressPercent;
+                
+                // 更新百分比顯示
+                var progressPercentElement = document.getElementById("progress-percent");
+                progressPercentElement.textContent = progressPercent.toFixed(2) + "%";
+            }
+            
+            // 每秒更新一次進度條
+            setInterval(updateProgressBar, 1000);
+        </script>-->
+        <!--機型選單-->
+        <!--<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // 定義圖片路徑
+                var imagePaths = {
+                    "#A321neo": "https://i.imgur.com/utsBQKH.jpg",
+                    "#A330neo": "https://i.imgur.com/jnxQjuF.jpg",
+                    "#A350-900": "https://i.imgur.com/ElJ4lX6.jpg",
+                };
+
+                // 監聽選單項目的點擊事件
+                var menuItems = document.querySelectorAll("li a");
+                for (var i = 0; i < menuItems.length; i++) {
+                    menuItems[i].addEventListener("click", function(event) {
+                    event.preventDefault(); // 阻止連結的預設行為
+                    var target = this.getAttribute("href");
+                    showContent(target); // 顯示對應的內容
+                    setActiveMenuItem(this); // 設定選單項目的活動狀態
+                    updateUpperDiv(target); // 更新上方的 div 內容
+                    });
+                }
+
+                // 顯示對應的內容
+                function showContent(target) {
+                    var contents = document.querySelectorAll(".content");
+                    for (var i = 0; i < contents.length; i++) {
+                    contents[i].style.display = "none"; // 隱藏所有內容
+                    }
+                    var selectedContent = document.querySelector(target);
+                    if (selectedContent) {
+                    selectedContent.style.display = "block"; // 顯示選中的內容
+                    }
+                }
+
+                // 設定選單項目的活動狀態
+                function setActiveMenuItem(selectedItem) {
+                    var menuItems = document.querySelectorAll("li a");
+                    for (var i = 0; i < menuItems.length; i++) {
+                    menuItems[i].classList.remove("active"); // 移除所有項目的活動狀態
+                    }
+                    selectedItem.classList.add("active"); // 添加選中項目的活動狀態
+                }
+
+                // 更新上方的 div 內容
+                function updateUpperDiv(target) {
+                    var upperDiv = document.querySelector("#upperDiv");
+                    upperDiv.innerHTML = ""; // 清空原有內容
+                    var image = document.createElement("img");
+                    image.src = imagePaths[target];
+                    image.alt = "圖片";
+                    image.style.maxWidth = "100%"; // 限制最大寬度
+                    image.style.maxHeight = "200px"; // 限制最大高度
+                    upperDiv.appendChild(image); // 添加圖片元素
+                }
+                // 顯示首頁內容
+                showContent("#A321neo");
+                setActiveMenuItem(document.querySelector("a[href='#A321neo']"));
+                updateUpperDiv("#A321neo");
+            });
+        </script>-->
+        <!--<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // 定義圖片路徑
+                var imagePaths = {
+                    "#A321neo": "https://i.imgur.com/utsBQKH.jpg",
+                    "#A330neo": "https://i.imgur.com/jnxQjuF.jpg",
+                    "#A350-900": "https://i.imgur.com/ElJ4lX6.jpg",
+                };
+            
+                // 監聽選單項目的點擊事件
+                var menuItems = document.querySelectorAll("li a");
+                for (var i = 0; i < menuItems.length; i++) {
+                    menuItems[i].addEventListener("click", function(event) {
+                        event.preventDefault(); // 阻止連結的預設行為
+                        var target = this.getAttribute("href");
+                        showContent(target); // 顯示對應的內容
+                        setActiveMenuItem(this); // 設定選單項目的活動狀態
+                        updateUpperDiv(target); // 更新上方的 div 內容
+                    });
+                }
+            
+                // 顯示對應的內容
+                function showContent(target) {
+                    var contents = document.querySelectorAll(".content");
+                    for (var i = 0; i < contents.length; i++) {
+                        contents[i].style.display = "none"; // 隱藏所有內容
+                    }
+                    var selectedContent = document.querySelector(target);
+                    if (selectedContent) {
+                        selectedContent.style.display = "block"; // 顯示選中的內容
+                    }
+                }
+            
+                // 設定選單項目的活動狀態
+                function setActiveMenuItem(selectedItem) {
+                    var menuItems = document.querySelectorAll("li a");
+                    for (var i = 0; i < menuItems.length; i++) {
+                        menuItems[i].classList.remove("active"); // 移除所有項目的活動狀態
+                    }
+                    selectedItem.classList.add("active"); // 添加選中項目的活動狀態
+                }
+            
+                // 更新上方的 div 內容
+                function updateUpperDiv(target) {
+                    var upperDiv = document.querySelector("#upperDiv");
+                    upperDiv.innerHTML = ""; // 清空原有內容
+                    var image = document.createElement("img");
+                    image.src = imagePaths[target];
+                    image.alt = "圖片";
+                    image.style.maxWidth = "100%"; // 限制最大寬度
+                    image.style.maxHeight = ""; // 限制最大高度
+                    upperDiv.appendChild(image); // 添加圖片元素
+                }
+            
+                // 顯示首頁內容
+                showContent("#A321neo");
+                setActiveMenuItem(document.querySelector("a[href='#A321neo']"));
+                updateUpperDiv("#A321neo");
+            });
+        </script>-->
+        <!--日期倒數-->
+        <!--<script>
+            // 目標日期
+            var targetDate = new Date("2030-12-31 00:00");
+
+            // 更新倒計時
+            function updateCountdown() {
+            var currentDate = new Date();
+            var timeDifference = targetDate - currentDate;
+
+            // 計算剩餘天數、小時、分鐘和秒數
+            var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+            var minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+            var seconds = Math.floor((timeDifference / 1000) % 60);
+
+            // 將倒計時顯示在頁面上
+            var countdownElement = document.getElementById("countdown");
+            countdownElement.innerHTML =
+                "倒計時：" +
+                days +
+                "天 " +
+                hours +
+                "小時 " +
+                minutes +
+                "分鐘 " +
+                seconds +
+                "秒";
+
+            // 如果目標日期已過，則顯示倒計時結束
+            if (timeDifference <= 0) {
+                countdownElement.innerHTML = "倒計時結束";
+            }
+            }
+
+            // 每秒鐘更新倒計時
+            setInterval(updateCountdown, 1000);
+
+        </script>-->
+
+        <!--風格-->
+        <style>
+            table{border: 1px; solid whitesmoke}
+            th, td{border: 2px; solid blue; empty-cells: show}
+            body{padding-top: 5%;}
+
+            .space-10{width: 10px; height: 10px;}
+            .space-20{width: 20px; height: 20px;}
+            .space-50{width: 50px; height: 50px;}
+
+
+            .space_height-10{height: 10px;}
+            .space_height-20{height: 20px;}
+            .space_height-50{height: 50px;}
+            .space_width-10{width: 10px;}
+            .space_width-20{width: 20px;}
+            .space_width-50{width: 50px;}
+            .hotel{text-decoration: none; font-size: 5;}
+            .hotelinformation{text-decoration: none; font-size: 3;}
+
+            .copy{background-color:#79FF79; width: 55px; height: 35px; border: none; border-radius: 10px;}
+
+
+            .seatingmap{width: 60%;}
+        </style>
+        <!--<style>
+            .ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #f1f1f1;
+                display: flex;
+                justify-content: center;
+            }
+
+            li {
+                display: inline-block;
+                margin: 10px;
+            }
+
+            li a {
+                display: block;
+                color: #333;
+                text-align: center;
+                padding: 15px 50px;
+                text-decoration: none;
+                background-color: #ddd; /* 新增的背景顏色 */
+                color: #333; /* 新增的文字顏色 */
+            }
+
+            li a:hover {
+                background-color: #aaa; /* 滑鼠懸停時的背景顏色 */
+            }
+
+            .active {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            .content {
+                display: none;
+            }
+
+
+            .airplane {
+                width: 90%;
+                height: auto;
+            }
+        </style>-->
+        <!--機型選單-->
+        <!--<style>
+            /* CSS樣式 */
+            #menu {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #D0D0D0;
+                display: flex;
+                justify-content: center;
+            }
+        
+            #menu li {
+                display: inline-block;
+                margin: 10px;
+            }
+        
+            #menu li a {
+                display: block;
+                color: #333;
+                text-align: center;
+                padding: 15px 80px;
+                text-decoration: none;
+                background-color: #ddd;
+                color: #333;
+                border-radius: 10px;
+            }
+        
+            #menu li a:hover {
+                background-color: #aaa;
+            }
+        
+            #menu .active {
+                background-color: #4CAF50;
+                color: white;
+            }
+        
+            .content {
+                display: none;
+            }
+        
+            .airplane {
+                width: 90%;
+                height: auto;
+            }
+
+            .aircraftinformation {
+                background-color: #D0D0D0;
+                border: none;
+                border-radius: 20px;
+                width: 95%;
+            }
+        
+        </style>-->
+        <!--航班資訊-->
+        <style>
+            .table-flightinformation {
+                border-collapse: collapse;
+                max-width: 40px;
+            }
+        
+            .th-flightinformation, .td-flightinformation {
+                border: 2px solid green;
+                padding: 8px;
+                height: 20px;
+            }
+        </style>
+        <!--日期進度條-->
+        <style>
+            .progress-bar-container {
+                width: 60%;
+                height: 20px;
+                border: 1px solid #ccc;
+                margin-bottom: 20px;
+                position: relative;
+            }
+        
+            .progress-bar {
+                height: 100%;
+                background-color: #66B3FF;
+                width: 0;
+                transition: width 0.5s ease;
+            }
+        
+            .progress-text {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-weight: bold;
+                color: #000000;
+            }
+        </style>
+        <!--世界時鐘-->
+        <style>
+            .clock {
+                display: inline-block;
+                margin: 20px;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+            }
+
+            .clock-info {
+                display: flex;
+                align-items: center;
+                margin-right: 10px; /* 根據需要調整邊距 */
+            }
+
+            .clock img {
+                max-width: 40px; /* 根據需要調整最大寬度 */
+                margin-right: 5px; /* 根據需要調整邊距 */
+            }
+
+        </style>
+        <!--顯示對應id-->
+        <script>
+            // 定義showPage函式
+            function showPage(id) {
+                // 取得所有具有class="page"的元素
+                var pages = document.getElementsByClassName("page");
+
+                // 隱藏所有元素
+                for (var i = 0; i < pages.length; i++) {
+                    pages[i].style.display = "none";
+                }
+
+                // 使用getElementById取得具有特定ID的元素
+                var element = document.getElementById(id);
+
+                // 檢查元素是否存在
+                if (element) {
+                    // 將元素的display屬性設定為"block"，使其顯示
+                    element.style.display = "block";
+                } else {
+                    // 如果元素不存在，顯示錯誤訊息
+                    console.error("找不到具有ID '" + id + "' 的元素。");
+                }
+            }
+        </script>
+        <!--顯示對應id-->
+        <style>
+            .page {
+                display: none;
+            }
+        </style>
+        <!--行程資訊-->
+        <!--<style>
+            .airport-info {
+                display: flex;
+                align-items: center;
+                justify-content: center; /* 将元素水平居中 */
+                text-align: left; /* 设置文本左对齐 */
+            }
+        
+            .airport-icon {
+                margin-right: 5px; /* 调整图标和文本之间的间距 */
+            }
+        </style>-->
+        <style>
+            /*地點資訊*/
+            .place-info {
+                display: flex;
+                align-items: center;
+                /*justify-content: center;*/ /* 将元素水平居中 */
+                line-height: 25px;
+                text-align: left; /* 设置文本左对齐 */
+                flex-direction: row; /* 将子元素水平排列 */
+            }
+
+            .place-icon {
+                margin-right: 10px; /* 调整图标和文本之间的间距 */
+            }
+
+            .place-text {
+                margin-top: 3px; /* 调整文本的上边距 */
+            }
+
+            .Itinerary-information {
+                padding: 10px;
+                padding-left: 15px;
+                border: 3px solid #ADADAD;
+                width: calc(85%);
+            }
+            
+            .place-name {
+                font-size: 30px;
+            }
+
+            /*交通資訊*/
+
+            .custom-table {
+              width: 90%;
+              border-collapse: collapse;
+            }
+        
+            .column {
+              width: 20%;
+            }
+        
+            .column2 {
+              width: 60%;
+            }
+        
+            .column3 {
+              width: 20%;
+            }
+        
+            .cell {
+              border: 0px solid black;
+              height: 80px;
+              text-align: center;
+            }
+
+            .airport {
+                font-size: 60px;
+            }
+
+            .flight-progress {
+                border-top: 3px solid #BEBEBE;
+            }
+
+            .take_off-and-landing_time {
+                font-size: 30px;
+            }
+
+            .total-flight-time {
+                vertical-align: bottom;
+            }
+        </style>
+          <style>
+
+          </style>
+    </head>
+    <body onload="showPage('home')"></body>
+    <body>
+        <!-- 導覽列 -->
+        <nav class="navbar navbar-light bg-light navbar-expand-md fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">旅遊計畫</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar1"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbar1">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item active"><a class="nav-link" style="cursor: pointer;" onclick="showPage('home')">首頁</a></li>
+                        <li class="nav-item"><a class="nav-link" style="cursor: pointer;" onclick="showPage('journey')">行程表</a></li>
+                        <li class="nav-item"><a class="nav-link" style="cursor: pointer;" onclick="showPage('Traffic-information')">交通資訊</a></li>
+                        <li class="nav-item"><a class="nav-link" style="cursor: pointer;" onclick="showPage('tool')">工具</a></li>
+                        <li class="nav-item"><a class="nav-link" style="cursor: pointer;" href="">緊急狀態</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">日期</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#day_1">第一天</a>
+                                <a class="dropdown-item" href="#day_2">第二天</a>
+                                <a class="dropdown-item" href="#day_3">第三天</a>
+                                <a class="dropdown-item" href="#day_4">第四天</a>
+                                <a class="dropdown-item" href="#day_5">第五天</a>
+                                <a class="dropdown-item" href="#day_6">第六天</a>
+                                <a class="dropdown-item" href="#day_7">第七天</a>
+                                <a class="dropdown-item" href="#day_8">第八天</a>
+                                <a class="dropdown-item" href="#day_9">第九天</a>
+                            </div>
+                        </li>
+                    </ul>    
+                </div>		  
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="輸入景點">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+        <center>
+        <div id="home" class="page">
+            <div class="space_height-20"></div>
+            <div class="space_height-10"></div>
+            <!--當前時間-->
+            <body onload="startTime()">
+                當前時間：<font><span id="nowDateTimeSpan"></span></font>
+            </body>
+            <div class="space_width-20"></div>
+            <div class="space-50"></div>
+
+            <!--旅行進度條-->
+            <h2>旅行進度條</h2>
+            <div class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar"></div>
+                <div id="progress-text" class="progress-text">準備出發</div>
+            </div>
+
+            <!--世界時鐘-->
+            <div class="clock" id="taipeiClock">
+                <div class="clock-info">
+                    <img src="https://i.imgur.com/TS3yEx5.png" alt="">
+                    <h2>台北時間</h2>
+                </div>
+                <p id="taipeiTime"></p>
+            </div>
+            <div class="clock" id="tokyoClock">
+                <div class="clock-info">
+                    <img src="https://i.imgur.com/TvOZA59.png" alt="">
+                    <h2>東京時間</h2>
+                </div>
+                <p id="tokyoTime"></p>
+            </div>
+
+            <!--桃園國際機場-->
+            <!--<p class="place-name">桃園國際機場</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：桃園國際機場</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：337桃園市大園區航站南路9號</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/4x3VpCVM9Z1Td34p9" target="_blank">https://maps.app.goo.gl/4x3VpCVM9Z1Td34p9</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26465.915328487627!2d121.17931178413369!3d25.06384870757084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34429fc062d215d5%3A0x70a3b690a9b5b109!2z5qGD5ZyS5ZyL6Zqb5qmf5aC0!5e1!3m2!1szh-TW!2stw!4v1706326021222!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>-->
+            <!--臺灣桃園國際機場第一航廈-->
+            <p class="place-name">臺灣桃園國際機場第一航廈</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：臺灣桃園國際機場第一航廈</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：337桃園市大園區航站南路15號</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/skvYXKTmRXAunGUU6" target="_blank">https://maps.app.goo.gl/skvYXKTmRXAunGUU6</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.765731671114!2d121.23265729678955!3d25.081384999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34429fd1b5fda82d%3A0x3d5496cc66876c8f!2z6Ie654Gj5qGD5ZyS5ZyL6Zqb5qmf5aC056ys5LiA6Iiq5buI!5e1!3m2!1szh-TW!2stw!4v1706326110974!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--桃園國際機場第二航廈-->
+            <!--<p class="place-name">桃園國際機場第二航廈</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：桃園國際機場第二航廈</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：33758桃園市大園區航站南路9號</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/3UipvDngQkX2wKiZ9" target="_blank">https://maps.app.goo.gl/3UipvDngQkX2wKiZ9</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.8769385118035!2d121.22951067488682!3d25.077269036548756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34429fb922c5d465%3A0x6afc0c2c6d525b27!2z5qGD5ZyS5ZyL6Zqb5qmf5aC056ys5LqM6Iiq5buI!5e1!3m2!1szh-TW!2stw!4v1706326231604!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>-->
+            <!--第三航廈工程辦公處-->
+            <!--<p class="place-name">第三航廈工程辦公處</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：第三航廈工程辦公處</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：337桃園市大園區海豐坡15鄰7-3號</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/8AZ8ShshibXcwm2p7" target="_blank">https://maps.app.goo.gl/8AZ8ShshibXcwm2p7</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26465.931510193623!2d121.17931177431642!3d25.06377380000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3468210973b65307%3A0x3d0660b943c79daa!2z56ys5LiJ6Iiq5buI5bel56iL6L6m5YWs6JmV!5e1!3m2!1szh-TW!2stw!4v1706326305934!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>-->
+            <!--成田國際機場-->
+            <!--<p class="place-name">成田國際機場</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：成田國際機場</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：1-1 Furugome, Narita, Chiba 282-0004日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/aq7cqJZ7HVtp3GQJ7" target="_blank">https://maps.app.goo.gl/aq7cqJZ7HVtp3GQJ7</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2963.2286970993!2d140.3794505817459!3d35.77018225434479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6022f379d1bd3757%3A0xd56e29a162771aa1!2z5oiQ55Sw5ZyL6Zqb5qmf5aC0!5e1!3m2!1szh-TW!2stw!4v1706326376521!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>-->
+            <!--Narita Airport Terminal 1-->
+            <!--<p class="place-name">Narita Airport Terminal 1</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：Narita Airport Terminal 1</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：Kinone, 成田市千葉縣 286-0105日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/tbCxokfAwALfVSib9" target="_blank">https://maps.app.goo.gl/tbCxokfAwALfVSib9</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11852.900197390434!2d140.37402174521497!3d35.77028015582665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6022f30b656c4ea7%3A0xbc0cd6366869370d!2sNarita%20Airport%20Terminal%201!5e1!3m2!1szh-TW!2stw!4v1706326676702!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>-->
+            <!--成田國際機場第二航廈-->
+            <p class="place-name">成田國際機場第二航廈</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：成田國際機場第二航廈</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：Furugome, 成田市千葉縣 286-0104日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/mgXQyZjtv7EYKRcq5" target="_blank">https://maps.app.goo.gl/mgXQyZjtv7EYKRcq5</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2963.1157692851893!2d140.38277939678954!3d35.77321299999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6022f3764fc26239%3A0xc6bbc46b9f31ea49!2z5oiQ55Sw5ZyL6Zqb5qmf5aC056ys5LqM6Iiq5buI!5e1!3m2!1szh-TW!2stw!4v1706326770818!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--成田機場第三旅客航站樓-->
+            <!--<p class="place-name">成田機場第三旅客航站樓</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：成田機場第三旅客航站樓</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：Tokko, 成田市千葉縣 286-0106日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/rQ135tm5kJq6cVF66" target="_blank">https://maps.app.goo.gl/rQ135tm5kJq6cVF66</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2962.929282591605!2d140.3808685753028!3d35.778217424640985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6022f37bbff19d75%3A0x998c414bc12c76a7!2z5oiQ55Sw5qmf5aC056ys5LiJ5peF5a6i6Iiq56uZ5qiT!5e1!3m2!1szh-TW!2stw!4v1706326965196!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>-->
+            <!--橫濱站東口相鐵FRESA INN飯店-->
+            <p class="place-name">橫濱站東口相鐵FRESA INN飯店</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：橫濱站東口相鐵FRESA INN飯店</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：5-10 Kinkocho, Kanagawa Ward, Yokohama, Kanagawa 221-0056日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">入住時間 15:00，退房時間 11:00</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/GsdvsrMRZ92HRwMZ8" target="_blank">https://maps.app.goo.gl/GsdvsrMRZ92HRwMZ8</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3249.470474229322!2d139.62219337528856!3d35.467901741664214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185dc5f1e06d63%3A0xa2331288e77f1440!2z5qmr5r-x56uZ5p2x5Y-j55u46ZC1RlJFU0EgSU5O6aOv5bqX!5e0!3m2!1szh-TW!2stw!4v1706147889411!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--田町格拉斯麗飯店-->
+            <p class="place-name">田町格拉斯麗飯店</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：田町格拉斯麗飯店</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：日本〒108-0023 Tokyo, Minato City, Shibaura, 3 Chome−8−1 １F</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/EMsujjie8E9TQXYB7" target="_blank">https://maps.app.goo.gl/EMsujjie8E9TQXYB7</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.349922482096!2d139.74837047529655!3d35.64374943203285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bb537644091%3A0x5ee980ca92e93bf2!2z55Sw55S65qC85ouJ5pav6bqX6aOv5bqX!5e0!3m2!1szh-TW!2stw!4v1706236961050!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--Hotel MONday toyosu-->
+            <p class="place-name">Hotel MONday toyosu</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：Hotel MONday toyosu</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：1 Chome-2-11 Shinonome, Koto City, Tokyo 135-0062日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/gwJ5rhaTDBQZkU6o7" target="_blank">https://maps.app.goo.gl/gwJ5rhaTDBQZkU6o7</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.1373244516217!2d139.79862517529688!3d35.64898813174524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018898b807fb28d%3A0x6d5cf013b4a896a7!2sHotel%20MONday%20toyosu!5e0!3m2!1szh-TW!2stw!4v1706237495922!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--Super Hotel JR上野入谷口-->
+            <p class="place-name">Super Hotel JR上野入谷口</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：Super Hotel JR上野入谷口</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：7 Chome-9-14 Ueno, Taito City, Tokyo 110-0005日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/q9Yh1ua24AghmBw88" target="_blank">https://maps.app.goo.gl/q9Yh1ua24AghmBw88</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.4401610048717!2d139.7774273098786!3d35.7153919724618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188e9bcf340001%3A0x434f6adb25883e65!2zU3VwZXIgSG90ZWwgSlLkuIrph47lhaXosLflj6M!5e0!3m2!1szh-TW!2sus!4v1706238719057!5m2!1szh-TW!2sus" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+        <!-------------------------------------------------------------------------------->
+
+        <div id="journey" class="page">
+            <!--第一天 Day_1-->
+            <h2 id="day_1" style="text-align: left; margin-left: 100px;">第一天</h2>
+            <!--地點1-->
+            <p class="place-name">臺灣桃園國際機場</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：臺灣桃園國際機場</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：337桃園市大園區航站南路9號</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/jhPZRXB5dpr5zupN9" target="_blank">https://maps.app.goo.gl/jhPZRXB5dpr5zupN9</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14454.906795071665!2d121.2215338!3d25.0772507!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34429fc062d215d5%3A0x70a3b690a9b5b109!2z5qGD5ZyS5ZyL6Zqb5qmf5aC0!5e0!3m2!1szh-TW!2stw!4v1705117073872!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">成田國際機場</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：成田國際機場</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：1-1 Furugome, Narita, Chiba 282-0004日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/GMfiFY3PVj3vjHBAA" target="_blank">https://maps.app.goo.gl/GMfiFY3PVj3vjHBAA</a></span>
+                </div>
+                <p>
+                    SKYLINER到上野<br>
+                    開車時間17:43/18:03/18:18/18:43/19:03車次( 抓50分鐘到)<br>
+                    18:43到上野19:27才來得及吃飯<br>
+                    先去上野車站T’s Tan Tan Ecute Ueno吃飯
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3237.2116100944527!2d140.38174657543732!3d35.770177972558685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6022f379d1bd3757%3A0xd56e29a162771aa1!2z5oiQ55Sw5ZyL6Zqb5qmf5aC0!5e0!3m2!1szh-TW!2stw!4v1706147009716!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">T's TanTan Ecute Ueno</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：T's TanTan Ecute Ueno</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：日本〒110-0005 Tokyo, Taito City, Ueno, 7-chōme−1−1 JR 上野駅改札内 ecute上野（3階）内</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：10:00～22:00</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/rxPgyM9uBCr1eVwx5" target="_blank">https://maps.app.goo.gl/rxPgyM9uBCr1eVwx5</a></span>
+                </div>
+                <p>
+                    直接找JR上野東京線就對了!!<br>
+                    地點在上野車站裡面, 要走到比較靠近上面的ecute商場區域<br>
+                    可以參考照片總之往上走到有商場區域, 然後在7/8號線路隔壁(剛好要去橫濱的月台就在7號)<br>
+                    https://home.gamer.com.tw/artwork.php?sn=5825288
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.4938000889233!2d139.7745658752998!3d35.71407242817005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188e9c112698a5%3A0x5f571b1c4018cfee!2sT&#39;s%20TanTan%20Ecute%20Ueno!5e0!3m2!1szh-TW!2stw!4v1706147367655!5m2!1szh-TW!2stw&quot" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">橫濱站東口相鐵FRESA INN飯店</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：橫濱站東口相鐵FRESA INN飯店</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：5-10 Kinkocho, Kanagawa Ward, Yokohama, Kanagawa 221-0056日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">入住時間 15:00，退房時間 11:00</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/GsdvsrMRZ92HRwMZ8" target="_blank">https://maps.app.goo.gl/GsdvsrMRZ92HRwMZ8</a></span>
+                </div>
+                <p>
+                    再從上野坐到橫濱(580yan)<br>
+                    21:06-21:40<br>
+                    21:18-21:50<br>
+                    JR上野東京線到平塚(7號月台)5分鐘<br>
+                    直達車繼續乘坐同一台車<br>
+                    JR東海道本線(東京-熱海)到平塚(10號月台)27分鐘<br>
+                    JU02-JT05(出發上野7號月台 到站 橫濱10號月台)<br>
+
+                    從JR一下車後，會處在位在1F的月台，此時可以看到各式車種通過橫濱車站（採光佳、車種多，橫濱車站月台一定會鐵道粉的愛！）<br>
+                    簡單來說，JR橫濱車站分為三大札口，分別為①北札口、②中央札口（雖然有分中央北、中央南，但出札口後都是同一區）、以及③南札口。<br>
+                    每個札口都在B1，且都會連通道不同地方，因此下車後，下對樓梯，走對札口十分重要！<br>
+
+                    下車後除了可以抬頭看指標，知道是哪一個札口之外，小撇步就是利用電車方向來判斷下車後要往哪個方向走。<br>
+                    由於橫濱車站的1F月台是南北向，橫濱位於東京的南方，因此從東京來的話，車頭前進方向會是南方，往前進方向的樓梯走到底，一出來就是南札口，反之亦然。<br>
+                    如果仍然搞不清楚的話，建議直接走位於月台中間的樓梯，一出來就會是中央札口（包含中央北札口、中央南札口），此札口也是可以最四通八達的札口！<br>
+
+                    接著，出了札口後，就會遇到另一個難題，要往哪一個出口走。如同上述介紹，中央札口十分重要，<br>
+                    因此以下也以中央札口的主要出口「東口」、「西口」做介紹，此口可連通道各大娛樂購物設施！<br>
+
+                    從JR中央札口（京急線稱正面札口、東橫線稱南札口）出來後，就會看到人潮穿梭在B1平面道路上，此道路可說是最重要的連通道，貫穿東口與西口。<br>
+
+                    橫濱車站「東口」<br>
+                    東口是室內百貨重鎮，站內就連通Lumine百貨，穿過地下道後就會抵達World Porta地下街，<br>
+                    從地下街也可以繼續通到SOGO、OIOI丸井百貨、SKY百貨、Bay Quarter港灣百貨、以及YCAT機場巴士轉運站。<br>
+                    Bay Quarter 2F更可以直接搭乘SEA BASS 水上巴士，直達港未來、紅磚倉庫、山下公園一帶，是很推薦也很熱門的遊橫濱方式！(殘念 纜車冬季公休)<br>
+
+                    橫濱車站「西口」
+                    西口則是百貨與戶外商店街，B1改札後就直接連通JOINUS百貨與高島屋，特別是JOINUS有生鮮超市、伴手禮、知名服飾品牌、雜貨等，<br>
+                    是年輕世代的逛街首選！另外，從此百貨也可直接連通到 YODOBASHI 電器店，十分方便！西口戶外商店街徒步區，<br>
+                    則是有HAC藥妝店、ABC-Mart 鞋店、BIC CAMERA 電器店等，是西口相當熱鬧的地方。<br>
+
+                    橫濱車站內提供東西向通道（稱中央通路），以及南北向通道（稱南北連絡通路），讓乘客可以輕鬆東西南北口自由移動。<br>
+                    因此，如果逛完東口，想要移動到西口，最簡單的方式就是回到B1的「中央札口」，從車站B1底下穿越，就可聯通道西口。<br>
+                    另外，如果不小心走錯札口，可以不用急著出站，從「南北連絡通路」就可以從北札口走到中央札口，或是從南札口回到中央札口，十分方便！<br>
+
+                    橫濱水上巴士的乘船處位在橫濱車站東口！<br>
+                    能抵達港未來、紅磚倉庫、中華街(山下公園)等等的地方！<br>
+                    *橫濱水上巴士情報<br>
+                    1.橫濱車站⇔港未來21(約10分) 大人420yan <br>
+                    2.橫濱車站⇔橫濱紅磚倉庫(約20分) 大人600yan<br>
+                    3.橫濱車站⇔中華街(山下公園)(約15分) 大人700yan
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3249.470474229322!2d139.62219337528856!3d35.467901741664214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185dc5f1e06d63%3A0xa2331288e77f1440!2z5qmr5r-x56uZ5p2x5Y-j55u46ZC1RlJFU0EgSU5O6aOv5bqX!5e0!3m2!1szh-TW!2stw!4v1706147889411!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第二天 Day_-->
+            <h2 id="day_2" style="text-align: left; margin-left: 100px;">第二天</h2>
+            <!--地點1-->
+            <p class="place-name">GUNDAM FACTORY YOKOHAMA</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：GUNDAM FACTORY YOKOHAMA</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：279-25 Yamashitacho, Naka Ward, Yokohama, Kanagawa 231-0023日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：11:00～20:00</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/322FK3JGKqw6ZdSw8" target="_blank">https://maps.app.goo.gl/322FK3JGKqw6ZdSw8</a></span>
+                </div>
+                <p>
+                    參考~港未來一日乘車卷460日幣<br>
+                    單程200日幣<br>
+
+                    此區景點~<br>
+                    1.象之鼻公園<br>
+                    2.大棧橋(必去)<br>
+                    3.山下公園<br>
+                    4.鋼彈(必去)<br>
+                    5.吃飯 元町中華街<br>
+
+                    預計15:00-15:30到目的地<br>
+
+                    橫濱鋼彈工廠 GUNDAM FACTORY YOKOHAMA<br>
+                    地址：〒231-0023 神奈川県横浜市中区山下町279-25<br>
+                    營業時間：平日：11:00–20:00、假日：10:00–20:00（週二休息）<br>
+
+                    交通方式<br>
+                    橫濱站搭乘港未來線(みなとみらい線)到元町‧中華街站，4號出口出站後，往山下公園步行10分鐘即可抵達售票處<br>
+                    橫濱鋼彈工廠位在橫濱山下碼頭。<br>
+                    往日本貨船「冰川丸」的方向走，遠遠就可以看到巨大鋼彈了。<br>
+                    「冰川丸」也是橫濱山下碼頭的觀光景點之一，是文化遺產，也可以買票登船參觀。<br>
+
+                    官網購票1/31(水) 16:05～16:50 (集合時間 15:50～16:05) <br>
+                    觀景台3300x2(TWD1413<br>
+                    門票1650x2(TWD707)<br>
+                    Total:9900yan(TWD2120/1060每人)<br>
+
+                    出場後就不能再度入場。<br>
+                    如果想要一次看到白天、晚上的鋼彈演出，建議16:00-19:00。這段時間可以收集到全部的演出、包括夜光秀<br>
+
+                    鋼彈實驗室非常酷！<br>
+                    如何製造鋼彈機器人、橫濱鋼彈的組裝過程，小朋友一定看到目不轉睛。<br>
+
+                    除了GUNDAM Café鋼彈咖啡，一樓鋼彈展望台旁也有餐車。<br>
+                    可以買到可愛的哈囉爆米花桶。<br>
+                    餐車前貼心設有長桌座位，坐在這裡邊吃邊看鋼彈，比在GUNDAM Café鋼彈咖啡更有搖滾區的感覺。<br>
+
+                    觀景台分為兩層，比較高的樓層在鋼彈的頭部附近，比較低的大概在胸口附近。<br>
+                    小技巧就是如果你要先去高處看，那就晚點去排隊。它的排隊方式會分為六排，<br>
+                    前三排會先去低樓層，後三排會去高樓層，個人建議先去高樓層。在每小時的表演出場後，兩層樓的人會做交換，<br>
+                    雖然說這樣都看得見，但是鋼彈出場時在高樓層會比較爽。<br>
+
+                    https://waynesan.com/gundam-factory-yokohama/<br>
+                    #%E3%80%8A%E6%A9%AB%E6%BF%B1%E9%8B%BC%E5%BD%88%E5%B7%A5%E5<br>
+                    %BB%A0%E3%80%8B%E8%A7%80%E6%99%AF%E5%8F%B0%E6%94%BB%E7%95%A5
+
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3250.314209214567!2d139.6517456752876!3d35.44701484280553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185df2887c6bf7%3A0xc83634d218e1d77d!2sGUNDAM%20FACTORY%20YOKOHAMA!5e0!3m2!1szh-TW!2stw!4v1706149105476!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第三天 Day_-->
+            <h2 id="day_3" style="text-align: left; margin-left: 100px;">第三天</h2>
+            <!--地點1-->
+            <p class="place-name">鎌倉、江之島</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：鎌倉、江之島</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：太平洋相模灣</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/WdrNzz6E2KgoV24h8" target="_blank">https://maps.app.goo.gl/WdrNzz6E2KgoV24h8</a></span>
+                </div>
+                <p>
+                    橫濱大船湘南單軌電鐵大船站<br>
+                    9:01/9:07/9:10/9:34/9:37(320yan)<br>
+
+                    鎌倉一日遊<br>
+                    https://gojp.tw/kamakura-tour/<br>
+
+                    有地圖<br>
+                    https://kimiyo.tw/enoshima/<br>
+
+                    景點1<br>
+                    湘南單軌電車<br>
+                    https://www.bobblog.tw/shonan-monorail/<br>
+                    湘南單軌電車一日券，湘南單軌電車運行於大船與江之島之間，總共有八個車站<br>
+                    官網有介紹這是日本坡度最陡的單軌電車，逼近之前去箱根搭乘的箱根登山電車，<br>
+                    另外中途也會過幾個山洞，世界上比較少有這種類似的單軌電車，要搭建議白天搭，<br>
+                    景色比較好，晚上就黑漆漆的，什麼也看不到。大約搭乘到中段時，突然發現富士山就在旁邊，原來搭這個湘南單軌電車還可以賞富士山<br>
+                    搭乘的時候可不要害怕到把眼睛都閉上喔! 經過14分鐘的驚魂記後，終於來到湘南單軌電車的尾站-江之島站<br>
+
+                    走出湘南江之島駅可惜回頭也無法拍到懸掛式列車(都擋住了)<br>
+                    但這個搭乘的體驗真的很有趣<br>
+
+                    因為地形的關係，湘南單軌電車翻過高山、跨越山谷，還有上下起伏、轉彎等<br>
+                    總共只有8個站別，從「大船站」一路開往「湘南江之島站」，整趟只需要14分鐘<br>
+
+                    江之電及湘南單軌的搭乘注意事項<br>
+
+                    ◆江之電和湘南單軌電車的路線都只有一條，也都沒有快慢車之別，全部是站站停的普通車。<br>
+                    兩條線還有一個共同特色，就是除了部分車站和區段，都只有一條軌道（單線），所以無法雙向通行。<br>
+                    ◆這導致兩者的班距都不短，江之電為 12 分鐘一班，湘南單軌電車為 7～8 分鐘一班，<br>
+                    因此行程安排較緊湊的懶蟲們，建議事前查好時刻表，或在下車時留意月台上的時刻表，並依時刻表安排行程，以免搭車時久候。<br>
+                    ◆也由於部分車站只有一條軌道，因此同一個月台會有順向及逆向列車停靠，<br>
+                    所以上車前請務必確認該列車的行駛方向，以免搭到反方向的列車。<br>
+
+                    ◆ 「江之島站」是江之電的車站，「湘南江之島站」是湘南單軌電車的車站，這兩站都離連接江之島的江之島大橋較遠。<br>
+                    ◆ 「片瀨江之島站」是小田急電鐵的車站，出入口就在江之島大橋旁。<br>
+
+                    所以想多省點體力的懶蟲們，可以選擇在小田急電鐵的「片瀨江之島站」上下車，往返江之島時可以少走個 5～10 分鐘喔！<br>
+
+                    鎌倉・江之島Afternoon Pass:江之島電車全線(13:00後)與江之島景點的套票，適合已經在鐮倉江之島地區旅遊，下午出發到江之島旅遊的朋友購買<br>
+                    江之電1日車票「Noriorikun」:一日任意搭乘江之島電車，適合當日行程規劃在鐮倉江之島地區旅遊<br>
+
+                    1.	江之電1日車票(800yan)<br>
+                    購買地點：江之島電鐵藤澤站、江之島站、鎌倉站 只要會用到江之島電鐵就很適合這張票券，只要搭個三趟就差不多回本。<br>
+                    2.鎌倉、江之島Afternoon Pass(1210yan)<br>
+                    13點開始發售的江之電全線自由乘坐車票可以分別與江之島Escar、江之島Samuel Cocking苑、<br>
+                    江之島海蠟燭（展望燈塔）景點門票組成套票，方便且有優惠。（13點以後有效）<br>
+                    販售處~江之電藤澤站、江之島站、長谷站、鎌倉站各窗口<br>
+
+                    江島神社大鳥居旁就是江之島各種票券售票的地點<br>
+                    1.江之島手扶梯(單次200、全程360日幣)：手扶梯共有三段，不搭手扶梯以步行上山也不會很難走<br>
+                    2.江之島展望台(大人500、兒童250日幣)：江之島至高點展望台，景色無限美好<br>
+                    3.江之島花園(大人500、兒童250日幣)：四季不同花卉，屬於小品等級景點<br>
+                    4.江之島シーキャンドルセット券(大人700、兒童350日幣)：手扶梯+展望台+花園，三合一套票<br>
+                    5.江之島1day PASS(大人1100、兒童500日幣)：三合一套票再加上岩之洞窟，最完整江之島一日遊<br>
+
+                    江之島手扶梯共有三段，可買單程也可以購買整天的手扶梯搭乘PASS，<br>
+                    不買手扶梯搭乘券其實道路也不會很難走，慢慢走大概30分鐘就可以走到山頂。<br>
+                    一次包含手扶梯+展望台+花園的江之島シーキャンドルセット通常會是最多人的選擇，<br>
+                    但如果還預計規劃江之島浪漫路線(江之島浪漫コース)，購買江之島1day PASS就更會是首選。<br>
+
+                    第一段：江島神社~江島神社(辺津宮)<br>
+                    第二段：江島神社(邊津宮)~江島神社(中津宮)<br>
+                    第三段：江島神社(中津宮)~江島神社(奧津宮)<br>
+
+                    「江之島」就位在海岸邊，抵達車站後約步行10分鐘即可抵達山腳下的「江之島神社」入口。<br>
+                    「江之島神社」供奉的是三位女神，也是日本三大弁財天神社之一。<br>
+
+                    江之島三條步行路線：<br>
+                    1.江之島展望路線(江之島展望コース)：包含江之島商店街、江島神社、<br>
+                    慢慢步行上山前往海中展望台(江之島展望灯台)，最經典的江之島遊覽路線
+                    2.江之島海灘長廊路線(ハーバープロムナードコース)：包含湘南遊艇港口與眺望江之島海岸景色絕佳地點，<br>
+                    如果天氣好的時候更可以在海岸邊看到富士山的樣貌<br>
+                    3.江之島浪漫路線(江之島浪漫コース)：包含浪漫的戀人之丘、海水沖蝕形成的岩屋洞窟(門票500日幣)、<br>
+                    最美日落的稚兒之淵，這條路線可以說是充滿了江之島的自然風光。<br>
+                    
+                    江之島三條路線推薦順序：<br>
+                    第一選擇就是江之島展望路線(藍色)，可以品嘗江之島美食以及親近最著名的江島神社，<br>
+                    如果有餘力再選擇江之島浪漫路線(橘色)，江之島海灘長廊路線(紅色)則算是比較小品等級的步道。<br>
+                    備註：江之島展望路線(約需2~3小時)、江之島海灘長廊路線(約1小時)、江之島浪漫路線(約需2~3小時)<br>
+
+                    以上只有江之島行程<br>
+
+                    以下鐮倉<br>
+
+                    鄰近「湘南海岸」的鎌倉有許多著名的觀光景點，有廣為人知的「鎌倉大佛」、繡球花賞花名點的「明月院」，<br>
+                    穿過大橋之後抵達江之島，還有浪漫的「江之島燈塔」與日本三大弁財天神社之一的「江島神社」。、<br>
+
+                    1.	鐮倉大佛如何去搭乘「江之電」電車至「長谷站」下車。步行約7分鐘。<br>
+                    「鎌倉大佛」就位在「高德院」之中。如果前往鎌倉觀光卻沒去看過「鎌倉大佛」的話，絕對不能說去過鎌倉！<br>
+
+                    2.長谷寺搭乘「江之電」電車至「長谷站」下車，步行約5分鐘。<br>
+                    「長谷寺」主要供奉觀音，也因此也被大家暱稱為「長谷觀音」。除了可以悠閒地在境內散步之外，<br>
+                    這裡最大的特徵之一就是可以登上位在境內的「見晴台」，能夠俯瞰鎌倉地區的樣貌！<br>
+                    天氣好時可以看見鎌倉的市鎮以及由比之濱、三浦半島，甚至最遠可以看見伊豆半島，可以同時看見山景以及海景的樣貌。<br>
+
+                    充滿歷史風情的古都鎌倉，在這裡絕對不能錯過的就是純正統的日式甘味茶點了！<br>
+                    而其中又屬「茶房雲母」、「豊島屋菓寮 八十小路」、「三日月堂花仙」最為知名。<br>
+
+                    「茶房雲母」的招牌必點是「水果紅豆白玉湯圓」，和一般尺寸比簡直是驚人的大的白玉湯圓絕對是必吃！<br>
+
+                    「豊島屋菓寮 八十小路」除了口味好吃之外造型上也下了一番功夫，如果是喜歡可愛風的話推薦「豆羹」。<br>
+
+                    「三日月堂花仙」的名物是使用高級葛粉「吉野葛」製成的涼葛粉，口味非常清爽適合夏天享用。除此之外這裡的銅鑼燒也非常有名，<br>
+                    被神奈川縣指定為「銘菓」（意旨品質優良，具有代表性的甜點）。
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6512.389147431212!2d139.48099345!3d35.301146499999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60184ee6a0890aa5%3A0x4fe5988514a5aec!2z5pel5pys44CSMjUxLTAwMzYg56We5aWI5bed57ij6Jek5r6k5biC5rGf5LmL5bO2!5e0!3m2!1szh-TW!2stw!4v1706235413483!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">地點名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：餐食</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    1.鐮倉野菜咖哩kan太君 11 :00-15:00<br>
+                    kamakurayasaikare-kantakun<br>
+                    地址:日本〒248-0005 Kanagawa, Kamakura, Yukinoshita, 1 Chome−4−2-1F コートドール<br>
+                    電話： +81 467-73-7418<br>
+                    鎌倉駅東口から小町通り沿いに約550m。徒歩約7分。<br>
+                    小町通りから鏑木清方記念美術館に向かう小道に入って30メートル右。<br>
+                    八幡宮前(三の鳥居)から約300m、徒歩約4分。<br>
+                    距离鎌倉 524 米
+
+                    2.	OXYMORON Komachi<br>
+
+                    •	〒248-0005 神奈川県鎌倉市雪ノ下1-5-38 2F<br>
+                    •	Tel：0467-73-8626<br>
+                    JR鎌倉駅東口改札を出て小町通りを真っ直ぐ進んで下さい。<br>
+                    3つ目の十字路を過ぎて、クレープ屋さんの向かいにある<br>
+                    商業施設「こもれび禄岸」の2Fです。<br>
+                    （駅から徒歩約７分です。）<br>
+
+                    •	※祝日の場合は翌(週四)木曜休み。臨時休業などはblogで告知いたします<br>
+
+                    3. SAIRAM（サイラム）　鎌倉店<br>
+                    自助餐 / 五辛、全素、無奶蛋<br>
+                    地址：〒248-0021 神奈川県鎌倉市坂ノ下20-11 ( 江之島電鐵 - 長谷站)<br>
+                    營業時間：11:30-17:00(L.o. 16:30) (定休:網站公告)<br>
+                    官網： http://www.sairam.jp/<br>
+
+                    SAIRAM嚴選秘境之店，放鬆的美景，美味的蔬食，來到鎌倉除了大佛、江之島，別忘了到長谷走走 ! <br>
+                    https://zoegoog.pixnet.net/blog/post/47276022-%e3%80%90%e8%94%ac%e9%a3%9f%e3%80%91sairam%<br>
+                    ef%bc%88%e3%82%b5%e3%82%a4%e3%83%a9%e3%83%a0%ef%bc%89%e9%8e%8c%e5%80%89%e5%ba%97-<br>
+                    從長谷站下車後，先步行到老舖力餅家後，可見上圖Px招牌<br>
+                    順著Px的指標走 繼續走到底右轉 柳暗花明又一村，SAIRAM就在左手邊囉!<br>
+                    SAIRAM 是採自助餐方式，每100G   ¥ 450<br>
+                    另有飯(吃到飽) <br>
+                    麵包、湯、沙拉等加價付費，飯湯不是免費的，記得要加價<br>
+                    有飲料、甜點可另外選購<br>
+
+                    營業時間請出發前上官網確認<br>
+                    入門換拖鞋 選擇喜歡位置 就可以到餐點區選擇自己喜歡的餐點了 ! <br>
+
+                    3.	木と季（きととき）<br>
+                    預約制11:00 ～ 16:00(2天前預約)<br>
+                    鎌倉から江ノ電で長谷駅へ　駅から徒歩８分ほどの<br>
+                    ステキな隠れ屋　"木と季"<br>
+
+                    「小町通」是鎌倉最繁華的地段，在這裡除了有許多小攤販可以買來邊走邊吃之外，想要購買伴手禮的話那來這裡絕對沒錯！<br>
+
+                    「豊島屋」餅乾是來到鎌倉絕對必買的伴手禮，以「鶴岡八幡宮」的神使鴿子作為主形象的「豊島屋」絕對必買。<br>
+
+                    「鎌倉五郎」的「半月」日式夾心餅乾也是鎌倉的受歡迎伴手禮，帶點日式摩登感的造型，不論是外表或是口味都不會讓人失望。<br>
+
+                    從「鎌倉站」徒步約20到30分鐘即可抵達「長谷寺」。而這段路程也就是所謂的「由比之濱大道」。<br>
+                    而最有名的就屬「 鯛魚燒NAMIHEI」這家鯛魚燒專賣店了。鯛魚燒內飽滿的餡料讓人吃了就停不下來！<br>
+                    共有四種口味可供選擇有紅豆、芝麻、抹茶和烤栗子共四種口味可選擇，<br>
+                    除了鯛魚燒之外也有另外販售天然酵母製作麵包，適合買來當小點心。
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6512.389147431212!2d139.48099345!3d35.301146499999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60184ee6a0890aa5%3A0x4fe5988514a5aec!2z5pel5pys44CSMjUxLTAwMzYg56We5aWI5bed57ij6Jek5r6k5biC5rGf5LmL5bO2!5e0!3m2!1szh-TW!2stw!4v1706235413483!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第四天 Day_-->
+            <h2 id="day_4" style="text-align: left; margin-left: 100px;">第四天</h2>
+            <!--地點1-->
+            <p class="place-name">合味道紀念館 橫濱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：合味道紀念館 橫濱</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：2 Chome-3-4 Shinko, Naka Ward, Yokohama, Kanagawa 231-0001日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：10:00～18:00</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/MZzzXAkPHDQxgpuW6" target="_blank">https://maps.app.goo.gl/MZzzXAkPHDQxgpuW6</a></span>
+                </div>
+                <p>
+                    1.橫濱合味道紀念館 (日清杯麵博物館)----必去<br>
+                    門票是成人500日圓、高中生以下免費。<br>
+                    https://yukigo.tw/cupnoodles-museum-yokohama/<br>
+                    前往橫濱合味道紀念館可以搭乘港未來線電車<br>
+                    在港未來站(みなとみらい駅)或馬車道站下車後，步行前往都約8分鐘<br>
+                    如果搭乘横橫濱觀光景點周遊巴士紅舞鞋號或碼頭線公車<br>
+                    請在國際橋・合味道紀念館站下車，下車後合味道紀念館就在眼前<br>
+
+                    合味道紀念館 橫濱的門票可事先於LAWSON售票端點購買。若要利用「我的合味道工廠」，購買門票時選擇「門票包含我的合味道工廠」就可以事先預約<br>
+
+                    雞湯拉麵工廠 中學生以上1,000日元 (要先上網預約)<br>
+                    我的合味道工廠1份500日圓 (現場製作)<br>
+                    合味道遊樂區 30分鐘輪換制 500日元<br>
+                    ※實際遊玩時間為25分鐘<br>
+                    NOODLES BAZAAR麵條街<br>
+                    1份 500日元 (半碗裝)、小碗雞湯拉麵 1份 250日元、各國的甜點 400日元 、各國的果汁 200日元 、飲料吧 250日元
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4094.6861203351864!2d139.63709442130144!3d35.45591906634734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185c577b6193dd%3A0x7368667740b93abe!2z5ZCI5ZGz6YGT57SA5b-16aSoIOapq-a_sQ!5e0!3m2!1szh-TW!2stw!4v1706236097008!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">Konica Minolta Planetaria</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：Konica Minolta Planetaria</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：日本〒220-0011 Kanagawa, Yokohama, Nishi Ward, Takashima, 1 Chome−2−5 横濱ゲートタワー 2F</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：10:30～21:00</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/hBM7CrDbyFWLyPiH7" target="_blank">https://maps.app.goo.gl/hBM7CrDbyFWLyPiH7</a></span>
+                </div>
+                <p>
+                    Konica Minolta Planetaria YOKOHAMA<br>
+                    在2022年3月於Yokohama Gate Tower內開幕的全新天文館，<br>
+                    由日本數位相機及影像軟體公司柯尼卡美能達所營運，帶來最佳的天文影象體驗。<br>
+                    他們每天提供多場不同主題的天文投影作品，像是結合著名文學作品「銀河鐵道之夜」，<br>
+                    或是與青春動漫合作等，再加上使用充滿臨場感的最新LED屏幕，可以充分享受美麗的星空。<br>
+                    如果選擇限定4席的沙發座位，躺著觀賞會更療癒喔！<br>
+                    地址：神奈川県横浜市西区高島一丁目2番5号横濱ゲートタワー2F
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d207583.57015006692!2d139.42228882812498!3d35.61556402053606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185d80ea99f2db%3A0x842bb104e1681f28!2sKonica%20Minolta%20Planetaria!5e0!3m2!1szh-TW!2stw!4v1706236361670!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">橫濱紅磚倉庫1號館</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：橫濱紅磚倉庫1號館</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：1 Chome-1-1 Shinko, Naka Ward, Yokohama, Kanagawa 231-0001日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：10:00～19:00</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/SLpif3j5qZLc8Nr69" target="_blank">https://maps.app.goo.gl/SLpif3j5qZLc8Nr69</a></span>
+                </div>
+                <p>
+                    紅磚倉庫<br>
+                    地址：神奈川県横浜市中区新港1-1<br>
+                    二號館內就有不少餐廳，其中最人氣莫過於Bills了，只有它一家需要排隊。<br>
+                    它有著玻璃外牆，如果夠幸運坐到旁邊的位置就可以邊眺望景色邊用餐。<br>
+                    這家有名的餐廳的菜單相信也不用我多介紹，反正點它的鬆餅就對了！絕對能俘虜每位女生的心❤️。     
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3250.1071084154637!2d139.63852518164256!3d35.45214267205343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185c58ad0b62cd%3A0x4b294ab19267e96!2z5qmr5r-x57SF56Oa5YCJ5bqrMeiZn-mkqA!5e0!3m2!1szh-TW!2stw!4v1706236581817!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">橫濱地標大廈</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：橫濱地標大廈</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：2 Chome-2-1 Minatomirai, Nishi Ward, Yokohama, Kanagawa 220-0012日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：07:00～22:00</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/DaXXgU3btdS3D3vCA" target="_blank">https://maps.app.goo.gl/DaXXgU3btdS3D3vCA</a></span>
+                </div>
+                <p>
+                    橫濱地標大廈樓高73層，是日本第二高的大樓，結合辦公室、飯店、商業設施，可以找到各式各樣的商店及餐廳，<br>
+                    包括大人小孩都喜愛的吉卜力主題商店、少年漫畫雜誌JUMP主題商店等等<br>
+                    69樓設有收費的展望台SKY GARDEN，可以從高空360度俯瞰橫濱美麗的景色。<br>
+                    他們還常常舉辦一些主題活動，例如在玻璃窗結合投影、在展望台進行解謎遊戲，除了觀景更增添趣味。<br>
+                    地址：横浜市西区みなとみらい2-2-1
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3249.9933791317203!2d139.62881097528793!3d35.45495834237157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185c5d7366a111%3A0x3661ef0a3534c8c7!2z5qmr5r-x5Zyw5qiZ5aSn5buI!5e0!3m2!1szh-TW!2stw!4v1706236737447!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點5-->
+            <p class="place-name">橫濱Hammerhead</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：橫濱Hammerhead</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：2 Chome-14-1 Shinko, Naka Ward, Yokohama, Kanagawa 231-0001日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：11:00～22:00</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/33RNUDcbctc1ZhMy7" target="_blank">https://maps.app.goo.gl/33RNUDcbctc1ZhMy7</a></span>
+                </div>
+                <p>
+                    YOKOHAMA HAMMERHEAD是結合客船碼頭的商業設施，館內可找到很多神奈川縣的品牌，<br>
+                    像橫濱的伴手禮商店Ariake Harbour Studio可自製印有自己照片的點心禮盒、<br>
+                    鎌倉紅谷Kurumicco Factory看到點心的現場製作過程，三崎港的著名甜甜圈店Misaki Donut等等。
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3249.963021538147!2d139.63852832528804!3d35.4557098923305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185c5731c00001%3A0x4ec46cc16e559328!2z5qmr5r-xSGFtbWVyaGVhZA!5e0!3m2!1szh-TW!2stw!4v1706236884415!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點6-->
+            <p class="place-name">田町格拉斯麗飯店</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：田町格拉斯麗飯店</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：日本〒108-0023 Tokyo, Minato City, Shibaura, 3 Chome−8−1 １F</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/EMsujjie8E9TQXYB7" target="_blank">https://maps.app.goo.gl/EMsujjie8E9TQXYB7</a></span>
+                </div>
+                <p>
+                    換飯店<br>
+                    橫濱到田町(410yan)<br>
+                    11:18-11:50<br>
+                    JK京濱東北根岸線快速開往南浦和<br>
+                    JK12-JK22(32分鐘)<br>
+
+                    田町Hotel Gracery Tokyo Tamachi<br>
+                    格拉斯麗田町酒店 2晚<br>
+                    Check in 14:00<br>
+                    Check out 11:00<br>
+
+                    飯店位置圖<br>
+                    https://tamachi.gracery.com/tw/<br>
+
+                    飯店距離JR田町站500m<br>
+                    附近有大型超市、便利店、餐廳，都很晚打烊
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.349922482096!2d139.74837047529655!3d35.64374943203285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bb537644091%3A0x5ee980ca92e93bf2!2z55Sw55S65qC85ouJ5pav6bqX6aOv5bqX!5e0!3m2!1szh-TW!2stw!4v1706236961050!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第五天 Day_-->
+            <h2 id="day_5" style="text-align: left; margin-left: 100px;">第五天</h2>
+            <!--地點1-->
+            <p class="place-name">澀谷 SKY</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：澀谷 SKY</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：日本〒150-6145 Tokyo, Shibuya City, Shibuya, 2 Chome−24−12 14階・45階・46階・屋上</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：10:00～22:30</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/iYF2YccnDWaUp7hY9" target="_blank">https://maps.app.goo.gl/iYF2YccnDWaUp7hY9</a></span>
+                </div>
+                <p>
+                    JR一日卷(760yan)<br>
+                    東京都心23區內JR車站的自動售票機<br>
+                    
+                    澀谷SHIBUYA SKY<br>
+                    
+                    B6出口方向<br>
+                    ・JR澀谷站：從JR中央口或JR南檢票口，往東口方向走。<br>
+                    ・東急東橫線or東京地下鐵有樂町線：出澀谷Hikarie1號出口後，往右手方向直走。<br>
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.752711661578!2d139.70226210807584!3d35.65846380857261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b6825f61ae1%3A0x6ff47ee61e522473!2z5r6A6LC3IFNLWQ!5e0!3m2!1szh-TW!2stw!4v1706237376071!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第六天 Day_-->
+            <h2 id="day_6" style="text-align: left; margin-left: 100px;">第六天</h2>
+            <!--地點1-->
+            <p class="place-name">Hotel MONday toyosu</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：Hotel MONday toyosu</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：1 Chome-2-11 Shinonome, Koto City, Tokyo 135-0062日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/gwJ5rhaTDBQZkU6o7" target="_blank">https://maps.app.goo.gl/gwJ5rhaTDBQZkU6o7</a></span>
+                </div>
+                <p>
+                    換飯店(位於永旺購物中心東雲店前方)<br>
+
+                    田町到豐洲(350yan)<br>
+                    11:25-11:46<br>
+                    JR山手線JY27-JY30<br>
+                    東京地鐵有樂町線Y18-Y22<br>
+                    豐洲6A口徒步923m(15min)<br>
+                    
+                    豐洲hotel MONday Premium TOYOSU  2晚<br>
+                    Check in 15:00<br>
+                    Check out 10:00<br>
+                    
+                    早餐6:30-9:30<br>
+                    
+                    大浴場營業時間<br>
+                    (1)15:00-25:00<br>
+                    (2)5:00-10:00<br>
+                    
+                    有前往豐洲站的免費接駁車<br>
+                    7:00-10:00(7:00/7:20/7:40….以此類推8:00…)<br>
+                    
+                    在台場區域移動時，除了慢慢散步之外，也可以選擇搭乘巡迴巴士「お台場レインボーバス」（台場Rainbow Bus），<br>
+                    這班巴士從品川、田町一路連結到台場地區，如果從品川出發的人也可以考慮搭巴士直達，很方便！進入台場地區後，<br>
+                    巴士會行經台場海濱公園、富士電視台、AQUA CITY，每週平日、六日均有行駛。
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.1373244516217!2d139.79862517529688!3d35.64898813174524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018898b807fb28d%3A0x6d5cf013b4a896a7!2sHotel%20MONday%20toyosu!5e0!3m2!1szh-TW!2stw!4v1706237495922!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">富士電視台</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：富士電視台</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：2 Chome-4-8 Daiba, Minato City, Tokyo 137-8088日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：10:00～18:00</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/rxHx82h162h1YQxg9" target="_blank">https://maps.app.goo.gl/rxHx82h162h1YQxg9</a></span>
+                </div>
+                <p>
+                    富士電視台<br>
+                    ・地址：東京都港区台場2-4-8<br>
+                    ・營業時間：10:00～18:00（最終入場時間為17:30）<br>
+                    ・休館日：週一<br>
+                    ・入場費：大人（高中生以上）550円、國中小學生300円<br>
+                    ・交通方式：百合海鷗線台場車站徒步約3分鐘
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6486.090983932513!2d139.76504377770993!3d35.62660500000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601889f7b0940e41%3A0xd4fc374ee144b1dc!2z5a-M5aOr6Zu76KaW5Y-w!5e0!3m2!1szh-TW!2stw!4v1706237808425!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">遠端通訊中心</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：遠端通訊中心</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：2-chōme-5-10 Aomi, Koto City, Tokyo 135-0064日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/ipu7vZCa3YE2xEgR9" target="_blank">https://maps.app.goo.gl/ipu7vZCa3YE2xEgR9</a></span>
+                </div>
+                <p>
+                    電訊中心展望室<br>
+                    ・地址：東京都江東区青海2-5-10テレコムセンター東棟20F<br>
+                    ・營業時間：平日15:00～21:00，週六、週日、假日11:00～21:00，最終入館時間20:30 *週一休館<br>
+                    ・交通方式：百合海鷗線テレコムセンター車站徒步約1分鐘<br>
+                    ・參觀費用：大人500円、小孩300円
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12973.726059815626!2d139.7616324989405!3d35.61708719632076!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60186207725e3dcd%3A0x663d0541500aeb9a!2z6YGg56uv6YCa6KiK5Lit5b-DIDItY2jFjW1lLTUtMTAgQW9taSwgS290byBDaXR5LCBUb2t5byAxMzUtMDA2NOaXpeacrA!5e0!3m2!1szh-TW!2sus!4v1706237954910!5m2!1szh-TW!2sus" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">台場景點</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    台場景點<br>
+
+                    「palette town」大大的摩天輪是指標<br>
+                    距離臨海線電車「東京電訊站」步行3分鐘，與新交通百合海鷗線「青海」站更是直結共構<br>
+                    「teamLab Borderless」在2019年被美國時代雜誌選為「2019年度世界最佳景點」<br>
+                    台場palette town推薦<br>
+
+                    ①購物商場「VenusFort」：超好逛的OUTLET在這裡<br>
+                    位在三樓的「Venus OUTLET」了，這裡是東京23區內少有的OUTLET，一共集結了約40間店鋪有著名精品名牌<br>
+
+                    ②體驗型主題樂園「MEGA WEB」<br>
+                    【TOYOTA CITYSHOWCASE】11:00～21:00<br>
+                    【HISTORY GARAG】11:00～21:00<br>
+                    【RIDE STUDIO】11:00～19:00<br>
+                    【試車體驗RIDE ONE】11:00～-20:00<br>
+
+                    ③台場地標「摩天輪」10:00-22:00 門票1000yan<br>
+                    乘坐時能夠一次看見東京鐵塔、晴空塔、東京京門大橋、彩虹大橋等東京著名地標景點及整座城市，<br>
+                    天氣晴朗無雲的時候甚至還能看見富士山<br>
+
+                    東京台場景點 必朝聖超大獨角獸鋼彈，燈光秀變身時間 (白天11:00-17:00四次；夜晚19:00-21:30六次)白天沒有燈光秀<br>
+                    鋼彈後方的台場購物廣場，品牌有 H&M (3F)、ZARA (4F)  ABC-MART (5F)、VANS (5F)、UNIQLO (5F)。<br>
+                    還有金子半之助、拉麵田中商店..等台場美食了<br>
+                    營業時間：11:00-20:00 <br>
+
+                    台場海濱公園也是很夯的御台場景點喔，大家最喜歡的台場夜景彩虹橋、自由女神就在這啦。<br>
+                    位於AQUA CITY ODAIBA購物中心附近  東京都港區台場1丁目4台場海濱公園内<br>
+
+                    自由女神後方是台場彩虹橋，做為連接芝浦與台場間的橋樑。<br>
+                    橋全長798公尺，上下雙層結構，上層是高速道路，下層為一般道路及百合鷗通行，兩側則是人行道。<br>
+                    這也就是說彩虹大橋有行人步道，遊客可以免費通行喔。彩虹橋步道分南北兩側，單趟約30分鐘左右可以走完<br>
+                    「東京樂高樂園」位於東京台場的DECKS東京Beach內<br>
+
+                    台場其實還有公園！而繡球花主要集中在東京Teleport駅跟Venus Fort商場中間的Symbol （シンボルプロムナード公園）<br>
+                    Peomenade Park，這裏有一條非常多IG打卡的「繡球花樓梯」及「繡球花小徑」。附近還有一個地方可以看繡球花，<br>
+                    就是位於青海駅附近靠海邊的位置，更可以拍到有巨型摩天輪在背後的照片。
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第七天 Day_-->
+            <h2 id="day_7" style="text-align: left; margin-left: 100px;">第七天</h2>
+            <!--地點1-->
+            <p class="place-name">東京歡樂城</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：東京歡樂城</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：日本〒135-0091 Tokyo, Minato City, Daiba, 1 Chome−6−1 3F～5F DECKS Tokyo Beach</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：10:00～19:00</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/2aTY6QpTaUKSG5yX9" target="_blank">https://maps.app.goo.gl/2aTY6QpTaUKSG5yX9</a></span>
+                </div>
+                <p>
+                    百合海鷗線 御台場海濱公園站 步行2分鐘<br>
+                    東京Joypolis樂園護照票卷(一日卷)<br>
+                    7-17y 3600八折2880(台幣620)
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12971.848761987247!2d139.75693139900721!3d35.62865859612832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601889f65e4f37b9%3A0x54acae2e02ff1426!2z5p2x5Lqs5q2h5qiC5Z-O!5e0!3m2!1szh-TW!2stw!4v1706238213064!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第八天 Day_-->
+            <h2 id="day_8" style="text-align: left; margin-left: 100px;">第八天</h2>
+            <!--地點1-->
+            <p class="place-name">teamLab Planets</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：teamLab Planets</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：6 Chome-1-16 Toyosu, Koto City, Tokyo 135-0061日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：09:00～22:00</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/a7aCcBAc4y9ddvNR6" target="_blank">https://maps.app.goo.gl/a7aCcBAc4y9ddvNR6</a></span>
+                </div>
+                <p>
+                    早上行李先寄放在豐州曼迪飯店<br>
+                    豐洲到新豐洲(190yan)<br>
+                    10:18-10:19<br>
+                    百合海鷗線U16-U15<br>
+                    
+                    東京豐洲 teamLab Planets Tokyo展覽 (要帶短褲)<br>
+                    門票預約11:30(最慢11:00要到 要排隊)<br>
+                    
+                    展出時間 9:00 - 22:00<br>
+                    成人TWD816<br>
+                    青少年 TWD494<br>
+                    Total:TWD1310<br>
+                    
+                    必吃 Vegan Ramen UZU<br>
+                    teamLab Flower Shop & Art<br>
+                    10:30 - 19:00<br>
+                    拉麵的最後點餐時間為店鋪閉店前30分鐘。<br>
+                    
+                    最多台灣拉麵店老闆推薦的餐廳。根據Vogue雜誌報導，「UZU 」（日文「渦」的發音）<br>
+                    本店於2020年在京都開業，麵條使用宮崎縣綾町的有機全麥麵粉，店家強調完全沒有人工香料，<br>
+                    而店內除供應五種湯頭的拉麵和沾麵之外，還製作拉麵的剩餘食材運用在湯葉卷和箱壽司上，貫徹「零浪費」理念。<br>
+                    
+                    Traveggo 來到位於東京這家分店，就在team Lab美術館旁，原來拉麵店也是由美術館團隊一手打造！<br>
+                    來這裡用餐，不但可以一面享受拉麵美味，還能沈浸在電子藝術氛圍中。<br>
+                    
+                    品嚐了醬油拉麵和辣味噌拉麵，剛喝了一口 醬油拉麵，立馬眼睛一亮，一臉驚喜，直說這真是一碗有深度的湯頭！<br>
+                    「將由拉麵用昆布根香菇浸泡３６小時熬製而成，還加入了８種蔬果，光用文字還真是說不出那個味道的分明和層次，<br>
+                    每吃一口都會迸出不同的味道，「聞起來是蒜香，吃進去醬油的鹹為化為甘甜，口感層次非常豐富。完全超乎我的期待！」<br>
+                    「這也太好吃了吧！」邊吃味增拉麵邊讚不絕口「原來以為只是簡單的拉麵，結果發現不只味增香氣，還加了花椒，<br>
+                    本來就有著蔬果的鮮甜味，加上味噌發酵的香氣後，又加上花椒香氣，香氣一直層層疊加。」<br>
+                    一臉滿足又欲罷不能，麵條則是寬麵，吃起來是很有口感，吸飽湯汁後更有嚼勁。<br>
+                    
+                    餐點一：醬油拉麵套餐（五辛）9.5分 ¥2200<br>
+                    餐點二：味噌拉麵套餐（五辛）9 分  ¥2200           
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12968.528004706362!2d139.77134129912577!3d35.64911929578865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188908e728e749%3A0x6de450c94bd3d622!2steamLab%20Planets!5e0!3m2!1szh-TW!2sus!4v1706238445865!5m2!1szh-TW!2sus" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">Super Hotel JR上野入谷口</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：Super Hotel JR上野入谷口</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：7 Chome-9-14 Ueno, Taito City, Tokyo 110-0005日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/q9Yh1ua24AghmBw88" target="_blank">https://maps.app.goo.gl/q9Yh1ua24AghmBw88</a></span>
+                </div>
+                <p>
+                    換飯店<br>
+                    豐洲到上野(350yan/28分鐘)<br>
+                    東京地鐵有樂町線Y22-Y18<br>
+                    JR山手線JY30-JY05<br>
+
+                    JR上野站位於距離該飯店大約400m<br>
+
+                    上野Super Hotel JR Ueno Iriyaguchi  1晚<br>
+                    Check in 15:00<br>
+                    Check out 10:00
+                </p>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.4401610048717!2d139.7774273098786!3d35.7153919724618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188e9bcf340001%3A0x434f6adb25883e65!2zU3VwZXIgSG90ZWwgSlLkuIrph47lhaXosLflj6M!5e0!3m2!1szh-TW!2sus!4v1706238719057!5m2!1szh-TW!2sus" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第九天 Day_-->
+            <h2 id="day_9" style="text-align: left; margin-left: 100px;">第九天</h2>
+            <!--地點1-->
+            <p class="place-name">成田國際機場</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：成田國際機場</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：1-1 Furugome, Narita, Chiba 282-0004日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/16xYqJHBKERdB8WV6" target="_blank">https://maps.app.goo.gl/16xYqJHBKERdB8WV6</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3237.2116100991148!2d140.3817412098821!3d35.770177972444145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6022f379d1bd3757%3A0xd56e29a162771aa1!2z5oiQ55Sw5ZyL6Zqb5qmf5aC0!5e0!3m2!1szh-TW!2sus!4v1706238868793!5m2!1szh-TW!2sus" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">地點名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+        <!-------------------------------------------------------------------------------->
+
+        <div id="Traffic-information" class="page">
+            <!--航班資訊-->
+            <h2 id="flightinformation">航班資訊</h2>
+            <div class="space_height-10"></div>
+
+            <table class="custom-table">
+                <tr>
+                    <th class="column"></th>
+                    <th class="column2"></th>
+                    <th class="column3"></th>
+                </tr>
+                <tr>
+                    <td class="cell column airport">TPE</td>
+                    <td class="cell column2 total-flight-time">總時間 3小時 0分鐘</td>
+                    <td class="cell column3 airport">NRT</td>
+                </tr>
+                <tr>
+                    <td class="cell column take_off-and-landing_time">12:50</td>
+                    <td class="cell column2 flight-progress">波音777-300</td>
+                    <td class="cell column3 take_off-and-landing_time">16:50</td>
+                </tr>
+                <tr>
+                    <td class="cell column"></td>
+                    <td class="cell column2"></td>
+                    <td class="cell column3"></td>
+                </tr>
+                <tr>
+                    <td class="cell column airport">NRT</td>
+                    <td class="cell column2 total-flight-time">總時間 4小時 20分鐘</td>
+                    <td class="cell column3 airport">TPE</td>
+                </tr>
+                <tr>
+                    <td class="cell column take_off-and-landing_time">15:20</td>
+                    <td class="cell column2 flight-progress">波音777-300</td>
+                    <td class="cell column3 take_off-and-landing_time">18:40</td>
+                </tr>
+                <tr>
+                    <td class="cell column"></td>
+                    <td class="cell column2"></td>
+                    <td class="cell column3"></td>
+                </tr>
+            </table>
+
+            <img src="https://i.imgur.com/b3bNed4.png" alt="" style="width: 95%;">
+            <div class="space_height-20"></div>
+        </div>
+        </center>
+
+        <!-------------------------------------------------------------------------------->
+
+        <center>
+
+        <div id="tool" class="page">
+            <!--碼表-->
+            <h3>碼表</h3>
+            <div class="color-box">
+                <div>
+                    <span id="timer-display">00:00:00.000</span>
+                </div>
+            </div>
+            <div class="space_height-10"></div>
+            <button id="start-button" class="stopwatch">開始</button> 
+            <button id="stop-button" class="stopwatch">暫停</button>
+            <button id="reset-button" class="stopwatch">重置</button>
+            <div class="space_height-20"></div>
+
+            <!--計時器-->
+            <h3>計時器</h3>
+            <div class="space_height-10"></div>
+            <h2 id="timer">00:00:00.000</h2>
+            <div>
+                <label>小時：</label>
+                <input type="number" id="hours" min="0" placeholder="小時">
+            </div>
+            <div class="space_height-10"></div>
+            <div>
+                <label>分鐘：</label>
+                <input type="number" id="minutes" min="0" placeholder="分鐘">
+            </div>
+            <div class="space_height-10"></div>
+            <div>
+                <label>秒鐘：</label>
+                <input type="number" id="seconds" min="0" placeholder="秒鐘">
+            </div>
+            <div class="space_height-10"></div>
+            <button id="startBtn" onclick="toggleTimer()">開始</button>
+            <button onclick="resetTimer()" id="resetBtn">重置</button>
+            <div class="space_height-20"></div>
+
+            <!--隨機數字-->
+            <h3>隨機數字</h3>
+            <div class="space_height-10"></div>
+            <input type="number" id="min-input" placeholder="最小值">
+            <div class="space_height-10"></div>
+            <input type="number" id="max-input" placeholder="最大值">
+            <div class="space_height-20"></div>
+            <button onclick="generateRandomNumber()" id="randomnumbergeneration">生成隨機數</button>
+            <div id="result"></div>
+            <div class="space_height-20"></div>
+            <div class="space_height-50"></div>
+
+            <!--倒數計時-->
+            <h5 id="outbound">去程</h5>
+            <iframe width="300" height="150" src="https://naozhong.tw/embed/jishiqi/#date=2024-01-30T12:50:00&title=%E8%B5%B7%E9%A3%9B%E6%99%82%E9%96%93&theme=0&ampm=1&sound=xylophone" frameborder="0" allowfullscreen></iframe>
+            <iframe width="300" height="150" src="https://naozhong.tw/embed/jishiqi/#date=2024-01-30T16:50:00&title=%E9%99%8D%E8%90%BD%E6%99%82%E9%96%93&theme=0&ampm=1&sound=xylophone" frameborder="0" allowfullscreen></iframe>
+            <h5 id="returnjourney">回程</h5>
+            <iframe width="300" height="150" src="https://naozhong.tw/embed/jishiqi/#date=2024-02-07T15:20:00&title=%E8%B5%B7%E9%A3%9B%E6%99%82%E9%96%93&theme=0&ampm=1&sound=xylophone" frameborder="0" allowfullscreen></iframe>
+            <iframe width="300" height="150" src="https://naozhong.tw/embed/jishiqi/#date=2024-02-07T18:40:00&title=%E9%99%8D%E8%90%BD%E6%99%82%E9%96%93&theme=0&ampm=1&sound=xylophone" frameborder="0" allowfullscreen></iframe>
+        </div>
+        </center> 
+
+        <!-------------------------------------------------------------------------------->
+
+        <footer class="container-fluid">
+            <hr>		
+            <p class="float-end"><a href="#">Back to top</a></p>
+            <p>© 2023日本東京 · <a href="#">隱私權</a> · <a href="#">聯絡我們</a></p>
+        </footer>
+        
+        <!--顯示對應id-->
+        <script>
+            // 定義showPage函式
+            function showPage(id) {
+                // 取得所有具有class="page"的元素
+                var pages = document.getElementsByClassName("page");
+        
+                // 隱藏所有元素
+                for (var i = 0; i < pages.length; i++) {
+                    pages[i].style.display = "none";
+                }
+        
+                // 使用getElementById取得具有特定ID的元素
+                var element = document.getElementById(id);
+        
+                // 檢查元素是否存在
+                if (element) {
+                    // 將元素的display屬性設定為"block"，使其顯示
+                    element.style.display = "block";
+                } else {
+                    // 如果元素不存在，顯示錯誤訊息
+                    console.error("找不到具有ID '" + id + "' 的元素。");
+                }
+            }
+        </script>
+<!--工具選單-->
+
+
+        <!--碼表-->
+        <script>
+            // 計時器對象
+            var timer = {
+            startTime: 0,
+            elapsedTime: 0,
+            intervalId: null,
+            isRunning: false,
+
+            // 開始計時
+            start: function() {
+                if (!this.isRunning) {
+                    this.startTime = Date.now() - this.elapsedTime;
+                    this.intervalId = setInterval(function() {
+                        this.elapsedTime = Date.now() - this.startTime;
+                        this.displayTime();
+                    }.bind(this), 10);
+                    this.isRunning = true;
+                    console.log("計時開始");  
+                }
+            },
+
+            // 停止計時
+            stop: function() {
+                if (this.isRunning) {
+                    clearInterval(this.intervalId);
+                    this.intervalId = null;
+                    this.isRunning = false;
+                    console.log("計時停止");
+                }
+            },
+
+            // 重置計時器
+            reset: function() {
+                    this.startTime = 0;
+                    this.elapsedTime = 0;
+                    this.displayTime();
+                    console.log("計時重置");
+            },
+
+            // 獲取當前計時器總時間（以毫秒為單位）
+            getTime: function() {
+                return this.elapsedTime;
+            },
+
+            // 將時間顯示在頁面上
+            displayTime: function() {
+                var milliseconds = Math.floor(this.elapsedTime % 1000);
+                var seconds = Math.floor((this.elapsedTime / 1000) % 60);
+                var minutes = Math.floor((this.elapsedTime / (1000 * 60)) % 60);
+                var hours = Math.floor((this.elapsedTime / (1000 * 60 * 60)) % 24);
+
+                var timeString = formatTime(hours, minutes, seconds, milliseconds);
+                document.getElementById("timer-display").textContent = timeString;
+            }
+            };
+
+            // 格式化時間
+            function formatTime(hours, minutes, seconds, milliseconds) {
+            return (
+                (hours < 10 ? "0" + hours : hours) +
+                ":" +
+                (minutes < 10 ? "0" + minutes : minutes) +
+                ":" +
+                (seconds < 10 ? "0" + seconds : seconds) +
+                "." +
+                (milliseconds < 100 ? (milliseconds < 10 ? "00" : "0") : "") +
+                milliseconds
+            );
+            }
+
+            // 初始化頁面
+            function init() {
+            var startButton = document.getElementById("start-button");
+            var stopButton = document.getElementById("stop-button");
+            var resetButton = document.getElementById("reset-button");
+
+            startButton.addEventListener("click", function() {
+                timer.start();
+            });
+
+            stopButton.addEventListener("click", function() {
+                timer.stop();
+            });
+
+            resetButton.addEventListener("click", function() {
+                timer.reset();
+            });
+            }
+
+            // 頁面加載完成後初始化
+            window.addEventListener("load", function() {
+            init();
+            });
+        </script>
+        <script>
+            // 碼表背景變顏色
+            var box = document.querySelector('.color-box');
+            var interval = setInterval(changeColor, 2000); // 每2秒更新顏色
+            
+            function changeColor() {
+                var color = getRandomColor();
+                box.style.backgroundColor = color;
+            }
+            
+            function getRandomColor() {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+            
+            // 碼表文字變顏色
+            /*function changeTextColor() {
+                var textElement = document.getElementById("timer-text");
+                var currentTime = new Date().getTime();
+                var hue = (currentTime / 10) % 360; // 根據時間計算色相值
+                var color = "hsl(" + hue + ", 100%, 50%)"; // 使用HSL颜色模式設置顏色
+                textElement.style.color = color;
+            }
+
+            // 每隔一段時間調用changeTextColor函數
+            setInterval(changeTextColor, 100);*/
+        </script>
+        <style>
+            .color-box {
+                width: 200px;
+                height: 200px;
+                background-color: #ffffff;
+                transition: background-color 10s ease;
+                border-radius: 50%;
+                border: 5px solid #F0F0F0;
+                box-shadow: 0px 0px 20px #F0F0F0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            /*.stopwatch {
+                width: 80px;
+                height: 50px;
+                border: none;
+                border-radius: 10px;
+                background-color: #79FF79;
+                font-size: 15px;
+            
+            
+            
+            }*/
+
+            #start-button {background-color: #00DB00; border: none; border-radius: 10px; width: 70px; height: 40px;}
+            #stop-button {background-color: #FF0000; border: none; border-radius: 10px; width: 70px; height: 40px;}
+            #reset-button {background-color: #46A3FF; border: none; border-radius: 10px; width: 70px; height: 40px;}
+            #timer-display {font-size: 25px;}
+
+        </style>
+        <!--可以設定時間的計時器-->
+        <script>
+            var remainingTime = 0;
+            var endTime;
+            var timerInterval;
+            var isRunning = false;
+            var isPaused = false;
+            var pausedTime = 0;
+    
+            function toggleTimer() {
+                if (isRunning) {
+                    if (isPaused) {
+                        resumeTimer();
+                    } else {
+                        pauseTimer();
+                    }
+                } else {
+                    startTimer();
+                }
+            }
+    
+            function startTimer() {
+                var hoursInput = document.getElementById("hours");
+                var minutesInput = document.getElementById("minutes");
+                var secondsInput = document.getElementById("seconds");
+    
+                var hours = parseInt(hoursInput.value) || 0;
+                var minutes = parseInt(minutesInput.value) || 0;
+                var seconds = parseInt(secondsInput.value) || 0;
+    
+                remainingTime = hours * 3600000 + minutes * 60000 + seconds * 1000;
+    
+                if (!isRunning) {
+                    endTime = Date.now() + remainingTime;
+                    isRunning = true;
+                    updateTimer();
+                    updateButtonLabel();
+                }
+            }
+    
+            function pauseTimer() {
+                if (isRunning && !isPaused) {
+                    clearInterval(timerInterval);
+                    isPaused = true;
+                    pausedTime = remainingTime;
+                    updateButtonLabel();
+                }
+            }
+    
+            function resumeTimer() {
+                if (isRunning && isPaused) {
+                    endTime = Date.now() + pausedTime;
+                    isPaused = false;
+                    updateTimer();
+                    updateButtonLabel();
+                }
+            }
+    
+            function resetTimer() {
+                clearInterval(timerInterval);
+                isRunning = false;
+                isPaused = false;
+                remainingTime = 0;
+                pausedTime = 0;
+                document.getElementById("timer").innerHTML = "00:00:00.000";
+                updateButtonLabel();
+            }
+    
+            function updateTimer() {
+                timerInterval = setInterval(function() {
+                    var currentTime = Date.now();
+                    remainingTime = endTime - currentTime;
+    
+                    if (remainingTime <= 0) {
+                        clearInterval(timerInterval);
+                        isRunning = false;
+                        document.getElementById("timer").innerHTML = "計時結束！";
+                        updateButtonLabel();
+                    } else {
+                        var hours = Math.floor(remainingTime / 3600000);
+                        var minutes = Math.floor((remainingTime % 3600000) / 60000);
+                        var seconds = Math.floor((remainingTime % 60000) / 1000);
+                        var milliseconds = Math.floor(remainingTime % 1000);
+    
+                        var timeStr = ("0" + hours).slice(-2) + ":" + ("0" + minutes).slice(-2) + ":" + ("0" + seconds).slice(-2) + "." + ("00" + milliseconds).slice(-3);
+                        document.getElementById("timer").innerHTML = timeStr;
+                    }
+                }, 10);
+            }
+    
+            function updateButtonLabel() {
+                var startBtn = document.getElementById("startBtn");
+                if (isRunning) {
+                    if (isPaused) {
+                        startBtn.innerHTML = "繼續";
+                    } else {
+                        startBtn.innerHTML = "暫停";
+                    }
+                } else {
+                    startBtn.innerHTML = "開始";
+                }
+            }
+        </script>
+        <style>
+            #startBtn{background-color: #46A3FF; border: none; border-radius: 10px; width: 70px; height: 40px;}
+            #resetBtn{background-color: #FF2D2D; border: none; border-radius: 10px; width: 70px; height: 40px;}
+        </style>
+        <!--隨機數字-->
+        <script>
+            function generateRandomNumber() {
+                var min = parseInt(document.getElementById("min-input").value);
+                var max = parseInt(document.getElementById("max-input").value);
+            
+                if (isNaN(min) || isNaN(max)) {
+                    document.getElementById("result").innerText = "請輸入有效的數字";
+                    return;
+                }
+            
+                if (min >= max) {
+                    document.getElementById("result").innerText = "最小值必須小於最大值";
+                    return;
+                }
+            
+                var randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+                document.getElementById("result").innerText = "隨機數: " + randomNumber;
+            }
+        </script>
+        <style>
+            #randomnumbergeneration {background-color: #00DB00; border: none; border-radius: 10px; width: 120px; height: 50px;}
+        </style>
+
+        <script>/*
+            var timerElement = document.getElementById("timer");
+            var hoursInput = document.getElementById("hours");
+            var minutesInput = document.getElementById("minutes");
+            var secondsInput = document.getElementById("seconds");
+            var startPauseButton = document.getElementById("start-pause-button");
+            var intervalId;
+            var totalSeconds = 0;
+            var isPaused = false;
+            
+            
+            
+            function startTimer() {
+                if (intervalId) {
+                    // 計時器已經在運行，不重複啟動
+                    return;
+                }
+            
+                // 取得輸入的時間
+                var hours = parseInt(hoursInput.value) || 0;
+                var minutes = parseInt(minutesInput.value) || 0;
+                var seconds = parseInt(secondsInput.value) || 0;
+                
+                // 將時間轉換為總秒數
+                totalSeconds = hours * 3600 + minutes * 60 + seconds;
+                
+                // 更新計時器顯示
+                updateTimerDisplay(totalSeconds);
+                
+                // 開始計時器
+                intervalId = setInterval(function() {
+                    if (!isPaused) {
+                        if (totalSeconds > 0) {
+                            totalSeconds -= 0.001; // 減去 0.001 秒（1 毫秒）
+                            updateTimerDisplay(totalSeconds);
+                        } else {
+                            stopTimer();
+                            alert("時間到！");
+                        }
+                    }
+                }, 1); // 每毫秒更新一次計時器
+                    
+                startPauseButton.innerText = "暫停";
+            }
+            
+            function pauseTimer() {
+                isPaused = !isPaused;
+                
+                if (isPaused) {
+                    startPauseButton.innerText = "繼續";
+                } else {
+                    startPauseButton.innerText = "暫停";
+                }
+            }
+            
+            function stopTimer() {
+                clearInterval(intervalId);
+                intervalId = null;
+                totalSeconds = 0;
+                isPaused = false;
+                updateTimerDisplay(totalSeconds);
+                startPauseButton.innerText = "開始計時";
+            }
+            
+            function updateTimerDisplay(totalSeconds) {
+                var hours = Math.floor(totalSeconds / 3600);
+                var minutes = Math.floor((totalSeconds % 3600) / 60);
+                var seconds = Math.floor(totalSeconds % 60);
+                var milliseconds = Math.floor((totalSeconds % 1) * 1000); // 取得毫秒部分
+                
+                // 格式化顯示的時間，將毫秒部分加入顯示
+                var formattedTime = padZero(hours) + ":" + padZero(minutes) + ":" + padZero(seconds) + "." + padZero(milliseconds, 3);
+                
+                // 更新計時器顯示
+                timerElement.innerText = formattedTime;
+            }
+            
+            function padZero(number, length = 2) {
+                return number.toString().padStart(length, "0");
+            }
+            
+            */
+  </script>
+
+</body>
+</html>
+</html>

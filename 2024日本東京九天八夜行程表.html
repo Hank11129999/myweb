@@ -137,8 +137,8 @@
         <!--日期進度條-->
         <script>
             window.addEventListener('DOMContentLoaded', function() {
-                var startDateTime = new Date('2024-01-30T08:30:00');
-                var endDateTime = new Date('2024-02-07T13:55:00');
+                var startDateTime = new Date('2024-01-30T12:50:00');
+                var endDateTime = new Date('2024-02-07T18:40:00');
                 var progressBar = document.getElementById('progress-bar');
                 var progressText = document.getElementById('progress-text');
 
@@ -665,21 +665,6 @@
                         <li class="nav-item"><a class="nav-link" style="cursor: pointer;" onclick="showPage('journey')">行程表</a></li>
                         <li class="nav-item"><a class="nav-link" style="cursor: pointer;" onclick="showPage('Traffic-information')">交通資訊</a></li>
                         <li class="nav-item"><a class="nav-link" style="cursor: pointer;" onclick="showPage('tool')">工具</a></li>
-                        <li class="nav-item"><a class="nav-link" style="cursor: pointer;" href="">緊急狀態</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">日期</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#day_1">第一天</a>
-                                <a class="dropdown-item" href="#day_2">第二天</a>
-                                <a class="dropdown-item" href="#day_3">第三天</a>
-                                <a class="dropdown-item" href="#day_4">第四天</a>
-                                <a class="dropdown-item" href="#day_5">第五天</a>
-                                <a class="dropdown-item" href="#day_6">第六天</a>
-                                <a class="dropdown-item" href="#day_7">第七天</a>
-                                <a class="dropdown-item" href="#day_8">第八天</a>
-                                <a class="dropdown-item" href="#day_9">第九天</a>
-                            </div>
-                        </li>
                     </ul>    
                 </div>		  
                 <form class="d-flex">
@@ -693,11 +678,11 @@
             <div class="space_height-20"></div>
             <div class="space_height-10"></div>
             <!--當前時間-->
-            <body onload="startTime()">
+            <!--<body onload="startTime()">
                 當前時間：<font><span id="nowDateTimeSpan"></span></font>
             </body>
             <div class="space_width-20"></div>
-            <div class="space-50"></div>
+            <div class="space-50"></div>-->
 
             <!--旅行進度條-->
             <h2>旅行進度條</h2>
@@ -1980,8 +1965,9 @@
                 <br>
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3237.2116100991148!2d140.3817412098821!3d35.770177972444145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6022f379d1bd3757%3A0xd56e29a162771aa1!2z5oiQ55Sw5ZyL6Zqb5qmf5aC0!5e0!3m2!1szh-TW!2sus!4v1706238868793!5m2!1szh-TW!2sus" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-            <!--地點2-->
-            <p class="place-name">地點名稱</p>
+
+            <!--地點範本-->
+            <!--<p class="place-name">地點名稱</p>
             <div class="Itinerary-information">
                 <div class="place-info">
                     <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
@@ -2001,7 +1987,7 @@
                 </div>
                 <br>
                 <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+            </div>-->
         </div>
 
         <!-------------------------------------------------------------------------------->

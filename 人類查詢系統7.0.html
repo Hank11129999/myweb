@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人類查詢系統</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    input[type="text"],
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        box-sizing: border-box;
+    }
+    input[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    .result {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #f8f9fa;
+    }
+    .result img {
+        display: block;
+        margin: 0 auto;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+    .result.male {
+        background-color: #007bff;
+        color: white;
+    }
+    .result.female {
+        background-color: #ff007f;
+        color: white;
+    }
+</style>
+</head>
+<body>
+<h1>人類查詢系統</h1>
+<div class="container">
+    <form id="queryForm">
+        <input type="text" id="name" placeholder="姓名">
+        <input type="text" id="id" placeholder="身分證字號">
+        <input type="text" id="specialId" placeholder="特殊ID">
+        <input type="submit" value="查詢">
+    </form>
+    <div id="result" class="result"></div>
+</div>
+<script>
+    document.getElementById("queryForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const name = document.getElementById("name").value;
+        const id = document.getElementById("id").value;
+        const specialId = document.getElementById("specialId").value;
+
+        const data = [
+
+            // 112國一年段
+
+            // 國一甲班
+
+            {
+                img: "",
+                name: "王言心",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112001",
+                classNo: "國一甲班 1號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112",
+                classNo: "國一甲班 2號"
+            },
+            {
+                img: "",
+                name: "江依璇",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112003",
+                classNo: "國一甲班 3號"
+            },
+            {
+                img: "",
+                name: "李侑熹",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112",
+                classNo: "國一甲班 4號"
+            },
+            {
+                img: "",
+                name: "李昱嫻",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112005",
+                classNo: "國一甲班 5號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112",
+                classNo: "國一甲班 6號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "邱若芹",
+                gender: "女性",
+                id: "----------",
+                specialId: "112007",
+                classNo: "國一甲班 7號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112",
+                classNo: "國一甲班 8號"
+            },
+            {
+                img: "",
+                name: "郭子瑈",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112009",
+                classNo: "國一甲班 9號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112",
+                classNo: "國一甲班 10號"
+            },
+            {
+                img: "",
+                name: "馮薏宸",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112011",
+                classNo: "國一甲班 11號"
+            },
+            {
+                img: "",
+                name: "葉丞芸",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112012",
+                classNo: "國一甲班 12號"
+            },
+            {
+                img: "",
+                name: "劉子彤",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112013",
+                classNo: "國一甲班 13號"
+            },
+            {
+                img: "",
+                name: "盧沛妘",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112014",
+                classNo: "國一甲班 14號"
+            },
+            {
+                img: "",
+                name: "蕭敬賢",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112015",
+                classNo: "國一甲班 15號"
+            },
+            {
+                img: "",
+                name: "戴妙蓉",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112016",
+                classNo: "國一甲班 16號"
+            },
+            {
+                img: "",
+                name: "羅慧雲",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112017",
+                classNo: "國一甲班 17號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112018",
+                classNo: "國一甲班 18號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112019",
+                classNo: "國一甲班 19號"
+            },
+            {
+                img: "",
+                name: "李亞諭",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112020",
+                classNo: "國一甲班 20號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112021",
+                classNo: "國一甲班 21號"
+            },
+            {
+                img: "",
+                name: "洪家程",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112022",
+                classNo: "國一甲班 22號"
+            },
+            {
+                img: "",
+                name: "徐子義",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112023",
+                classNo: "國一甲班 23號"
+            },
+            {
+                img: "",
+                name: "張凱詰",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112024",
+                classNo: "國一甲班 24號"
+            },
+            {
+                img: "",
+                name: "陳廷侑",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112025",
+                classNo: "國一甲班 25號"
+            },
+            {
+                img: "",
+                name: "陳祖寬",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112026",
+                classNo: "國一甲班 26號"
+            },
+            {
+                img: "",
+                name: "趙師",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112027",
+                classNo: "國一甲班 27號"
+            },
+            {
+                img: "",
+                name: "劉禹濰",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112028",
+                classNo: "國一甲班 28號"
+            },
+            {
+                img: "",
+                name: "鄭翔宇",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112029",
+                classNo: "國一甲班 29號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112030",
+                classNo: "國一甲班 30號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112031",
+                classNo: "國一甲班 31號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112032",
+                classNo: "國一甲班 32號"
+            },
+            {
+                img: "",
+                name: "羅立倫",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112033",
+                classNo: "國一甲班 33號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112034",
+                classNo: "國一甲班 34號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112035",
+                classNo: "國一甲班 35號"
+            },
+            {
+                img: "",
+                name: "江澄畇",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112036",
+                classNo: "國一甲班 36號"
+            },
+
+            // 國一乙班
+
+            {
+                img: "",
+                name: "李玥",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112035",
+                classNo: "國一乙班 1號"
+            },
+            {
+                img: "",
+                name: "李芝菱",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112036",
+                classNo: "國一乙班 2號"
+            },
+            {
+                img: "",
+                name: "徐洛妍",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112037",
+                classNo: "國一乙班 3號"
+            },
+            {
+                img: "",
+                name: "張可芳",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112038",
+                classNo: "國一乙班 4號"
+            },
+            {
+                img: "",
+                name: "張如慧",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112039",
+                classNo: "國一乙班 5號"
+            },
+            {
+                img: "",
+                name: "許家家",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112040",
+                classNo: "國一乙班 6號"
+            },
+            {
+                img: "",
+                name: "陳涓涓",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112041",
+                classNo: "國一乙班 7號"
+            },
+            {
+                img: "",
+                name: "彭羽崴",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112042",
+                classNo: "國一乙班 8號"
+            },
+            {
+                img: "",
+                name: "黃奕璇",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112043",
+                classNo: "國一乙班 9號"
+            },
+            {
+                img: "",
+                name: "董正玉",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112044",
+                classNo: "國一乙班 10號"
+            },
+            {
+                img: "",
+                name: "劉子以",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112045",
+                classNo: "國一乙班 11號"
+            },
+            {
+                img: "",
+                name: "鄭曼殊",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112046",
+                classNo: "國一乙班 12號"
+            },
+            {
+                img: "",
+                name: "簡芮恩",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112047",
+                classNo: "國一乙班 13號"
+            },
+            {
+                img: "",
+                name: "羅心汝",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112048",
+                classNo: "國一乙班 14號"
+            },
+            {
+                img: "",
+                name: "王宥翔",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112049",
+                classNo: "國一乙班 15號"
+            },
+            {
+                img: "",
+                name: "余正雍",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112050",
+                classNo: "國一乙班 16號"
+            },
+            {
+                img: "",
+                name: "卓品澄",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112051",
+                classNo: "國一乙班 17號"
+            },
+            {
+                img: "",
+                name: "林三德",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112052",
+                classNo: "國一乙班 18號"
+            },
+            {
+                img: "林大利",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112053",
+                classNo: "國一乙班 19號"
+            },
+            {
+                img: "",
+                name: "林均安",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112054",
+                classNo: "國一乙班 20號"
+            },
+            {
+                img: "",
+                name: "林彥鈞",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112055",
+                classNo: "國一乙班 21號"
+            },
+            {
+                img: "",
+                name: "徐子軒",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112056",
+                classNo: "國一乙班 22號"
+            },
+            {
+                img: "",
+                name: "張宇翔",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112057",
+                classNo: "國一乙班 23號"
+            },
+            {
+                img: "",
+                name: "陳峟瑜",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112058",
+                classNo: "國一乙班 24號"
+            },
+            {
+                img: "",
+                name: "彭柏翔",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112059",
+                classNo: "國一乙班 25號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112060",
+                classNo: "國一乙班 26號"
+            },
+            {
+                img: "",
+                name: "湯承翰",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112061",
+                classNo: "國一乙班 27號"
+            },
+            {
+                img: "",
+                name: "劉宇翔",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112062",
+                classNo: "國一乙班 28號"
+            },
+            {
+                img: "",
+                name: "蔡鼎勝",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112063",
+                classNo: "國一乙班 29號"
+            },
+            {
+                img: "",
+                name: "鄭庭潤",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112064",
+                classNo: "國一乙班 30號"
+            },
+            {
+                img: "",
+                name: "何汯家",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112065",
+                classNo: "國一乙班 31號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112066",
+                classNo: "國一乙班 32號"
+            },
+            {
+                img: "",
+                name: "林煜恆",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "1120",
+                classNo: "國一乙班 33號"
+            },
+            {
+                img: "",
+                name: "劉品澄",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112067",
+                classNo: "國一乙班 34號"
+            },
+            {
+                img: "",
+                name: "吳印俞",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112068",
+                classNo: "國一乙班 35號"
+            },
+
+            // 國一丙班
+
+            {
+                img: "",
+                name: "江禮安",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112065",
+                classNo: "國一丙班 1號"
+            },
+            {
+                img: "",
+                name: "余閔芯",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112066",
+                classNo: "國一丙班 2號"
+            },
+            {
+                img: "",
+                name: "宋沛汝",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112067",
+                classNo: "國一丙班 3號"
+            },
+            {
+                img: "",
+                name: "林霏",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112068",
+                classNo: "國一丙班 4號"
+            },
+            {
+                img: "",
+                name: "張以青",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112069",
+                classNo: "國一丙班 5號"
+            },
+            {
+                img: "",
+                name: "曹庭芸",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112070",
+                classNo: "國一丙班 6號"
+            },
+            {
+                img: "",
+                name: "陳禹安",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112071",
+                classNo: "國一丙班 7號"
+            },
+            {
+                img: "",
+                name: "曾翔苡",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112072",
+                classNo: "國一丙班 8號"
+            },
+            {
+                img: "",
+                name: "黃品喬",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112073",
+                classNo: "國一丙班 9號"
+            },
+            {
+                img: "",
+                name: "黃馨霈",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112074",
+                classNo: "國一丙班 10號"
+            },
+            {
+                img: "",
+                name: "蔡妮妮",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112075",
+                classNo: "國一丙班 11號"
+            },
+            {
+                img: "",
+                name: "盧以嬑",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112076",
+                classNo: "國一丙班 12號"
+            },
+            {
+                img: "",
+                name: "賴沛昀",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112077",
+                classNo: "國一丙班 13號"
+            },
+            {
+                img: "",
+                name: "林品妤",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112196",
+                classNo: "國一丙班 14號"
+            },
+            {
+                img: "",
+                name: "余宥增",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112079",
+                classNo: "國一丙班 15號"
+            },
+            {
+                img: "",
+                name: "林同軒",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112080",
+                classNo: "國一丙班 16號"
+            },
+            {
+                img: "",
+                name: "林啟生",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112081",
+                classNo: "國一丙班 17號"
+            },
+            {
+                img: "",
+                name: "洪右澄",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112082",
+                classNo: "國一丙班 18號"
+            },
+            {
+                img: "",
+                name: "許荏凱",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112083",
+                classNo: "國一丙班 19號"
+            },
+            {
+                img: "",
+                name: "許堰勛",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112084",
+                classNo: "國一丙班 20號"
+            },
+            {
+                img: "",
+                name: "郭睿廷",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112085",
+                classNo: "國一丙班 21號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112086",
+                classNo: "國一丙班 22號"
+            },
+            {
+                img: "",
+                name: "陳省善",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112087",
+                classNo: "國一丙班 23號"
+            },
+            {
+                img: "",
+                name: "陳稟翔",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112088",
+                classNo: "國一丙班 24號"
+            },
+            {
+                img: "",
+                name: "黃仕安",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112089",
+                classNo: "國一丙班 25號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112090",
+                classNo: "國一丙班 26號"
+            },
+            {
+                img: "",
+                name: "蔡傑丞",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112091",
+                classNo: "國一丙班 27號"
+            },
+            {
+                img: "",
+                name: "謝哲淯",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112092",
+                classNo: "國一丙班 28號"
+            },
+            {
+                img: "",
+                name: "陳奕森",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112190",
+                classNo: "國一丙班 29號"
+            },
+            {
+                img: "",
+                name: "邱楷軒",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112078",
+                classNo: "國一丙班 30號"
+            },
+            {
+                img: "",
+                name: "陳宥銘",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112191",
+                classNo: "國一丙班 31號"
+            },
+            {
+                img: "",
+                name: "陳柏翰",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112192",
+                classNo: "國一丙班 32號"
+            },
+            {
+                img: "",
+                name: "黃紹瑜",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112193",
+                classNo: "國一丙班 33號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112194",
+                classNo: "國一丙班 34號"
+            },
+            {
+                img: "",
+                name: "謝侑倫",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112195",
+                classNo: "國一丙班 35號"
+            },
+
+            // 國一丁班
+
+            {
+                img: "",
+                name: "王宥貽",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112093",
+                classNo: "國一丁班 1號"
+            },
+            {
+                img: "",
+                name: "王韋姍",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112094",
+                classNo: "國一丁班 2號"
+            },
+            {
+                img: "",
+                name: "甘珺羽",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112095",
+                classNo: "國一丁班 3號"
+            },
+            {
+                img: "",
+                name: "周品甄",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112096",
+                classNo: "國一丁班 4號"
+            },
+            {
+                img: "",
+                name: "洪紜萱",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112097",
+                classNo: "國一丁班 5號"
+            },
+            {
+                img: "",
+                name: "徐惟晴",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112098",
+                classNo: "國一丁班 6號"
+            },
+            {
+                img: "",
+                name: "張嫚芯",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112099",
+                classNo: "國一丁班 7號"
+            },
+            {
+                img: "",
+                name: "陳芷瑩",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112198",
+                classNo: "國一丁班 8號"
+            },
+            {
+                img: "",
+                name: "陳予晴",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112101",
+                classNo: "國一丁班 9號"
+            },
+            {
+                img: "",
+                name: "陳湘淇",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112102",
+                classNo: "國一丁班 10號"
+            },
+            {
+                img: "",
+                name: "曾柔棋",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112103",
+                classNo: "國一丁班 11號"
+            },
+            {
+                img: "",
+                name: "黃彥蓁",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112104",
+                classNo: "國一丁班 12號"
+            },
+            {
+                img: "",
+                name: "趙喬瑩",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112105",
+                classNo: "國一丁班 13號"
+            },
+            {
+                img: "",
+                name: "蘇琬淯",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112106",
+                classNo: "國一丁班 14號"
+            },
+            {
+                img: "",
+                name: "林葦恩",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112199",
+                classNo: "國一丁班 15號"
+            },
+            {
+                img: "",
+                name: "李承蔚",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112108",
+                classNo: "國一丁班 16號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112109",
+                classNo: "國一丁班 17號"
+            },
+            {
+                img: "",
+                name: "林琮晏",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112110",
+                classNo: "國一丁班 18號"
+            },
+            {
+                img: "",
+                name: "林聖融",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112111",
+                classNo: "國一丁班 19號"
+            },
+            {
+                img: "",
+                name: "邱明昱",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112112",
+                classNo: "國一丁班 20號"
+            },
+            {
+                img: "",
+                name: "高立炘",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112113",
+                classNo: "國一丁班 21號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112114",
+                classNo: "國一丁班 22號"
+            },
+            {
+                img: "",
+                name: "莊善至",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112115",
+                classNo: "國一丁班 23號"
+            },
+            {
+                img: "",
+                name: "陳奕愷",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112116",
+                classNo: "國一丁班 24號"
+            },
+            {
+                img: "",
+                name: "陳首邑",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112117",
+                classNo: "國一丁班 25號"
+            },
+            {
+                img: "",
+                name: "陳書愷",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112118",
+                classNo: "國一丁班 26號"
+            },
+            {
+                img: "",
+                name: "曾翔偉",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112119",
+                classNo: "國一丁班 27號"
+            },
+            {
+                img: "",
+                name: "黃昶元",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112120",
+                classNo: "國一丁班 28號"
+            },
+            {
+                img: "",
+                name: "黃琮諺",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112121",
+                classNo: "國一丁班 29號"
+            },
+            {
+                img: "",
+                name: "楊芷宜",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "217108",
+                classNo: "國一丁班 30號"
+            },
+            {
+                img: "",
+                name: "蔡承霖",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112123",
+                classNo: "國一丁班 31號"
+            },
+            {
+                img: "",
+                name: "江玟震",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112107",
+                classNo: "國一丁班 32號"
+            },
+            {
+                img: "",
+                name: "廖柏菘",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112197",
+                classNo: "國一丁班 33號"
+            },
+
+            // 國一戊班
+
+            {
+                img: "",
+                name: "余黛妍",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112124",
+                classNo: "國一戊班 1號"
+            },
+            {
+                img: "",
+                name: "吳采樺",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112125",
+                classNo: "國一戊班 2號"
+            },
+            {
+                img: "",
+                name: "宋沛涵",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112126",
+                classNo: "國一戊班 3號"
+            },
+            {
+                img: "",
+                name: "林佳儀",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112127",
+                classNo: "國一戊班 4號"
+            },
+            {
+                img: "",
+                name: "林佳瑩",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112128",
+                classNo: "國一戊班 5號"
+            },
+            {
+                img: "",
+                name: "林洺安",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112129",
+                classNo: "國一戊班 6號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112130",
+                classNo: "國一戊班 7號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112131",
+                classNo: "國一戊班 8號"
+            },
+            {
+                img: "",
+                name: "陳予芉",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112132",
+                classNo: "國一戊班 9號"
+            },
+            {
+                img: "",
+                name: "潘妮",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112133",
+                classNo: "國一戊班 10號"
+            },
+            {
+                img: "",
+                name: "謝艾欣",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112134",
+                classNo: "國一戊班 11號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112135",
+                classNo: "國一戊班 12號"
+            },
+            {
+                img: "",
+                name: "蘇柔瑄",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112136",
+                classNo: "國一戊班 13號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112137",
+                classNo: "國一戊班 14號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112138",
+                classNo: "國一戊班 15號"
+            },
+            {
+                img: "",
+                name: "吳丞洋",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112139",
+                classNo: "國一戊班 16號"
+            },
+            {
+                img: "",
+                name: "周楷峻",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112140",
+                classNo: "國一戊班 17號"
+            },
+            {
+                img: "",
+                name: "林士瑋",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112141",
+                classNo: "國一戊班 18號"
+            },
+            {
+                img: "",
+                name: "林哲楷",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112142",
+                classNo: "國一戊班 19號"
+            },
+            {
+                img: "",
+                name: "林裕恩",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112143",
+                classNo: "國一戊班 20號"
+            },
+            {
+                img: "",
+                name: "施善喆",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112144",
+                classNo: "國一戊班 21號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112145",
+                classNo: "國一戊班 22號"
+            },
+            {
+                img: "",
+                name: "陳瑞騰",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112146",
+                classNo: "國一戊班 23號"
+            },
+            {
+                img: "",
+                name: "曾啟紘",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112147",
+                classNo: "國一戊班 24號"
+            },
+            {
+                img: "",
+                name: "溫長鴻",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112148",
+                classNo: "國一戊班 25號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112149",
+                classNo: "國一戊班 26號"
+            },
+            {
+                img: "",
+                name: "廖士朋",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112150",
+                classNo: "國一戊班 27號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112151",
+                classNo: "國一戊班 28號"
+            },
+            {
+                img: "",
+                name: "簡浩鈞",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112152",
+                classNo: "國一戊班 29號"
+            },
+            {
+                img: "",
+                name: "蘇品哲",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112153",
+                classNo: "國一戊班 30號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112154",
+                classNo: "國一戊班 31號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112155",
+                classNo: "國一戊班 32號"
+            },
+            {
+                img: "",
+                name: "官以媃",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112156",
+                classNo: "國一戊班 33號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112157",
+                classNo: "國一戊班 34號"
+            },
+            {
+                img: "",
+                name: "劉秀妃",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112158",
+                classNo: "國一戊班 35號"
+            },
+            {
+                img: "",
+                name: "",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112",
+                classNo: "國一戊班 36號"
+            },
+
+            // 國一己班
+
+            {
+                img: "",
+                name: "艾玥廷",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112154",
+                classNo: "國一己班 1號"
+            },
+            {
+                img: "",
+                name: "何芷儀",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112155",
+                classNo: "國一己班 2號"
+            },
+            {
+                img: "",
+                name: "林芯儀",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112156",
+                classNo: "國一己班 3號"
+            },
+            {
+                img: "",
+                name: "范艿榆",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112157",
+                classNo: "國一己班 4號"
+            },
+            {
+                img: "",
+                name: "張維媛",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112158",
+                classNo: "國一己班 5號"
+            },
+            {
+                img: "",
+                name: "彭若涵",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112159",
+                classNo: "國一己班 6號"
+            },
+            {
+                img: "",
+                name: "賀心妤",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112160",
+                classNo: "國一己班 7號"
+            },
+            {
+                img: "",
+                name: "黃邑婕",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112161",
+                classNo: "國一己班 8號"
+            },
+            {
+                img: "",
+                name: "黃唯苓",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112162",
+                classNo: "國一己班 9號"
+            },
+            {
+                img: "",
+                name: "蒲念慈",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112163",
+                classNo: "國一己班 10號"
+            },
+            {
+                img: "",
+                name: "劉芸岑",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112164",
+                classNo: "國一己班 11號"
+            },
+            {
+                img: "",
+                name: "蔡佳沂",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112165",
+                classNo: "國一己班 12號"
+            },
+            {
+                img: "",
+                name: "蔡宥琳",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112166",
+                classNo: "國一己班 13號"
+            },
+            {
+                img: "",
+                name: "蔡馥如",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112167",
+                classNo: "國一己班 14號"
+            },
+            {
+                img: "",
+                name: "賴玉儒",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112168",
+                classNo: "國一己班 15號"
+            },
+            {
+                img: "",
+                name: "賴羿蓁",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112",
+                classNo: "國一己班 16號"
+            },
+            {
+                img: "",
+                name: "黃莘雅",
+                englishName: "",
+                gender: "女性",
+                id: "----------",
+                specialId: "112170",
+                classNo: "國一己班 17號"
+            },
+            {
+                img: "",
+                name: "石宗翰",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112171",
+                classNo: "國一己班 18號"
+            },
+            {
+                img: "",
+                name: "何宥葳",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112172",
+                classNo: "國一己班 19號"
+            },
+            {
+                img: "",
+                name: "吳瑋恩",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112173",
+                classNo: "國一己班 20號"
+            },
+            {
+                img: "",
+                name: "方思永",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112174",
+                classNo: "國一己班 21號"
+            },
+            {
+                img: "",
+                name: "方岳晟",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112175",
+                classNo: "國一己班 22號"
+            },
+            {
+                img: "",
+                name: "徐佑恩",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112176",
+                classNo: "國一己班 23號"
+            },
+            {
+                img: "",
+                name: "崔正霖",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112177",
+                classNo: "國一己班 24號"
+            },
+            {
+                img: "",
+                name: "莊子毅",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112178",
+                classNo: "國一己班 25號"
+            },
+            {
+                img: "",
+                name: "陳以勛",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112179",
+                classNo: "國一己班 26號"
+            },
+            {
+                img: "",
+                name: "彭宇恩",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112180",
+                classNo: "國一己班 27號"
+            },
+            {
+                img: "",
+                name: "曾意修",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112181",
+                classNo: "國一己班 28號"
+            },
+            {
+                img: "",
+                name: "廖哲毅",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112182",
+                classNo: "國一己班 29號"
+            },
+            {
+                img: "",
+                name: "樊昱頡",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112183",
+                classNo: "國一己班 30號"
+            },
+            {
+                img: "",
+                name: "謝秉昀",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112184",
+                classNo: "國一己班 31號"
+            },
+            {
+                img: "",
+                name: "施伯翰",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112205",
+                classNo: "國一己班 32號"
+            },
+            {
+                img: "",
+                name: "許洺誠",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112206",
+                classNo: "國一己班 33號"
+            },
+            {
+                img: "",
+                name: "黃柏翔",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112207",
+                classNo: "國一己班 34號"
+            },
+            {
+                img: "",
+                name: "黃煜得",
+                englishName: "",
+                gender: "男性",
+                id: "----------",
+                specialId: "112208",
+                classNo: "國一己班 35號"
+            }
+        ];
+
+        let matchedData = [];
+        data.forEach((person) => {
+            if ((name && name === person.name) ||
+                (id && id === person.id) ||
+                (specialId && specialId === person.specialId)) {
+                matchedData.push(person);
+            }
+        });
+
+        if (matchedData.length === 0) {
+            alert("找不到相關資料");
+            return;
+        }
+
+        if (matchedData.length > 1) {
+            alert("輸入的資料有衝突，請確認後重新輸入");
+            return;
+        }
+
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = "";
+        matchedData.forEach((person) => {
+            resultDiv.innerHTML += `
+                <div class="result ${person.gender === '男性' ? 'male' : 'female'}">
+                    <img src="${person.img}" alt="大頭照">
+                    <p>姓名: ${person.name}</p>
+                    <p>英文名字: ${person.englishName}</p>
+                    <p>性別: ${person.gender}</p>
+                    <p>身分證字號: ${person.id}</p>
+                    <p>特殊ID: ${person.specialId}</p>
+                    <p>班級座號: ${person.classNo}</p>
+                </div>
+            `;
+        });
+    });
+</script>
+</body>
+</html>

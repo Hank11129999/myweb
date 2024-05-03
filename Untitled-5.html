@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>照片詳細資料偵測器</title>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+    <style>
+        #image-preview {
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>照片詳細資料偵測器</h1>
+    <input type="file" id="file-input" accept="image/*">
+    <div id="image-details"></div>
+    <img id="image-preview" alt="預覽" style="display: none;">
+
+    <script>
+        const fileInput = document.getElementById("file-input");
+        const imagePreview = document.getElementById("image-preview");
+        const imageDetails = document.getElementById("image-details");
+
+        function toDMS(degrees) {
+            const d = Math.floor(degrees);
+            const mFloat = (degrees - d) * 60;
+            const m = Math.floor(mFloat);
+            const s = ((mFloat - m) * 60).toFixed(2);
+            return `${d}° ${m}' ${s}"`;
+        }
+
+        function processGPS(exifTag) {
+            if (!exifTag) return '未知';
+            const ref = EXIF.getTag(this, `${exifTag}Ref`);
+            const coord = EXIF.getTag(this, exifTag);
+            if (!coord) return '未知';
+            const degrees = coord[0] + coord[1] / 60 + coord[2] / 3600;
+            const signedDegrees = ref === 'S' || ref === 'W' ? -degrees : degrees;
+            return `${toDMS(signedDegrees)} ${ref}`;
+        }
+
+        fileInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+
+            if (file) {
+                const fileReader = new FileReader();
+
+                fileReader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = "block";
+
+                    EXIF.getData(file, function () {
+                        const width = EXIF.getTag(this, "PixelXDimension");
+                        const height = EXIF.getTag(this, "PixelYDimension");
+                        const make = EXIF.getTag(this, "Make");
+                        const model = EXIF.getTag(this, "Model");
+                        const lensType = EXIF.getTag(this, "LensType");
+                        const aperture = EXIF.getTag(this, "FNumber");
+                        const exposureTime = EXIF.getTag(this, "ExposureTime");
+                        const exposureProgram = EXIF.getTag(this, "ExposureProgram");
+                        const focalLength = EXIF.getTag(this, "FocalLength");
+                        const iso = EXIF.getTag(this, "ISOSpeedRatings");
+                        const flash = EXIF.getTag(this, "Flash");
+                        const whiteBalance = EXIF.getTag(this, "WhiteBalance");
+                        const creator = EXIF.getTag(this, "Artist");
+                        const gpsLatitude = processGPS("GPSLatitude");
+                        const gpsLongitude = processGPS("GPSLongitude");
+                        
+                        const size = (file.size / 1024).toFixed(2) + " KB"; // KB
+                        const created = file.lastModifiedDate; // 未必準確
+                        
+                        imageDetails.innerHTML = `
+                            <p>檔案類型：${file.type}</p>
+                            <p>檔案大小：${size}</p>
+                            <p>解析度：${width} x ${height}</p>
+                            <p>裝置製造商：${make || '未知'}</p>
+                            <p>機型：${model || '未知'}</p>
+                            <p>鏡頭類型：${lensType || '未知'}</p>
+                            <p>光圈：${aperture || '未知'}</p>
+                            <p>曝光時間：${exposureTime || '未知'}</p>
+                            <p>曝光程式：${exposureProgram || '未知'}</p>
+                            <p>焦距：${focalLength || '未知'}</p>
+                            <p>ISO感光度：${iso || '未知'}</p>
+                            <p>閃光燈：${flash || '未知'}</p>
+                            <p>白平衡：${whiteBalance || '未知'}</p>
+                            <p>內容創作者：${creator || '未知'}</p>
+                            <p>經度：${gpsLongitude}</p>
+                            <p>緯度：${gpsLatitude}</p>
+                        `;
+                    });
+                };
+
+                fileReader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,769 @@
+<html id="facebook" class="_9dls __fb-light-mode" lang="zh-Hant" dir="ltr" foxified="">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <style>
+        .__fb-light-mode { /*封面顏色配置*/
+            --accent: #0866FF;
+            --card-background: #FFFFFF;
+            --divider: #CED0D4;
+            --nav-bar-background-gradient: linear-gradient(to top, #FFFFFF, rgba(255, 255, 255.9), rgba(255, 255, 255, .7), rgba(255, 255, 255, .4), rgba(255, 255, 255, 0));
+        }
+
+        @font-face { /*字體*/
+            font-family: 'Segoe UI Historic';
+            src: local('Arial');
+            unicode-range: U+530-5f4, U+10a0-10ff
+        }
+
+        #facebook .system-fonts--body.segoe { /*字體*/
+            font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif
+        }
+
+        .Bottom_line_number_of_friends { /*朋友數量下方底線*/
+            text-decoration: none
+        }
+
+        .Profile_and_background_image_alignment { /*個人資料及封面相片對齊方式*/
+            position: absolute
+        }
+
+        .Divider_line_below_profile { /*個人資料下方分隔線*/
+            border-top-style: solid
+        }
+
+        .Divider_line_below_profile1 { /*個人資料下方分隔線*/
+            border-top-width: 1px
+        }
+
+        .Background_images_and_gradients1 { /*背景圖片和漸層*/
+            left: 0
+        }
+
+        .Profile_and_cover_photo_alignment2 { /*個人資料及封面相片對齊方式*/
+            flex-grow: 1
+        }
+
+        .Photo_sticker_border_background { /*大頭貼邊框背景*/
+            background-color: var(--card-background)
+        }
+
+        .Rounded_corner_stickers { /*大頭貼圓角*/
+            border-top-left-radius: 50%
+        }
+
+        .Profile_and_cover_photo_layout1 { /*個人檔案及封面相片排版*/
+            position: relative
+        }
+
+        .Home_name1 { /*首頁姓名*/
+            font-size: inherit
+        }
+
+        .Photo_sticker_camera_alignment { /*大頭貼相機對齊*/
+            align-items: center
+        }
+
+        .Cover_photo_scroller { /*封面相片捲動軸*/
+            transform: var(--transform, revert)
+        }
+
+        .Home_name { /*首頁姓名*/
+            font-size: 2rem
+        }
+
+        .Profile_and_cover_photo_alignment1 { /*個人資料及封面相片對齊方式*/
+            display: flex
+        }
+
+
+        .Extra_objects_or_borders {  /*多餘的物件或邊框*/
+            border-top-width: 0
+        }
+
+        .Photo_stickers_and_friend_stickers { /*大頭貼及好友頭貼*/
+            fill: none
+        }
+
+        .Alignment_of_friends { /*好友的對齊方式*/
+            margin-left: -6px
+        }
+
+        .Background_images_and_gradients { /*背景圖片和漸層*/
+            right: 0
+        }
+
+        .Profile_and_cover_photo_layout { /*個人檔案及封面相片排版*/
+            flex-direction: column
+        }
+
+        .Profile_and_cover_photo_alignment { /*個人資料及封面相片對齊方式*/
+            justify-content: center
+        }
+
+
+        @media (min-width: 900px) { /*個人資料與大頭貼間距*/
+            .Distance_between_personal_information_and_photo_post.Distance_between_personal_information_and_photo_post {
+                position: absolute
+            }
+        }
+
+        .Separator_color_below_profile { /*個人資料下方分隔線顏色*/
+            border-top-color: var(--divider)
+        }
+
+        .Rounded_corner_stickers1 { /*大頭貼圓角*/
+            border-top-right-radius: 50%
+        }
+
+
+        .Gradient_background_on_the_right_side_of_the_cover_photo {/*封面相片右邊漸層*/
+            left: var(--left, revert)
+        }
+
+    
+        @media (max-width: 899px) { /*個人資料與大頭貼縮放時排版*/
+            .Typesetting_of_personal_information_and_photo_post_when_zooming.Typesetting_of_personal_information_and_photo_post_when_zooming {
+                flex-direction: column
+            }
+        }
+
+        .Gradient_alignment_behind_background_image { /*背景圖片後面的漸層對齊*/
+            overflow-y: hidden
+        }
+
+        .Background_images_and_gradients { /*背景圖片和漸層*/
+            top: 0
+        }
+
+
+        .camera_symbol_border1 { /*相機符號邊框*/
+            width: 36px
+        }
+
+        .camera_symbol_border { /*相機符號邊框*/
+            height: 36px
+        }
+
+        .Gradient_background_on_the_left_side_of_the_cover_photo { /*封面相片左邊漸層*/
+            bottom: 0
+        }
+
+
+        .Spacing_between_home_page_information_and_background_image1 { /*首頁資訊和背景圖像之間的間距*/
+            margin-top: 8px
+        
+        }
+
+        .Personal_information_and_separator_spacing { /*個人資訊與分隔線間距*/
+            padding-bottom: 16px
+        }
+
+        .Cover_photo_and_background1 { /*封面照片和背景*/
+            padding-top: var(--paddingTop, revert)
+        }
+
+
+        @media (min-height: 790px) { /*個人資料與封面相片對齊*/
+            .Align_profile_with_cover_photo.Align_profile_with_cover_photo {
+                max-width: 1218px
+            }
+        }
+
+        @media (min-height: 790px) { /*封面相片與漸層背景對齊*/
+            .Cover_photo_aligned_with_gradient_background.Cover_photo_aligned_with_gradient_background {
+                max-width: 1250px
+            }
+        }
+
+        .Cover_photo_and_background { /*封面照片和背景*/
+            width: 100%
+        }
+
+        .Home_page_name_alignment { /*主頁名稱對齊*/
+            width: 174px
+        }
+
+        @media (min-width: 900px) { /*大頭貼與封面相片對齊*/
+            .Align_the_photo_sticker_with_the_cover_photo.Align_the_photo_sticker_with_the_cover_photo {
+                bottom: 0
+            }
+        }
+
+        .Background_image_gradient { /*背景漸層*/
+            background-image: var(--nav-bar-background-gradient)
+        }
+
+
+        .Landscape_background_picture {
+            padding-top: 6px
+        }
+
+
+
+        .Spacing_between_home_page_information_and_background_image { /*首頁資訊和背景圖像之間的間距*/
+            margin-top: 0
+        }
+
+        .Distance_between_home_page_information_and_photo_post { /*主頁資訊與照片貼文之間的距離*/
+            margin-bottom: -8px
+        }
+    </style>
+</head>
+
+<body class="_6s5d _71pn system-fonts--body segoe">
+    <div id="mount_0_0_4V" style=""><!--$--><!--$-->
+        <div class=""><!--$-->
+
+            <div class="x9f619 Profile_and_cover_photo_layout1 x1ja2u2z Profile_and_cover_photo_alignment1 x2lah0s Profile_and_cover_photo_alignment x1qjc9v5 xozqiw3 x1q0g3np x1ve1bff">
+                <div class="x9f619 Profile_and_cover_photo_layout1 x1ja2u2z x193iq5w xeuugli x1r8uery Profile_and_cover_photo_alignment2 xs83m0k Profile_and_cover_photo_alignment1 Profile_and_cover_photo_layout">
+                    <div class="x5yr21d Profile_and_cover_photo_layout1 Cover_photo_and_background">
+                        <div class="x9f619 Profile_and_cover_photo_layout1 x1ja2u2z Profile_and_cover_photo_alignment1 x2lah0s Profile_and_cover_photo_alignment x1qjc9v5 xozqiw3 x1q0g3np">
+                            <div class="Gradient_background_on_the_left_side_of_the_cover_photo x9f619 Background_images_and_gradients x6ikm8r Gradient_alignment_behind_background_image Profile_and_background_image_alignment Background_images_and_gradients1 Background_images_and_gradients">
+                                <div class="html-div xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r x4uap5 x18d9i69 xkhd6sd xqtp20y Cover_photo_and_background Gradient_background_on_the_right_side_of_the_cover_photo Profile_and_background_image_alignment Background_images_and_gradients Cover_photo_scroller Cover_photo_and_background1"
+                                    style="--left: 50%; --transform: translateX(-50%); --paddingTop: 75%;">
+                                    <div
+                                        class="html-div xe8uvvx x1qjc9v5 x1q0q8m5 x1qhh985 xu3j5b3 xcfux6l x26u7qi xm0m39n Divider_line_below_profile Extra_objects_or_borders Gradient_background_on_the_left_side_of_the_cover_photo x9f619 Profile_and_cover_photo_alignment1 Profile_and_cover_photo_layout Profile_and_cover_photo_alignment2 xs83m0k Background_images_and_gradients Background_images_and_gradients1 x1qughib xat24cr x11i5rnm x1mh8g0r Spacing_between_home_page_information_and_background_image x2lwn1j xeuugli x18d9i69 x4uap5 xkhd6sd xexx8yu Profile_and_background_image_alignment Background_images_and_gradients x1ja2u2z">
+                                        <img alt=""
+                                            class="xz74otr Gradient_background_on_the_left_side_of_the_cover_photo x9f619 Background_images_and_gradients x5yr21d Profile_and_background_image_alignment Background_images_and_gradients1 Background_images_and_gradients Cover_photo_and_background"
+                                            referrerpolicy="origin-when-cross-origin"
+                                            src="https://scontent.ftpe5-1.fna.fbcdn.net/v/t39.30808-6/368385645_837480071326312_4096310201309613903_n.jpg?stp=cp6_dst-jpg_fb50_p240x240&amp;_nc_cat=109&amp;ccb=1-7&amp;_nc_sid=5f2048&amp;_nc_ohc=D7msPOtRnk0Q7kNvgEYgGnE&amp;_nc_ht=scontent.ftpe5-1.fna&amp;oh=00_AfCKQ9E8lsUiaDTfK-ynro_-PA6Ttf8N5Poa6yV0VZbrAw&amp;oe=663B9929">
+                                    </div>
+                                </div>
+                                <div class="Background_image_gradient Gradient_background_on_the_left_side_of_the_cover_photo x9f619 Background_images_and_gradients Profile_and_background_image_alignment Background_images_and_gradients1 Background_images_and_gradients">
+                                </div>
+                            </div>
+                            <div
+                                class="x9f619 Profile_and_cover_photo_layout1 x1ja2u2z xeuugli x1r8uery Profile_and_cover_photo_alignment2 xs83m0k Photo_sticker_camera_alignment Profile_and_cover_photo_alignment1 Profile_and_cover_photo_layout Profile_and_cover_photo_alignment x1uyial6 x1rr25im Cover_photo_aligned_with_gradient_background">
+                                <div class="x6ikm8r Gradient_alignment_behind_background_image Profile_and_cover_photo_layout1 Cover_photo_and_background x30kzoy x9jhf4c x1nxjzwp xd7htx2"
+                                    style="border-radius: 0px 0px max(0px, min(8px, (-100% - 4px + 100vw) * 9999)) max(0px, min(8px, (-100% - 4px + 100vw) * 9999)) / 0px 0px 8px 8px;">
+                                    <a aria-label="Link to open profile cover photo"
+                                        class="x1i10hfl xjbqb8w x1ejq31n xd10rxx x1sy0etr x17r0tee Extra_objects_or_borders xcfux6l x1qhh985 xm0m39n x9f619 x1ypdohk xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd x16tdsg8 Bottom_line_number_of_friends xggy1nq x1o1ewxj x3x9cwd x1e5q0jg x13rtm0m Profile_and_cover_photo_layout1 x87ps6o x1lku1pv x1a2a7pz x1lliihq"
+                                        href="https://www.facebook.com/photo/?fbid=837480077992978&amp;set=a.695147012226286"
+                                        role="link" tabindex="0">
+                                        <div class="html-div xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r x4uap5 x18d9i69 xkhd6sd xqtp20y Profile_and_cover_photo_layout1 Cover_photo_and_background x6ikm8r Gradient_alignment_behind_background_image Cover_photo_and_background1"
+                                            style="--paddingTop: 37.03703703703704%;">
+                                            <div
+                                                class="html-div xe8uvvx x1qjc9v5 x1q0q8m5 x1qhh985 xu3j5b3 xcfux6l x26u7qi xm0m39n Divider_line_below_profile Extra_objects_or_borders Gradient_background_on_the_left_side_of_the_cover_photo x9f619 Profile_and_cover_photo_alignment1 Profile_and_cover_photo_layout Profile_and_cover_photo_alignment2 xs83m0k Background_images_and_gradients Background_images_and_gradients1 x1qughib xat24cr x11i5rnm x1mh8g0r Spacing_between_home_page_information_and_background_image x2lwn1j xeuugli x18d9i69 x4uap5 xkhd6sd xexx8yu Profile_and_background_image_alignment Background_images_and_gradients x1ja2u2z">
+                                                <div class="html-div xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r x4uap5 x18d9i69 xkhd6sd xqtp20y Cover_photo_and_background x6ikm8r Gradient_alignment_behind_background_image Gradient_background_on_the_right_side_of_the_cover_photo Profile_and_background_image_alignment xrzbxsz Cover_photo_scroller Cover_photo_and_background1"
+                                                    style="">
+                                                    <div
+                                                        class="html-div xe8uvvx x1qjc9v5 x1q0q8m5 x1qhh985 xu3j5b3 xcfux6l x26u7qi xm0m39n Divider_line_below_profile Extra_objects_or_borders Gradient_background_on_the_left_side_of_the_cover_photo x9f619 Profile_and_cover_photo_alignment1 Profile_and_cover_photo_layout Profile_and_cover_photo_alignment2 xs83m0k Background_images_and_gradients Background_images_and_gradients1 x1qughib xat24cr x11i5rnm x1mh8g0r Spacing_between_home_page_information_and_background_image x2lwn1j xeuugli x18d9i69 x4uap5 xkhd6sd xexx8yu Profile_and_background_image_alignment Background_images_and_gradients x1ja2u2z">
+                                                        <img data-imgperflogname="" alt="" class="" referrerpolicy=""
+                                                            src="https://scontent.ftpe5-1.fna.fbcdn.net/v/t39.30808-6/368385645_837480071326312_4096310201309613903_n.jpg?stp=cp6_dst-jpg_p720x720&amp;_nc_cat=109&amp;ccb=1-7&amp;_nc_sid=5f2048&amp;_nc_ohc=D7msPOtRnk0Q7kNvgEYgGnE&amp;_nc_ht=scontent.ftpe5-1.fna&amp;oh=00_AfDMSoeuwOCN6zW_K2C3IQADMFR7xpa5EOgVkDUxVN0dPA&amp;oe=663B9929">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="x9f619 Profile_and_cover_photo_layout1 x1ja2u2z Profile_and_cover_photo_alignment1 x2lah0s Profile_and_cover_photo_alignment x1qjc9v5 xozqiw3 x1q0g3np Personal_information_and_separator_spacing x1ve1bff">
+                <div
+                    class="x9f619 Profile_and_cover_photo_layout1 x1ja2u2z Profile_and_cover_photo_alignment1 Profile_and_cover_photo_layout xeuugli x1r8uery Profile_and_cover_photo_alignment2 xs83m0k x1swvt13 x1pi30zi xqdwrps x16i7wwg Align_profile_with_cover_photo">
+                    <div>
+                        <div class="Photo_sticker_camera_alignment Profile_and_cover_photo_alignment1 Typesetting_of_personal_information_and_photo_post_when_zooming x9w375v xxfedj9 x1roke11 x1es02x0">
+                            <div class="x15sbx0n x1xy773u Align_the_photo_sticker_with_the_cover_photo xb2vh1x Distance_between_personal_information_and_photo_post x18u1y24 xs6kywh x5wy4b0">
+                                <div
+                                    class="Photo_sticker_border_background Rounded_corner_stickers Rounded_corner_stickers1 x18nykt9 xww2gxu x1iorvi4 x150jy0e xjkvuk6 x1e558r4">
+                                    <div aria-label="å¤§é&nbsp;&shy;è²¼ç…§å‹•ä½œ"
+                                        class="x1i10hfl x1qjc9v5 xjbqb8w xjqpnuy xa49m3k xqeqjp1 x2hbi6w Divider_line_below_profile xu3j5b3 x1q0q8m5 x26u7qi Extra_objects_or_borders xcfux6l x1qhh985 xm0m39n x9f619 x1ypdohk xdl72j9 x2lah0s xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r x2lwn1j xeuugli xexx8yu x4uap5 x18d9i69 xkhd6sd Profile_and_cover_photo_layout1 x16tdsg8 Bottom_line_number_of_friends xggy1nq x1ja2u2z x1t137rt x1o1ewxj x3x9cwd x1e5q0jg x13rtm0m x1q0g3np x87ps6o x1lku1pv x1a2a7pz xzsf02u x1rg5ohu"
+                                        role="button" tabindex="0">
+                                        <div class="x1rg5ohu Profile_and_cover_photo_layout1 x3ajldb x1ja2u2z">
+                                            <svg aria-label="å¤§é&nbsp;&shy;è²¼ç…§å‹•ä½œ" class="x3ajldb"
+                                                data-visualcompletion="ignore-dynamic" role="img"
+                                                style="height: 168px; width: 168px;">
+                                                <mask id=":r0:">
+                                                    <circle cx="84" cy="84" fill="white" r="84">
+                                                    </circle>
+                                                    <circle cx="84" cy="84" fill="transparent" r="78" stroke="black"
+                                                        stroke-width="4">
+                                                    </circle>
+                                                </mask>
+                                                <g mask="url(#:r0:)">
+                                                    <image x="8" y="8" height="100%"
+                                                        preserveAspectRatio="xMidYMid slice" width="100%"
+                                                        xlink:href="https://scontent.ftpe5-1.fna.fbcdn.net/v/t39.30808-1/356809028_807121504362169_2052093868047572004_n.jpg?stp=cp6_dst-jpg_p200x200&amp;_nc_cat=103&amp;ccb=1-7&amp;_nc_sid=5f2048&amp;_nc_ohc=0kaubqTeX54Q7kNvgHstCMk&amp;_nc_ht=scontent.ftpe5-1.fna&amp;oh=00_AfA3xASTx1l51gjqZTUDwuqeqdu2imMVQRThBfKg-1naJg&amp;oe=663B9576"
+                                                        style="height: 152px; width: 152px;">
+                                                    </image>
+                                                    <circle class="Photo_stickers_and_friend_stickers x1pwv2dq xvlca1e" cx="84" cy="84" r="84">
+                                                    </circle>
+                                                    <circle class="x1p5r69i x17ld789" cx="84" cy="84" fill="transparent"
+                                                        r="82" stroke="var(--accent)" stroke-width="4">
+                                                    </circle>
+                                                </g>
+                                            </svg>
+                                            <div class="Gradient_background_on_the_left_side_of_the_cover_photo Background_images_and_gradients Background_images_and_gradients1 xg01cxk x47corl Profile_and_background_image_alignment Background_images_and_gradients x1ebt8du x19991ni x1dhq9h xzolkzo x12go9s9 x1rnf11y xprq8jg"
+                                                role="none" data-visualcompletion="ignore">
+                                            </div>
+                                            <div class="Rounded_corner_stickers Rounded_corner_stickers1 x18nykt9 xww2gxu Profile_and_background_image_alignment xhtitgo"
+                                                data-visualcompletion="ignore"
+                                                style="bottom: 25px; right: 25px; transform: translate(50%, 50%);">
+                                                <div aria-hidden="true">
+                                                    <div
+                                                        class="Photo_sticker_border_background Rounded_corner_stickers Rounded_corner_stickers1 x18nykt9 xww2gxu Gradient_background_on_the_left_side_of_the_cover_photo x9f619 Background_images_and_gradients Profile_and_background_image_alignment Background_images_and_gradients1 Background_images_and_gradients">
+                                                    </div>
+                                                    <div aria-label="æ›´æ–°å¤§é&nbsp;&shy;è²¼ç…§"
+                                                        class="x1i10hfl x1ejq31n xd10rxx x1sy0etr x17r0tee x1ypdohk xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r x16tdsg8 Bottom_line_number_of_friends xggy1nq x87ps6o x1lku1pv x1a2a7pz Photo_sticker_camera_alignment xzolkzo x12go9s9 x1rnf11y xprq8jg Extra_objects_or_borders xcfux6l x1qhh985 xm0m39n x9f619 Profile_and_cover_photo_alignment1 Profile_and_cover_photo_alignment xexx8yu x4uap5 x18d9i69 xkhd6sd Profile_and_cover_photo_layout1 camera_symbol_border camera_symbol_border1 x1qhmfi1"
+                                                        role="button" tabindex="-1"><i data-visualcompletion="css-img"
+                                                            class="x1b0d499 xep6ejk"
+                                                            style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yM/r/c6O2Cx5STAC.png&quot;); background-position: 0px -21px; background-size: auto; width: 20px; height: 20px; background-repeat: no-repeat; display: inline-block;"></i>
+                                                        <div class="Gradient_background_on_the_left_side_of_the_cover_photo Background_images_and_gradients Background_images_and_gradients1 xg01cxk x47corl Profile_and_background_image_alignment Background_images_and_gradients x1ebt8du x19991ni x1dhq9h xzolkzo x12go9s9 x1rnf11y xprq8jg"
+                                                            role="none" data-visualcompletion="ignore">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="x2lah0s xktsk01 Home_page_name_alignment x1daaz14"></div>
+                            <div class="Profile_and_cover_photo_alignment1 x15sbx0n x5oxk1f x1jxijyj xym1h4x xuy2c7u x1ltux0g xc9uqle">
+                                <div class="Profile_and_cover_photo_layout1 x1ja2u2z x9f619 Profile_and_cover_photo_alignment1 Profile_and_cover_photo_layout x2lah0s x193iq5w">
+                                    <div class="x9f619 Profile_and_cover_photo_layout1 x1ja2u2z Profile_and_cover_photo_alignment1 Profile_and_cover_photo_layout Profile_and_cover_photo_alignment2 x2lwn1j">
+                                        <div
+                                            class="x9f619 Profile_and_cover_photo_layout1 x1ja2u2z Profile_and_cover_photo_alignment1 Profile_and_cover_photo_layout x2lah0s x193iq5w x1cy8zhl xexx8yu">
+                                            <div class="Profile_and_cover_photo_alignment1 Profile_and_cover_photo_layout Distance_between_home_page_information_and_photo_post x9otpla">
+                                                <div class="x1e56ztr Spacing_between_home_page_information_and_background_image1">
+                                                    <span
+                                                        class="x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x1lliihq x1s928wv xhkezso x1gmr53x x1cpjm7i x1fgarty x1943h6x x14qwyeo xw06pyt Home_name xjkpybl x1xlr1w8 xzsf02u x1yc453h"
+                                                        dir="auto">
+                                                        <h1
+                                                            class=" xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd x1vvkbs x1heor9g Home_name1 x1pd3egz x1a2a7pz">
+                                                            Hank Shih&nbsp;<span class=""></span>
+                                                        </h1>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="x9f619 Profile_and_cover_photo_layout1 x1ja2u2z Profile_and_cover_photo_alignment1 Profile_and_cover_photo_layout x2lah0s x193iq5w x1cy8zhl xyamay9">
+                                            <span
+                                                class="x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x1lliihq x1s928wv xhkezso x1gmr53x x1cpjm7i x1fgarty x1943h6x xudqn12 x3x7a5m x6prxxf xvq8zen xo1l8bm xi81zsa"
+                                                dir="auto"><a
+                                                    class="x1i10hfl xjbqb8w x1ejq31n xd10rxx x1sy0etr x17r0tee Extra_objects_or_borders xcfux6l x1qhh985 xm0m39n x9f619 x1ypdohk xt0psk2 xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd x16tdsg8 xggy1nq x1a2a7pz xt0b8zv Bottom_line_number_of_friends xi81zsa x1s688f"
+                                                    href="https://www.facebook.com/HankShih1112/friends/" role="link"
+                                                    tabindex="0">108
+                                                    個朋友</a></span>
+                                        </div>
+                                        <div class="x9f619 Profile_and_cover_photo_layout1 x1ja2u2z Profile_and_cover_photo_alignment1 Profile_and_cover_photo_layout x2lah0s x193iq5w x1cy8zhl">
+                                            <div
+                                                class="x9f619 Profile_and_cover_photo_layout1 x1ja2u2z Profile_and_cover_photo_alignment1 x2lah0s x1qughib x1qjc9v5 xozqiw3 x1q0g3np xyamay9 xykv574 Alignment_of_friends x4cne27 xifccgj">
+                                                <div
+                                                    class="x9f619 Profile_and_cover_photo_layout1 x1ja2u2z Profile_and_cover_photo_alignment1 Profile_and_cover_photo_layout x2lah0s x193iq5w xeuugli xsyo7zv x16hj40l x10b6aqq Landscape_background_picture">
+                                                    <div class="Profile_and_cover_photo_alignment1 Profile_and_cover_photo_layout x1cy8zhl" role="grid">
+                                                        <div class="">
+                                                            <div class="Profile_and_cover_photo_alignment1 x1q0g3np x2lah0s x1a02dak x6ikm8r Gradient_alignment_behind_background_image Profile_and_cover_photo_layout1"
+                                                                role="row" data-visualcompletion="ignore-dynamic"
+                                                                style="height: 32px;">
+                                                                <div class="x9f619 x2lah0s Profile_and_cover_photo_layout1"
+                                                                    style="max-width: 100%; min-width: 0px; width: calc(-999900% + 318968px);">
+                                                                </div>
+                                                                <div class="xieb3on Profile_and_cover_photo_layout1" role="cell">
+                                                                    <div class="">
+                                                                        <a class="x1i10hfl x1qjc9v5 xjbqb8w xjqpnuy xa49m3k xqeqjp1 x2hbi6w Divider_line_below_profile xu3j5b3 x1q0q8m5 x26u7qi Extra_objects_or_borders xcfux6l x1qhh985 xm0m39n x9f619 x1ypdohk xdl72j9 x2lah0s xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r x2lwn1j xeuugli xexx8yu x4uap5 x18d9i69 xkhd6sd Profile_and_cover_photo_layout1 x16tdsg8 Bottom_line_number_of_friends xggy1nq x1ja2u2z x1t137rt x1o1ewxj x3x9cwd x1e5q0jg x13rtm0m x1q0g3np x87ps6o x1lku1pv x1a2a7pz xzsf02u x1rg5ohu"
+                                                                            href="https://www.facebook.com/HankShih1112/friends/?__tn__=%3C"
+                                                                            role="link" tabindex="-1">
+                                                                            <div
+                                                                                class="x1rg5ohu Profile_and_cover_photo_layout1 x3ajldb x1ja2u2z">
+                                                                                <svg aria-label="Chen Rebecca"
+                                                                                    class="x3ajldb"
+                                                                                    data-visualcompletion="ignore-dynamic"
+                                                                                    role="img"
+                                                                                    style="height: 32px; width: 32px;">
+                                                                                    <mask id=":r4s:">
+                                                                                        <circle cx="16" cy="16"
+                                                                                            fill="white" r="16">
+                                                                                        </circle>
+                                                                                    </mask>
+                                                                                    <g mask="url(#:r4s:)">
+                                                                                        <image x="0" y="0" height="100%"
+                                                                                            preserveAspectRatio="xMidYMid slice"
+                                                                                            width="100%"
+                                                                                            xlink:href="https://scontent.ftpe5-1.fna.fbcdn.net/v/t31.18172-1/1941434_905622026120902_857394230888086128_o.jpg?stp=c0.0.32.32a_cp0_dst-jpg_p32x32&amp;_nc_cat=108&amp;ccb=1-7&amp;_nc_sid=5f2048&amp;_nc_ohc=F6t2pFUZ_T0Q7kNvgH7w16z&amp;_nc_ht=scontent.ftpe5-1.fna&amp;oh=00_AfBcV0XpAuN-WoiIH5OhqN3JuE3o7QH96fOjHOV0DUaNSw&amp;oe=665D62FC"
+                                                                                            style="height: 32px; width: 32px;">
+                                                                                        </image>
+                                                                                        <circle
+                                                                                            class="Photo_stickers_and_friend_stickers x1pwv2dq xvlca1e"
+                                                                                            cx="16" cy="16" r="16">
+                                                                                        </circle>
+                                                                                    </g>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="x9f619 x2lah0s Profile_and_cover_photo_layout1"
+                                                                    style="max-width: 100%; min-width: 0px; width: calc(-999900% + 598940px);">
+                                                                </div>
+                                                                <div class="xieb3on Profile_and_cover_photo_layout1 x139jcc6" role="cell">
+                                                                    <div class="">
+                                                                        <a class="x1i10hfl x1qjc9v5 xjbqb8w xjqpnuy xa49m3k xqeqjp1 x2hbi6w Divider_line_below_profile xu3j5b3 x1q0q8m5 x26u7qi Extra_objects_or_borders xcfux6l x1qhh985 xm0m39n x9f619 x1ypdohk xdl72j9 x2lah0s xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r x2lwn1j xeuugli xexx8yu x4uap5 x18d9i69 xkhd6sd Profile_and_cover_photo_layout1 x16tdsg8 Bottom_line_number_of_friends xggy1nq x1ja2u2z x1t137rt x1o1ewxj x3x9cwd x1e5q0jg x13rtm0m x1q0g3np x87ps6o x1lku1pv x1a2a7pz xzsf02u x1rg5ohu"
+                                                                            href="https://www.facebook.com/HankShih1112/friends/?__tn__=%3C"
+                                                                            role="link" tabindex="-1">
+                                                                            <div
+                                                                                class="x1rg5ohu Profile_and_cover_photo_layout1 x3ajldb x1ja2u2z">
+                                                                                <svg aria-label="Chloe Shih"
+                                                                                    class="x3ajldb"
+                                                                                    data-visualcompletion="ignore-dynamic"
+                                                                                    role="img"
+                                                                                    style="height: 32px; width: 32px;">
+                                                                                    <mask id=":r4t:">
+                                                                                        <circle cx="16" cy="16"
+                                                                                            fill="white" r="16">
+                                                                                        </circle>
+                                                                                        <circle cx="-12" cy="16"
+                                                                                            fill="black" r="18">
+                                                                                        </circle>
+                                                                                    </mask>
+                                                                                    <g mask="url(#:r4t:)">
+                                                                                        <image x="0" y="0" height="100%"
+                                                                                            preserveAspectRatio="xMidYMid slice"
+                                                                                            width="100%"
+                                                                                            xlink:href="https://scontent.ftpe5-1.fna.fbcdn.net/v/t39.30808-1/353036378_2005527179784641_7877656684108960854_n.jpg?stp=cp6_dst-jpg_p32x32&amp;_nc_cat=107&amp;ccb=1-7&amp;_nc_sid=5f2048&amp;_nc_ohc=RilPvKlw9GMQ7kNvgFKH_sp&amp;_nc_ht=scontent.ftpe5-1.fna&amp;oh=00_AfCbobi3S5uGGATkrC43oKWnvuZCHcB_oIKWQQLXfOScrg&amp;oe=663BA9C9"
+                                                                                            style="height: 32px; width: 32px;">
+                                                                                        </image>
+                                                                                        <circle
+                                                                                            class="Photo_stickers_and_friend_stickers x1pwv2dq xvlca1e"
+                                                                                            cx="16" cy="16" r="16">
+                                                                                        </circle>
+                                                                                    </g>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="x9f619 x2lah0s Profile_and_cover_photo_layout1"
+                                                                    style="max-width: 100%; min-width: 0px; width: calc(-999900% + 878912px);">
+                                                                </div>
+                                                                <div class="xieb3on Profile_and_cover_photo_layout1 x139jcc6" role="cell">
+                                                                    <div class="">
+                                                                        <a class="x1i10hfl x1qjc9v5 xjbqb8w xjqpnuy xa49m3k xqeqjp1 x2hbi6w Divider_line_below_profile xu3j5b3 x1q0q8m5 x26u7qi Extra_objects_or_borders xcfux6l x1qhh985 xm0m39n x9f619 x1ypdohk xdl72j9 x2lah0s xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r x2lwn1j xeuugli xexx8yu x4uap5 x18d9i69 xkhd6sd Profile_and_cover_photo_layout1 x16tdsg8 Bottom_line_number_of_friends xggy1nq x1ja2u2z x1t137rt x1o1ewxj x3x9cwd x1e5q0jg x13rtm0m x1q0g3np x87ps6o x1lku1pv x1a2a7pz xzsf02u x1rg5ohu"
+                                                                            href="https://www.facebook.com/HankShih1112/friends/?__tn__=%3C"
+                                                                            role="link" tabindex="-1">
+                                                                            <div
+                                                                                class="x1rg5ohu Profile_and_cover_photo_layout1 x3ajldb x1ja2u2z">
+                                                                                <svg aria-label="Ding We Wu"
+                                                                                    class="x3ajldb"
+                                                                                    data-visualcompletion="ignore-dynamic"
+                                                                                    role="img"
+                                                                                    style="height: 32px; width: 32px;">
+                                                                                    <mask id=":r4u:">
+                                                                                        <circle cx="16" cy="16"
+                                                                                            fill="white" r="16">
+                                                                                        </circle>
+                                                                                        <circle cx="-12" cy="16"
+                                                                                            fill="black" r="18">
+                                                                                        </circle>
+                                                                                    </mask>
+                                                                                    <g mask="url(#:r4u:)">
+                                                                                        <image x="0" y="0" height="100%"
+                                                                                            preserveAspectRatio="xMidYMid slice"
+                                                                                            width="100%"
+                                                                                            xlink:href="https://scontent.ftpe5-1.fna.fbcdn.net/v/t39.30808-1/428629487_383909347682741_7767080704685121570_n.jpg?stp=cp0_dst-jpg_p32x32&amp;_nc_cat=103&amp;ccb=1-7&amp;_nc_sid=5f2048&amp;_nc_ohc=KmEUaHaVDeIQ7kNvgGG-U0U&amp;_nc_ht=scontent.ftpe5-1.fna&amp;oh=00_AfCDf_Yi0rB46Fn2epJtztsV3ifI-RsTcKFF5fBAvh4Tuw&amp;oe=663BA190"
+                                                                                            style="height: 32px; width: 32px;">
+                                                                                        </image>
+                                                                                        <circle
+                                                                                            class="Photo_stickers_and_friend_stickers x1pwv2dq xvlca1e"
+                                                                                            cx="16" cy="16" r="16">
+                                                                                        </circle>
+                                                                                    </g>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="x9f619 x2lah0s Profile_and_cover_photo_layout1"
+                                                                    style="max-width: 100%; min-width: 0px; width: calc(-999900% + 1.15888e+06px);">
+                                                                </div>
+                                                                <div class="xieb3on Profile_and_cover_photo_layout1 x139jcc6" role="cell">
+                                                                    <div class="">
+                                                                        <a class="x1i10hfl x1qjc9v5 xjbqb8w xjqpnuy xa49m3k xqeqjp1 x2hbi6w Divider_line_below_profile xu3j5b3 x1q0q8m5 x26u7qi Extra_objects_or_borders xcfux6l x1qhh985 xm0m39n x9f619 x1ypdohk xdl72j9 x2lah0s xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r x2lwn1j xeuugli xexx8yu x4uap5 x18d9i69 xkhd6sd Profile_and_cover_photo_layout1 x16tdsg8 Bottom_line_number_of_friends xggy1nq x1ja2u2z x1t137rt x1o1ewxj x3x9cwd x1e5q0jg x13rtm0m x1q0g3np x87ps6o x1lku1pv x1a2a7pz xzsf02u x1rg5ohu"
+                                                                            href="https://www.facebook.com/HankShih1112/friends/?__tn__=%3C"
+                                                                            role="link" tabindex="-1">
+                                                                            <div
+                                                                                class="x1rg5ohu Profile_and_cover_photo_layout1 x3ajldb x1ja2u2z">
+                                                                                <svg aria-label="Hank Shih"
+                                                                                    class="x3ajldb"
+                                                                                    data-visualcompletion="ignore-dynamic"
+                                                                                    role="img"
+                                                                                    style="height: 32px; width: 32px;">
+                                                                                    <mask id=":r4v:">
+                                                                                        <circle cx="16" cy="16"
+                                                                                            fill="white" r="16">
+                                                                                        </circle>
+                                                                                        <circle cx="-12" cy="16"
+                                                                                            fill="black" r="18">
+                                                                                        </circle>
+                                                                                    </mask>
+                                                                                    <g mask="url(#:r4v:)">
+                                                                                        <image x="0" y="0" height="100%"
+                                                                                            preserveAspectRatio="xMidYMid slice"
+                                                                                            width="100%"
+                                                                                            xlink:href="https://scontent.ftpe5-1.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?stp=cp0_dst-png_p32x32&amp;_nc_cat=1&amp;ccb=1-7&amp;_nc_sid=5f2048&amp;_nc_ohc=C0FEU6wOyRwQ7kNvgE-_4wz&amp;_nc_ht=scontent.ftpe5-1.fna&amp;oh=00_AfBPSuarNK6D47031IQcbqobFyDraunfQznLdh5O1gOGAg&amp;oe=665D68F8"
+                                                                                            style="height: 32px; width: 32px;">
+                                                                                        </image>
+                                                                                        <circle
+                                                                                            class="Photo_stickers_and_friend_stickers x1pwv2dq xvlca1e"
+                                                                                            cx="16" cy="16" r="16">
+                                                                                        </circle>
+                                                                                    </g>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="x9f619 x2lah0s Profile_and_cover_photo_layout1"
+                                                                    style="max-width: 100%; min-width: 0px; width: calc(-999900% + 1.43886e+06px);">
+                                                                </div>
+                                                                <div class="xieb3on Profile_and_cover_photo_layout1 x139jcc6" role="cell">
+                                                                    <div class="">
+                                                                        <a class="x1i10hfl x1qjc9v5 xjbqb8w xjqpnuy xa49m3k xqeqjp1 x2hbi6w Divider_line_below_profile xu3j5b3 x1q0q8m5 x26u7qi Extra_objects_or_borders xcfux6l x1qhh985 xm0m39n x9f619 x1ypdohk xdl72j9 x2lah0s xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r x2lwn1j xeuugli xexx8yu x4uap5 x18d9i69 xkhd6sd Profile_and_cover_photo_layout1 x16tdsg8 Bottom_line_number_of_friends xggy1nq x1ja2u2z x1t137rt x1o1ewxj x3x9cwd x1e5q0jg x13rtm0m x1q0g3np x87ps6o x1lku1pv x1a2a7pz xzsf02u x1rg5ohu"
+                                                                            href="https://www.facebook.com/HankShih1112/friends/?__tn__=%3C"
+                                                                            role="link" tabindex="-1">
+                                                                            <div
+                                                                                class="x1rg5ohu Profile_and_cover_photo_layout1 x3ajldb x1ja2u2z">
+                                                                                <svg aria-label="Huangxiang Chen"
+                                                                                    class="x3ajldb"
+                                                                                    data-visualcompletion="ignore-dynamic"
+                                                                                    role="img"
+                                                                                    style="height: 32px; width: 32px;">
+                                                                                    <mask id=":r50:">
+                                                                                        <circle cx="16" cy="16"
+                                                                                            fill="white" r="16">
+                                                                                        </circle>
+                                                                                        <circle cx="-12" cy="16"
+                                                                                            fill="black" r="18">
+                                                                                        </circle>
+                                                                                    </mask>
+                                                                                    <g mask="url(#:r50:)">
+                                                                                        <image x="0" y="0" height="100%"
+                                                                                            preserveAspectRatio="xMidYMid slice"
+                                                                                            width="100%"
+                                                                                            xlink:href="https://scontent.ftpe5-1.fna.fbcdn.net/v/t1.6435-1/41338834_1944207215599556_3453315042135506944_n.jpg?stp=cp0_dst-jpg_p32x32&amp;_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=5f2048&amp;_nc_ohc=G8V3b-p36gQQ7kNvgEGLCR7&amp;_nc_ht=scontent.ftpe5-1.fna&amp;oh=00_AfBJ6fWzfLNjJGoVddQMBZ4Vm0zBRwNrMfM6qrusT2ZY1w&amp;oe=665D363F"
+                                                                                            style="height: 32px; width: 32px;">
+                                                                                        </image>
+                                                                                        <circle
+                                                                                            class="Photo_stickers_and_friend_stickers x1pwv2dq xvlca1e"
+                                                                                            cx="16" cy="16" r="16">
+                                                                                        </circle>
+                                                                                    </g>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="x9f619 x2lah0s Profile_and_cover_photo_layout1"
+                                                                    style="max-width: 100%; min-width: 0px; width: calc(-999900% + 1.71883e+06px);">
+                                                                </div>
+                                                                <div class="xieb3on Profile_and_cover_photo_layout1 x139jcc6" role="cell">
+                                                                    <div class="">
+                                                                        <a class="x1i10hfl x1qjc9v5 xjbqb8w xjqpnuy xa49m3k xqeqjp1 x2hbi6w Divider_line_below_profile xu3j5b3 x1q0q8m5 x26u7qi Extra_objects_or_borders xcfux6l x1qhh985 xm0m39n x9f619 x1ypdohk xdl72j9 x2lah0s xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r x2lwn1j xeuugli xexx8yu x4uap5 x18d9i69 xkhd6sd Profile_and_cover_photo_layout1 x16tdsg8 Bottom_line_number_of_friends xggy1nq x1ja2u2z x1t137rt x1o1ewxj x3x9cwd x1e5q0jg x13rtm0m x1q0g3np x87ps6o x1lku1pv x1a2a7pz xzsf02u x1rg5ohu"
+                                                                            href="https://www.facebook.com/HankShih1112/friends/?__tn__=%3C"
+                                                                            role="link" tabindex="-1">
+                                                                            <div
+                                                                                class="x1rg5ohu Profile_and_cover_photo_layout1 x3ajldb x1ja2u2z">
+                                                                                <svg aria-label="Hulk Hulk"
+                                                                                    class="x3ajldb"
+                                                                                    data-visualcompletion="ignore-dynamic"
+                                                                                    role="img"
+                                                                                    style="height: 32px; width: 32px;">
+                                                                                    <mask id=":r51:">
+                                                                                        <circle cx="16" cy="16"
+                                                                                            fill="white" r="16">
+                                                                                        </circle>
+                                                                                        <circle cx="-12" cy="16"
+                                                                                            fill="black" r="18">
+                                                                                        </circle>
+                                                                                    </mask>
+                                                                                    <g mask="url(#:r51:)">
+                                                                                        <image x="0" y="0" height="100%"
+                                                                                            preserveAspectRatio="xMidYMid slice"
+                                                                                            width="100%"
+                                                                                            xlink:href="https://scontent.ftpe5-1.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?stp=cp0_dst-png_p32x32&amp;_nc_cat=1&amp;ccb=1-7&amp;_nc_sid=5f2048&amp;_nc_ohc=C0FEU6wOyRwQ7kNvgE-_4wz&amp;_nc_ht=scontent.ftpe5-1.fna&amp;oh=00_AfBPSuarNK6D47031IQcbqobFyDraunfQznLdh5O1gOGAg&amp;oe=665D68F8"
+                                                                                            style="height: 32px; width: 32px;">
+                                                                                        </image>
+                                                                                        <circle
+                                                                                            class="Photo_stickers_and_friend_stickers x1pwv2dq xvlca1e"
+                                                                                            cx="16" cy="16" r="16">
+                                                                                        </circle>
+                                                                                    </g>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="x9f619 x2lah0s Profile_and_cover_photo_layout1"
+                                                                    style="max-width: 100%; min-width: 0px; width: calc(-999900% + 1.9988e+06px);">
+                                                                </div>
+                                                                <div class="xieb3on Profile_and_cover_photo_layout1 x139jcc6" role="cell">
+                                                                    <div class="">
+                                                                        <a class="x1i10hfl x1qjc9v5 xjbqb8w xjqpnuy xa49m3k xqeqjp1 x2hbi6w Divider_line_below_profile xu3j5b3 x1q0q8m5 x26u7qi Extra_objects_or_borders xcfux6l x1qhh985 xm0m39n x9f619 x1ypdohk xdl72j9 x2lah0s xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r x2lwn1j xeuugli xexx8yu x4uap5 x18d9i69 xkhd6sd Profile_and_cover_photo_layout1 x16tdsg8 Bottom_line_number_of_friends xggy1nq x1ja2u2z x1t137rt x1o1ewxj x3x9cwd x1e5q0jg x13rtm0m x1q0g3np x87ps6o x1lku1pv x1a2a7pz xzsf02u x1rg5ohu"
+                                                                            href="https://www.facebook.com/HankShih1112/friends/?__tn__=%3C"
+                                                                            role="link" tabindex="0">
+                                                                            <div
+                                                                                class="x1rg5ohu Profile_and_cover_photo_layout1 x3ajldb x1ja2u2z">
+                                                                                <svg aria-label="Kate Hou"
+                                                                                    class="x3ajldb"
+                                                                                    data-visualcompletion="ignore-dynamic"
+                                                                                    role="img"
+                                                                                    style="height: 32px; width: 32px;">
+                                                                                    <mask id=":r52:">
+                                                                                        <circle cx="16" cy="16"
+                                                                                            fill="white" r="16">
+                                                                                        </circle>
+                                                                                        <circle cx="-12" cy="16"
+                                                                                            fill="black" r="18">
+                                                                                        </circle>
+                                                                                    </mask>
+                                                                                    <g mask="url(#:r52:)">
+                                                                                        <image x="0" y="0" height="100%"
+                                                                                            preserveAspectRatio="xMidYMid slice"
+                                                                                            width="100%"
+                                                                                            xlink:href="https://scontent.ftpe5-1.fna.fbcdn.net/v/t1.18169-1/302371_10150805182595296_1994544623_n.jpg?stp=c44.44.552.552a_cp0_dst-jpg_s32x32&amp;_nc_cat=109&amp;ccb=1-7&amp;_nc_sid=5f2048&amp;_nc_ohc=_rxe2ELATkYQ7kNvgEwwn01&amp;_nc_ht=scontent.ftpe5-1.fna&amp;oh=00_AfCApVyJuK2mokYao7XenpsJsKeU2p0FSE0yKc6VHngi-g&amp;oe=665D3A2A"
+                                                                                            style="height: 32px; width: 32px;">
+                                                                                        </image>
+                                                                                        <circle
+                                                                                            class="Photo_stickers_and_friend_stickers x1pwv2dq xvlca1e"
+                                                                                            cx="16" cy="16" r="16">
+                                                                                        </circle>
+                                                                                    </g>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="x9f619 x2lah0s Profile_and_cover_photo_layout1"
+                                                                    style="max-width: 100%; min-width: 0px; width: calc(-999900% + 2.27877e+06px);">
+                                                                </div>
+                                                                <div class="xieb3on Profile_and_cover_photo_layout1 x139jcc6" role="cell">
+                                                                    <div class="">
+                                                                        <a class="x1i10hfl x1qjc9v5 xjbqb8w xjqpnuy xa49m3k xqeqjp1 x2hbi6w Divider_line_below_profile xu3j5b3 x1q0q8m5 x26u7qi Extra_objects_or_borders xcfux6l x1qhh985 xm0m39n x9f619 x1ypdohk xdl72j9 x2lah0s xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r x2lwn1j xeuugli xexx8yu x4uap5 x18d9i69 xkhd6sd Profile_and_cover_photo_layout1 x16tdsg8 Bottom_line_number_of_friends xggy1nq x1ja2u2z x1t137rt x1o1ewxj x3x9cwd x1e5q0jg x13rtm0m x1q0g3np x87ps6o x1lku1pv x1a2a7pz xzsf02u x1rg5ohu"
+                                                                            href="https://www.facebook.com/HankShih1112/friends/?__tn__=%3C"
+                                                                            role="link" tabindex="-1">
+                                                                            <div
+                                                                                class="x1rg5ohu Profile_and_cover_photo_layout1 x3ajldb x1ja2u2z">
+                                                                                <svg aria-label="Kelly Peng"
+                                                                                    class="x3ajldb"
+                                                                                    data-visualcompletion="ignore-dynamic"
+                                                                                    role="img"
+                                                                                    style="height: 32px; width: 32px;">
+                                                                                    <mask id=":r53:">
+                                                                                        <circle cx="16" cy="16"
+                                                                                            fill="white" r="16">
+                                                                                        </circle>
+                                                                                        <circle cx="-12" cy="16"
+                                                                                            fill="black" r="18">
+                                                                                        </circle>
+                                                                                    </mask>
+                                                                                    <g mask="url(#:r53:)">
+                                                                                        <image x="0" y="0" height="100%"
+                                                                                            preserveAspectRatio="xMidYMid slice"
+                                                                                            width="100%"
+                                                                                            xlink:href="https://scontent.ftpe5-1.fna.fbcdn.net/v/t39.30808-1/438906121_422292983869760_9210762064877694695_n.jpg?stp=cp0_dst-jpg_p32x32&amp;_nc_cat=110&amp;ccb=1-7&amp;_nc_sid=5f2048&amp;_nc_ohc=xOiwoB2iPEUQ7kNvgGsSnNT&amp;_nc_ht=scontent.ftpe5-1.fna&amp;oh=00_AfBdWInmwNkvAoIxjJWXOlTMO_rL3vGAIsBVWKuS9CdKBg&amp;oe=663BA44C"
+                                                                                            style="height: 32px; width: 32px;">
+                                                                                        </image>
+                                                                                        <circle
+                                                                                            class="Photo_stickers_and_friend_stickers x1pwv2dq xvlca1e"
+                                                                                            cx="16" cy="16" r="16">
+                                                                                        </circle>
+                                                                                    </g>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div
+                                                                    class="Gradient_background_on_the_left_side_of_the_cover_photo x9f619 Profile_and_cover_photo_alignment1 Background_images_and_gradients x1q0g3np x47corl Profile_and_background_image_alignment Background_images_and_gradients1 Background_images_and_gradients">
+                                                                    <div class="x9f619 x2lah0s Profile_and_cover_photo_layout1"
+                                                                        style="max-width: 28px; min-width: 0px; width: calc(999900% - 598940px);">
+                                                                    </div>
+                                                                    <div class="x9f619 x2lah0s Profile_and_cover_photo_layout1"
+                                                                        style="max-width: 28px; min-width: 0px; width: calc(999900% - 878912px);">
+                                                                    </div>
+                                                                    <div class="x9f619 x2lah0s Profile_and_cover_photo_layout1"
+                                                                        style="max-width: 28px; min-width: 0px; width: calc(999900% - 1.15888e+06px);">
+                                                                    </div>
+                                                                    <div class="x9f619 x2lah0s Profile_and_cover_photo_layout1"
+                                                                        style="max-width: 28px; min-width: 0px; width: calc(999900% - 1.43886e+06px);">
+                                                                    </div>
+                                                                    <div class="x9f619 x2lah0s Profile_and_cover_photo_layout1"
+                                                                        style="max-width: 28px; min-width: 0px; width: calc(999900% - 1.71883e+06px);">
+                                                                    </div>
+                                                                    <div class="x9f619 x2lah0s Profile_and_cover_photo_layout1"
+                                                                        style="max-width: 28px; min-width: 0px; width: calc(999900% - 1.9988e+06px);">
+                                                                    </div>
+                                                                    <div class="x9f619 x2lah0s Profile_and_cover_photo_layout1"
+                                                                        style="max-width: 28px; min-width: 0px; width: calc(999900% - 2.27877e+06px);">
+                                                                    </div> <a
+                                                                        aria-label="é–‹å•Ÿé€£çµï¼ŒæŸ¥çœ‹æ¯å€‹äººçš„å€‹äººæª”æ¡ˆ"
+                                                                        class="x1i10hfl xjbqb8w xjqpnuy xa49m3k xqeqjp1 x2hbi6w Divider_line_below_profile xu3j5b3 x1q0q8m5 x26u7qi Extra_objects_or_borders xcfux6l x1qhh985 xm0m39n x9f619 x1ypdohk xdl72j9 xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r x2lwn1j xeuugli xexx8yu x4uap5 x18d9i69 xkhd6sd Profile_and_cover_photo_layout1 x16tdsg8 Bottom_line_number_of_friends xggy1nq x1ja2u2z x1t137rt x1q0g3np x87ps6o x1lku1pv x1a2a7pz Photo_sticker_camera_alignment Rounded_corner_stickers Rounded_corner_stickers1 x18nykt9 xww2gxu Profile_and_cover_photo_alignment1 x2lah0s Profile_and_cover_photo_alignment x71s49j x10w6t97 x1td3qas"
+                                                                        href="https://www.facebook.com/HankShih1112/friends/"
+                                                                        role="link" tabindex="-1"><svg
+                                                                            class="Gradient_background_on_the_left_side_of_the_cover_photo Background_images_and_gradients Profile_and_background_image_alignment Background_images_and_gradients1 Background_images_and_gradients"
+                                                                            height="32" viewBox="0 0 32 32" width="32">
+                                                                            <mask id=":r9:">
+                                                                                <circle cx="16" cy="16" fill="white"
+                                                                                    r="16">
+                                                                                </circle>
+                                                                                <circle cx="-12" cy="16" fill="black"
+                                                                                    r="18">
+                                                                                </circle>
+                                                                            </mask>
+                                                                            <circle class="x1wnuiir" cx="16" cy="16"
+                                                                                r="16" role="cell" mask="url(#:r9:)">
+                                                                            </circle>
+                                                                            <circle
+                                                                                class="x1wnuiir xg01cxk x1ebt8du x19991ni x1dhq9h"
+                                                                                cx="16" cy="16" r="16" role="cell"
+                                                                                mask="url(#:r9:)">
+                                                                            </circle>
+                                                                        </svg><svg viewBox="0 0 24 24" width="16"
+                                                                            height="16" fill="currentColor"
+                                                                            class="x19dipnz x1lliihq x1tzjh5l x1k90msu x2h7rmj x1qfuztq"
+                                                                            style="--color: var(--always-white);">
+                                                                            <circle cx="12" cy="12" r="2.5">
+                                                                            </circle>
+                                                                            <circle cx="19.5" cy="12" r="2.5">
+                                                                            </circle>
+                                                                            <circle cx="4.5" cy="12" r="2.5">
+                                                                            </circle>
+                                                                        </svg></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="x9f619 Profile_and_cover_photo_layout1 x1ja2u2z Profile_and_cover_photo_alignment1 x2lah0s Profile_and_cover_photo_alignment x1qjc9v5 xozqiw3 x1q0g3np x1ve1bff">
+                <div
+                    class="x9f619 Profile_and_cover_photo_layout1 x1ja2u2z Profile_and_cover_photo_alignment1 Profile_and_cover_photo_layout xeuugli x1r8uery Profile_and_cover_photo_alignment2 xs83m0k x1swvt13 x1pi30zi xqdwrps x16i7wwg Align_profile_with_cover_photo">
+                    <div
+                        class="html-div xe8uvvx Spacing_between_home_page_information_and_background_image x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd Separator_color_below_profile Divider_line_below_profile Divider_line_below_profile1">
+                    </div>
+                </div>
+
+            </div><!--/$--><!--/$-->
+        </div>
+
+
+
+
+
+</body>
+
+</html>

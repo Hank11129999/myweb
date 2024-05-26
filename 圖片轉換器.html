@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖片轉換器</title>
+</head>
+<body>
+    <h2>圖片轉換器</h2>
+    <input type="file" id="fileInput" accept="image/*" multiple>
+    <br>
+    <select id="formatSelect">
+        <option value="jpg">JPG</option>
+        <option value="png">PNG</option>
+        <option value="gif">GIF</option>
+    </select>
+    <br><br>
+    <button onclick="convertImages()">轉換圖片</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+
+    <script>
+        function convertImages() {
+            var fileInput = document.getElementById('fileInput');
+            var formatSelect = document.getElementById('formatSelect');
+            var files = fileInput.files;
+            var format = formatSelect.value;
+
+            if (files.length === 1) {
+                convertImage(files[0], format);
+            } else if (files.length > 1) {
+                var zip = new JSZip();
+                var folderName = getFormattedDateTime();
+                var count = 0; // 計數器，用於確定所有文件都已處理完畢
+                for (var i = 0; i < files.length; i++) {
+                    convertImage(files[i], format, zip.folder(folderName), function() {
+                        count++;
+                        if (count === files.length) { // 當所有文件都已處理完畢時生成 zip 檔案
+                            zip.generateAsync({ type: "blob" }).then(function(content) {
+                                saveAs(content, folderName + ".zip");
+                            });
+                        }
+                    });
+                }
+            }
+        }
+
+        function convertImage(file, format, zipFolder, callback) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var img = new Image();
+                img.src = e.target.result;
+                img.onload = function() {
+                    var canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    var ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    var blob = dataURLToBlob(canvas.toDataURL('image/' + format));
+                    if (zipFolder) {
+                        zipFolder.file(file.name.replace(/\.[^/.]+$/, "") + '.' + format, blob);
+                        callback(); // 處理完畢後呼叫 callback 函數
+                    } else {
+                        saveAs(blob, file.name.replace(/\.[^/.]+$/, "") + '.' + format);
+                    }
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function dataURLToBlob(dataURL) {
+            var parts = dataURL.split(';base64,');
+            var contentType = parts[0].split(':')[1];
+            var raw = window.atob(parts[1]);
+            var rawLength = raw.length;
+            var uInt8Array = new Uint8Array(rawLength);
+            for (var i = 0; i < rawLength; ++i) {
+                uInt8Array[i] = raw.charCodeAt(i);
+            }
+            return new Blob([uInt8Array], { type: contentType });
+        }
+
+        function getFormattedDateTime() {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = String(now.getMonth() + 1).padStart(2, '0');
+            var day = String(now.getDate()).padStart(2, '0');
+            var hours = String(now.getHours()).padStart(2, '0');
+            var minutes = String(now.getMinutes()).padStart(2, '0');
+            var seconds = String(now.getSeconds()).padStart(2, '0');
+            return year + month + day + hours + minutes + seconds;
+        }
+    </script>
+</body>
+</html>

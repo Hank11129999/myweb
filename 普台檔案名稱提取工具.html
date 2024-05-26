@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>檔案名稱提取工具</title>
+</head>
+<body>
+
+<h1>檔案名稱提取工具</h1>
+
+<textarea id="inputText" rows="5" cols="50" placeholder='請輸入文字，例如：<a href="F_20160620105080gclm2E.JPG">\n<a href="...">\n...'></textarea><br>
+
+<button onclick="extractFileNames()">提取檔案名稱</button>
+
+<p id="output"></p>
+
+<script>
+function extractFileNames() {
+  // 取得文字輸入框的內容
+  var inputText = document.getElementById('inputText').value;
+
+  // 使用正規表達式提取檔案名稱
+  var regex = /<a href="F_([^"]+)">/g;
+  var matches = inputText.match(regex);
+
+  if (matches) {
+    // 顯示提取的檔案名稱
+    var outputText = "提取的檔案 URL：<br>";
+    for (var i = 0; i < matches.length; i++) {
+      var fileName = matches[i].match(/<a href="F_([^"]+)">/)[1];
+      var fileURL = "https://www.ptsh.ntct.edu.tw/ptsh/upload/News/PHOTO/F_" + fileName;
+      outputText += fileURL + "<br>";
+    }
+    document.getElementById('output').innerHTML = outputText;
+  } else {
+    // 若未找到檔案名稱，顯示提示訊息
+    document.getElementById('output').innerHTML = "未找到檔案名稱。";
+  }
+}
+</script>
+
+</body>
+</html>

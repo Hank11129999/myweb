@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>获取网络连接真实速度</title>
+  <style>
+    #speed {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="speed"></div>
+
+  <script>
+    function getNetworkSpeed() {
+      var xhr = new XMLHttpRequest();
+      var startTime, endTime;
+
+      xhr.open('GET', 'https://www.example.com', true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          endTime = (new Date()).getTime();
+          var duration = endTime - startTime;
+          var speed = calculateSpeed(duration);
+          document.getElementById("speed").innerHTML = "网络速度：" + speed + " Mbps";
+        }
+      };
+
+      startTime = (new Date()).getTime();
+      xhr.send(null);
+    }
+
+    function calculateSpeed(duration) {
+      // 根据请求时间计算速度
+      var bitsLoaded = 8 * xhr.getResponseHeader('Content-Length');
+      var speedMbps = ((bitsLoaded / duration) / 1000).toFixed(2);
+      return speedMbps;
+    }
+
+    // 每秒更新网络速度
+    setInterval(getNetworkSpeed, 1000);
+  </script>
+</body>
+</html>

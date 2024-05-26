@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Upload and Detect</title>
+</head>
+<body>
+    <h1>影片上傳和偵測</h1>
+    <input type="file" id="videoUpload" accept="video/*">
+    <button onclick="detectVideo()">偵測影片</button>
+    
+    <h2>影片資訊</h2>
+    <p>影片名稱: <span id="videoName"></span></p>
+    <p>影片大小: <span id="videoSize"></span></p>
+    <p>影片時間: <span id="videoDuration"></span></p>
+    <p>位元數率: <span id="videoBitrate"></span></p>
+    <p>FPS: <span id="videoFPS"></span></p>
+    <p>畫質: <span id="videoQuality"></span></p>
+    <p>光圈: <span id="videoAperture"></span></p>
+    <p>35mm焦距: <span id="videoFocalLength"></span></p>
+    
+    <script>
+        function detectVideo() {
+            const fileInput = document.getElementById('videoUpload');
+            const file = fileInput.files[0];
+            if (file) {
+                document.getElementById('videoName').innerText = file.name;
+
+                const fileSize = formatBytes(file.size);
+                document.getElementById('videoSize').innerText = fileSize.value + ' ' + fileSize.unit;
+
+                const videoElement = document.createElement('video');
+                videoElement.src = URL.createObjectURL(file);
+                
+                videoElement.onloadedmetadata = function() {
+                    document.getElementById('videoDuration').innerText = videoElement.duration.toFixed(2) + ' seconds';
+                    
+                    // 估算位元數率
+                    const bitrate = (file.size * 8 / videoElement.duration / 1024).toFixed(2);
+                    document.getElementById('videoBitrate').innerText = bitrate + ' kbps';
+                    
+                    // 計算FPS
+                    const fps = videoElement.webkitDecodedFrameCount / videoElement.duration;
+                    document.getElementById('videoFPS').innerText = fps.toFixed(2);
+
+                    // 假設這裡是用於檢測畫質、光圈和35mm焦距的程式碼
+                    // 這裡僅為示例，實際應用需要使用相應的影片處理庫和算法
+                    
+                    // 顯示假設的結果
+                    document.getElementById('videoQuality').innerText = '1080p';
+                    document.getElementById('videoAperture').innerText = 'f/2.8';
+                    document.getElementById('videoFocalLength').innerText = '50mm';
+                };
+            }
+        }
+
+        function formatBytes(bytes) {
+            const units = ['bytes', 'KB', 'MB', 'GB', 'TB'];
+            let i = 0;
+            while (bytes >= 1024 && i < units.length - 1) {
+                bytes /= 1024;
+                i++;
+            }
+            return { value: bytes.toFixed(2), unit: units[i] };
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>本機磁碟資訊</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $.ajax({
+        url: "disk_info.php",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+          var capacityGB = (data.capacity / (1024*1024*1024)).toFixed(2);
+          var remainingSpaceGB = (data.remainingSpace / (1024*1024*1024)).toFixed(2);
+          var progress = (remainingSpaceGB / capacityGB) * 100;
+
+          // 顯示容量
+          $("#capacity").html("容量：" + capacityGB + " GB");
+
+          // 顯示剩餘容量
+          $("#remainingSpace").html("剩餘容量：" + remainingSpaceGB + " GB");
+
+          // 顯示進度條
+          $("#progressBar").css("width", progress + "%");
+        },
+        error: function() {
+          alert("無法取得磁碟資訊");
+        }
+      });
+    });
+  </script>
+  <style>
+    #progressBar {
+      width: 100%;
+      height: 20px;
+      background-color: #f2f2f2;
+    }
+    #progressBar div {
+      height: 100%;
+      background-color: #4CAF50;
+    }
+  </style>
+</head>
+<body>
+  <h1>本機磁碟：</h1>
+  <p id="capacity">容量：？ GB</p>
+  <div id="progressBar">
+    <div></div>
+  </div>
+  <p id="remainingSpace">剩餘容量：？ GB</p>
+</body>
+</html>

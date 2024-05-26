@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>橫向分頁標籤</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- css文件載入 -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="css/style.css">
+	<!-- js文件載入 -->
+	<script src="js/bootstrap.bundle.min.js"></script>
+    <style>
+        .tab-pane {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .tab-pane.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+    <style>
+        .social_software {
+            padding-top: 2%;
+            padding-left: 8%;
+        }
+
+        .social_software-icon {
+            width: 150px;
+            height: 150px;
+            /*border-radius: 50%;*/
+            margin-right: 10px;
+        }
+
+        .social_software-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .info_container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            /* 元素之間的間距 */
+            margin-bottom: 50px;
+            /* 不同資料行之間的間距 */
+
+        }
+
+        .show_information {
+            display: none;
+            /* 預設隱藏 */
+            gap: 50px;
+        }
+    </style>
+    <style>
+.input-group input.form-control[readonly]:focus,
+.input-group input.form-control[readonly]:active {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+.form-control {
+    width: 50px;
+}
+
+.input-group input.form-control[readonly] {
+    padding-left: 10px;
+    max-width: calc(70%) !important;
+    min-height: 70px !important;
+    font-size: 32px;
+    letter-spacing: 3px;
+}
+
+
+.input-group {
+    padding-left: calc(10%);
+}
+
+
+    </style>
+</head>
+
+<body>
+
+    <ul class="nav nav-tabs" id="myTabs">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#home" onclick="changeTab(event, 'home')">首頁</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#social" onclick="changeTab(event, 'social')">社交軟體</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#history" onclick="changeTab(event, 'history')">歷程</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#achievements" onclick="changeTab(event, 'achievements')">成就</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="home">
+            首頁內容
+            <h2>個人資料</h2>
+            <br>
+
+            <div class="input-group input-group-lg mb-2">
+                <span class="input-group-text">
+                    <i class="bi bi-person-fill"></i>&ensp;<a>中文姓名</a>
+                </span>
+                <input type="text" class="form-control" value="石宗翰" readonly>
+            </div>
+            <div class="input-group input-group-lg mb-2">
+                <span class="input-group-text">
+                    <i class="bi bi-person-fill"></i>&ensp;<a>英文姓名</a>
+                </span>
+                <input type="text" class="form-control" value="Hank" readonly>
+            </div>
+            <div class="input-group input-group-lg mb-2">
+                <span class="input-group-text">
+                    <i class="bi bi-gender-female"></i>&ensp;<a>性別</a>
+                </span>
+                <input type="text" class="form-control" value="男性" readonly>
+            </div>
+            <div class="input-group input-group-lg mb-2">
+                <span class="input-group-text">
+                    <i class="bi bi-calendar2-week"></i>&ensp;<a>生日</a>
+                </span>
+                <input type="text" class="form-control" value="2010年11月12日（民國99年11月12日）" style="cursor: pointer;" readonly onclick="openInNewTab('https://calendar.google.com/calendar/u/0/r/month/2010/11/12')">
+            </div>
+            <div class="input-group input-group-lg mb-2">
+                <span class="input-group-text">
+                    <i class="bi bi-geo-alt"></i>&ensp;<a>出生地</a>
+                </span>
+                <input type="text" class="form-control" value="新竹市" style="cursor: pointer;" readonly onclick="openInNewTab('https://www.google.com/search?q=%E6%96%B0%E7%AB%B9%E5%B8%82')">
+            </div>
+
+            <h2>學習</h2>
+            <br>
+            
+            <div class="input-group input-group-lg mb-2">
+                <span class="input-group-text">
+                    <i class="bi bi-book"></i>&ensp;<a>國小</a>
+                </span>
+                <input type="text" class="form-control" value="新竹市北區民富國民小學" style="cursor: pointer;" readonly onclick="openInNewTab('https://www.google.com/search?q=%E6%96%B0%E7%AB%B9%E5%B8%82%E5%8C%97%E5%8D%80%E6%B0%91%E5%AF%8C%E5%9C%8B%E6%B0%91%E5%B0%8F%E5%AD%B8')">
+            </div>
+
+            <div class="input-group input-group-lg mb-2">
+                <span class="input-group-text">
+                    <i class="bi bi-book"></i>&ensp;<a>國中</a>
+                </span>
+                <input type="text" class="form-control" value="南投縣私立普台高級中學（國中部）" style="cursor: pointer;" readonly onclick="openInNewTab('https://www.google.com/search?q=%E5%8D%97%E6%8A%95%E7%B8%A3%E7%A7%81%E7%AB%8B%E6%99%AE%E5%8F%B0%E9%AB%98%E7%B4%9A%E4%B8%AD%E5%AD%B8%EF%BC%88%E5%9C%8B%E4%B8%AD%E9%83%A8%EF%BC%89')">
+            </div>
+
+            <div class="input-group input-group-lg mb-2">
+                <span class="input-group-text">
+                    <i class="bi bi-book"></i>&ensp;<a>高中</a>
+                </span>
+                <input type="text" class="form-control" value="未知" style="cursor: pointer;" readonly onclick="openInNewTab('https://www.google.com/')">
+            </div>
+
+
+
+
+        </div>
+        <div class="tab-pane fade" id="social">
+            社交軟體內容
+
+            <div class="social_software">
+                <div class="info_container" id="BrawlStars_information">
+                    <img src="https://i.imgur.com/wZ5nH9F.png" alt="BrawlStars" class="social_software-icon">
+                    <img src="https://i.imgur.com/w5QRb0m.jpeg" alt="BrawlStars" class="social_software-avatar">
+                    <button class="show_button" data-target="BrawlStars_information">顯示</button>
+                    <div class="show_information">
+                        <p>Hank</p>
+                        <button
+                            onclick="openInNewTab('https://link.brawlstars.com/invite/friend/cnt?tag=Y9J0YVU99&token=rm6rkm7e')">加入好友</button>
+                    </div>
+                </div>
+
+                <div class="info_container" id="Facebook_information">
+                    <img src="https://i.imgur.com/wtNjYnd.png" alt="Facebook" class="social_software-icon">
+                    <img src="https://i.imgur.com/w5QRb0m.jpeg" alt="Facebook" class="social_software-avatar">
+                    <button class="show_button" data-target="Facebook_information">顯示</button>
+                    <div class="show_information">
+                        <p>石宗翰（HankShih1112）</p>
+                        <button onclick="openInNewTab('https://m.facebook.com/HankShih1112')">加入好友</button>
+                    </div>
+                </div>
+
+                <div class="info_container" id="Instagram_information">
+                    <img src="https://i.imgur.com/u1JfBtp.png" alt="Instagram" class="social_software-icon">
+                    <img src="https://i.imgur.com/w5QRb0m.jpeg" alt="Instagram" class="social_software-avatar">
+                    <button class="show_button" data-target="Instagram_information">顯示</button>
+                    <div class="show_information">
+                        <p>石宗翰（@hankshih1112）</p>
+                        <button onclick="openInNewTab('https://www.instagram.com/hankshih1112')">加入好友</button>
+                    </div>
+                </div>
+
+                <div class="info_container" id="Gmail_information">
+                    <img src="https://i.imgur.com/QNSMkwV.png" alt="Gmail" class="social_software-icon">
+                    <img src="https://i.imgur.com/w5QRb0m.jpeg" alt="Gmail" class="social_software-avatar">
+                    <button class="show_button" data-target="Gmail_information">顯示</button>
+                    <div class="show_information">
+                        <p>石宗翰</p>
+                        <button onclick="openInNewTab('mailto:zonghanshi1@gmail.com')">加入好友</button>
+
+                    </div>
+                </div>
+
+                <div class="info_container" id="LINE_information">
+                    <img src="https://i.imgur.com/GJuyNhr.png" alt="LINE" class="social_software-icon">
+                    <img src="https://i.imgur.com/w5QRb0m.jpeg" alt="LINE" class="social_software-avatar">
+                    <button class="show_button" data-target="LINE_information">顯示</button>
+                    <div class="show_information">
+                        <p>Hank</p>
+                        <button onclick="openInNewTab('https://line.me/ti/p/JKTjOnbrTE')">加入好友</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="history">歷程內容</div>
+        <div class="tab-pane fade" id="achievements">成就內容</div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function changeTab(event, tabId) {
+            event.preventDefault();
+
+            var tabs = document.querySelectorAll('#myTabs .nav-link');
+            tabs.forEach(function (tab) {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            var tabContents = document.querySelectorAll('.tab-content .tab-pane');
+            tabContents.forEach(function (content) {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
+    <script>
+        var social_software = [
+            { program_name: 'BrawlStars_information', password: '0001' },
+            { program_name: 'Facebook_information', password: '2111' },
+            { program_name: 'Instagram_information', password: '1234' },
+            { program_name: 'Gmail_information', password: '9825' },
+            { program_name: 'LINE_information', password: '09825' }
+        ];
+
+        document.querySelectorAll('.show_button').forEach(button => {
+            button.addEventListener('click', function () {
+                var targetId = this.getAttribute('data-target');
+                var password = prompt('請輸入密碼');
+                var correctPassword = social_software.find(obj => obj.program_name === targetId).password;
+
+                if (password === correctPassword) {
+                    var showInformation = document.getElementById(targetId).querySelector('.show_information');
+                    showInformation.style.display = 'flex'; // 顯示內容並水平排列
+                    this.style.display = 'none'; // 隱藏按鈕
+                } else {
+                    alert('密碼錯誤');
+                }
+            });
+        });
+    </script>
+    <script>
+        function openInNewTab(url) {
+            var win = window.open(url, '_blank');
+            win.focus();
+        }
+    </script>
+</body>
+
+</html>

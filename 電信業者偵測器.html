@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>電話號碼電信業者偵測器</title>
+    <script>
+        function detectTelecomProvider() {
+            var phoneNumber = document.getElementById("phone").value;
+            var telecomProvider = "未知";
+
+            if (phoneNumber.startsWith("09006") || phoneNumber.startsWith("09007") || phoneNumber.startsWith("09008") || phoneNumber.startsWith("09009") ||
+                phoneNumber.startsWith("0905") || phoneNumber.startsWith("0910") || phoneNumber.startsWith("0911") || phoneNumber.startsWith("0912") ||
+                phoneNumber.startsWith("0919") || phoneNumber.startsWith("0921") || phoneNumber.startsWith("0928") || phoneNumber.startsWith("0932") ||
+                phoneNumber.startsWith("0933") || (phoneNumber >= "09340" && phoneNumber <= "09344") || phoneNumber.startsWith("0937") || phoneNumber.startsWith("0963") ||
+                (phoneNumber >= "09650" && phoneNumber <= "09658") || (phoneNumber >= "09664" && phoneNumber <= "09667") || phoneNumber.startsWith("0972") ||
+                (phoneNumber >= "09740" && phoneNumber <= "09741") || phoneNumber.startsWith("0975") || phoneNumber.startsWith("0978") ||
+                (phoneNumber >= "09842" && phoneNumber <= "09843") || phoneNumber.startsWith("0988")) {
+                telecomProvider = "中華電信";
+            } else if (phoneNumber.startsWith("09000") || phoneNumber.startsWith("09001") || phoneNumber.startsWith("09002") || phoneNumber.startsWith("09003") ||
+                phoneNumber.startsWith("09004") || phoneNumber.startsWith("09005") || phoneNumber.startsWith("0903") || phoneNumber.startsWith("0913") ||
+                phoneNumber.startsWith("0915") || phoneNumber.startsWith("0916") || phoneNumber.startsWith("0917") || phoneNumber.startsWith("0925") ||
+                phoneNumber.startsWith("0926") || phoneNumber.startsWith("0927") || phoneNumber.startsWith("0930") || (phoneNumber >= "09310" && phoneNumber <= "09313") ||
+                phoneNumber.startsWith("0936") || phoneNumber.startsWith("0938") || (phoneNumber >= "09540" && phoneNumber <= "09541") || phoneNumber.startsWith("0955") ||
+                (phoneNumber >= "09605" && phoneNumber <= "09609") || phoneNumber.startsWith("09620") || (phoneNumber >= "09668" && phoneNumber <= "09669") ||
+                (phoneNumber >= "09670" && phoneNumber <= "09673") || (phoneNumber >= "09680" && phoneNumber <= "09681") || (phoneNumber >= "09742" && phoneNumber <= "09743") ||
+                phoneNumber.startsWith("0976") || (phoneNumber >= "0981" && phoneNumber <= "09841") || phoneNumber.startsWith("0989")) {
+                telecomProvider = "遠傳電信";
+            } else if (phoneNumber.startsWith("0906") || phoneNumber.startsWith("0907") || (phoneNumber >= "09682" && phoneNumber <= "09685") ||
+                (phoneNumber >= "09770" && phoneNumber <= "09777") || phoneNumber.startsWith("0980") || phoneNumber.startsWith("0982") ||
+                phoneNumber.startsWith("0985")) {
+                telecomProvider = "亞太電信";
+            } else if (phoneNumber.startsWith("09020") || phoneNumber.startsWith("09021") || phoneNumber.startsWith("09022") ||
+                phoneNumber.startsWith("09023") || phoneNumber.startsWith("09024") || phoneNumber.startsWith("09025") ||
+                phoneNumber.startsWith("09026") || phoneNumber.startsWith("0908") || (phoneNumber >= "09686" && phoneNumber <= "09689") ||
+                (phoneNumber >= "09712" && phoneNumber <= "09718") || phoneNumber.startsWith("0973") || phoneNumber.startsWith("0986")) {
+                telecomProvider = "台灣之星";
+            } else if (phoneNumber.startsWith("09010") || phoneNumber.startsWith("09011") || phoneNumber.startsWith("09012") ||
+                phoneNumber.startsWith("09013") || phoneNumber.startsWith("09014") || phoneNumber.startsWith("0909") ||
+                (phoneNumber >= "09140" && phoneNumber <= "09142") || phoneNumber.startsWith("0918") || phoneNumber.startsWith("0920") ||
+                phoneNumber.startsWith("0922") || phoneNumber.startsWith("0923") || (phoneNumber >= "09240" && phoneNumber <= "09241") ||
+                phoneNumber.startsWith("0929") || (phoneNumber >= "09314" && phoneNumber <= "09319") || phoneNumber.startsWith("0935") ||
+                phoneNumber.startsWith("0939") || phoneNumber.startsWith("0952") || phoneNumber.startsWith("0953") || phoneNumber.startsWith("0956") ||
+                phoneNumber.startsWith("0958") || (phoneNumber >= "09600" && phoneNumber <= "09604") || (phoneNumber >= "09610" && phoneNumber <= "09615") ||
+                (phoneNumber >= "09660" && phoneNumber <= "09663") || phoneNumber.startsWith("0970") || (phoneNumber >= "09710" && phoneNumber <= "09711") ||
+                (phoneNumber >= "09744" && phoneNumber <= "09745") || phoneNumber.startsWith("0979") || (phoneNumber >= "0983" && phoneNumber <= "09845") ||
+                phoneNumber.startsWith("0987")) {
+                telecomProvider = "台灣大哥大";
+            } else if (phoneNumber.startsWith("0966") || phoneNumber.startsWith("0968")) {
+                telecomProvider = "大眾電信";
+            }
+
+            document.getElementById("result").innerText = "電信業者：" + telecomProvider;
+        }
+    </script>
+</head>
+<body>
+    <h2>電話號碼電信業者偵測器</h2>
+    <p>請輸入電話號碼（不包括區碼）：</p>
+    <input type="text" id="phone" oninput="detectTelecomProvider()">
+    <p id="result"></p>
+</body>
+</html>

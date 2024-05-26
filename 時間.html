@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>逆時針旋轉示例</title>
+    <style>
+        #timeimgdiv {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            position: relative;
+            transform-origin: center center; /* 以中心為旋轉中心 */
+            transition: transform 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="timeimgdiv"></div>
+
+    <script>
+        function updateRotation() {
+            const timeimgdiv = document.getElementById('timeimgdiv');
+            const now = new Date();
+            const seconds = now.getSeconds();
+            const minutes = now.getMinutes();
+            const hours = now.getHours() % 12; // 12小時制
+
+            // 計算角度，每秒6度（360度/60秒），每分0.1度（360度/60分），每小時1度（360度/12小時）
+            const rotation = 180 + (hours * 30) + (minutes * 0.5) + (seconds * 0.1);
+            
+            timeimgdiv.style.transform = `rotate(${rotation}deg)`;
+        }
+
+        // 每秒更新一次角度
+        setInterval(updateRotation, 1000);
+
+        // 初始畫面更新一次
+        updateRotation();
+    </script>
+
+</body>
+</html>

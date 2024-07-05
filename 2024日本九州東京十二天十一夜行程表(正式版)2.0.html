@@ -1,0 +1,4214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+
+    <meta charset="utf-8">
+    <title>2024 — 日本自由行_九天八夜行程表</title>
+    <!--當前時間-->
+    <script language="JavaScript">
+        function startTime() {
+            var today = new Date();//定義日期物件   
+            var yyyy = today.getFullYear();//通過日期物件的getFullYear()方法返回年    
+            var MM = today.getMonth() + 1;//通過日期物件的getMonth()方法返回年    
+            var dd = today.getDate();//通過日期物件的getDate()方法返回年     
+            var hh = today.getHours();//通過日期物件的getHours方法返回小時   
+            var mm = today.getMinutes();//通過日期物件的getMinutes方法返回分鐘   
+            var ss = today.getSeconds();//通過日期物件的getSeconds方法返回秒   
+            // 如果分鐘或小時的值小於10，則在其值前加0，比如如果時間是下午3點20分9秒的話，則顯示15：20：09   
+            MM = checkTime(MM);
+            dd = checkTime(dd);
+            mm = checkTime(mm);
+            ss = checkTime(ss);
+            var day; //用於儲存星期（getDay()方法得到星期編號）
+            if (today.getDay() == 0) day = "星期日 "
+            if (today.getDay() == 1) day = "星期一 "
+            if (today.getDay() == 2) day = "星期二 "
+            if (today.getDay() == 3) day = "星期三 "
+            if (today.getDay() == 4) day = "星期四 "
+            if (today.getDay() == 5) day = "星期五 "
+            if (today.getDay() == 6) day = "星期六 "
+            document.getElementById('nowDateTimeSpan').innerHTML = yyyy + "-" + MM + "-" + dd + " " + hh + ":" + mm + ":" + ss + "   " + day;
+            setTimeout('startTime()', 1000);//每一秒中重新載入startTime()方法 
+        }
+
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }  
+    </script>
+    <!--世界時鐘-->
+    <script>
+        function updateClock(city, timeZone) {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { timeZone: timeZone, hour12: false });
+
+            document.getElementById(city + 'Time').textContent = `現在時間：${timeString} `;
+        }
+
+        function updateAllClocks() {
+            updateClock('taipei', 'Asia/Taipei'); //台北
+            updateClock('tokyo', 'Asia/Tokyo'); //東京
+            // Add more cities as needed
+        }
+
+        setInterval(updateAllClocks, 1000);
+        updateAllClocks();  // Initial update
+    </script>
+    <!--世界時鐘-->
+    <style>
+        .clock {
+            display: inline-block;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .clock-info {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+            /* 根據需要調整邊距 */
+        }
+
+        .clock img {
+            max-width: 40px;
+            /* 根據需要調整最大寬度 */
+            margin-right: 5px;
+            /* 根據需要調整邊距 */
+        }
+    </style>
+    <!--複製文字-->
+    <!--<script language="JavaScript">
+        function copyEvent(id) {
+            var str = document.getElementById(id);
+            window.getSelection().selectAllChildren(str);
+            document.execCommand("Copy")
+            alert("複製成功")
+        }
+
+    </script>-->
+    <!--超連結並且在新分頁中開啟-->
+    <script>
+        function openLinkInNewTab(url) {
+            window.open(url, "_blank");
+        }
+
+    </script>
+    <!--機型選單-->
+    <!--<script>
+        // JavaScript程式碼
+        document.addEventListener("DOMContentLoaded", function () {
+            var imagePaths = {
+                "#A321neo": "https://i.imgur.com/utsBQKH.jpg",
+                "#A330neo": "https://i.imgur.com/jnxQjuF.jpg",
+                "#A350-900": "https://i.imgur.com/ElJ4lX6.jpg",
+            };
+
+            var menuItems = document.querySelectorAll("#menu li a");
+            for (var i = 0; i < menuItems.length; i++) {
+                menuItems[i].addEventListener("click", function (event) {
+                    event.preventDefault();
+                    var target = this.getAttribute("href");
+                    showContent(target);
+                    setActiveMenuItem(this);
+                    updateUpperDiv(target);
+                });
+            }
+
+            function showContent(target) {
+                var contents = document.querySelectorAll(".content");
+                for (var i = 0; i < contents.length; i++) {
+                    contents[i].style.display = "none";
+                }
+                var selectedContent = document.querySelector(target);
+                if (selectedContent) {
+                    selectedContent.style.display = "block";
+                }
+            }
+
+            function setActiveMenuItem(selectedItem) {
+                var menuItems = document.querySelectorAll("#menu li a");
+                for (var i = 0; i < menuItems.length; i++) {
+                    menuItems[i].classList.remove("active");
+                }
+                selectedItem.classList.add("active");
+            }
+
+            function updateUpperDiv(target) {
+                var upperDiv = document.querySelector("#upperDiv");
+                upperDiv.innerHTML = "";
+                var image = document.createElement("img");
+                image.src = imagePaths[target];
+                image.alt = "圖片";
+                image.style.maxWidth = "100%";
+                image.style.maxHeight = "";
+                upperDiv.appendChild(image);
+            }
+
+            showContent("#A321neo");
+            setActiveMenuItem(document.querySelector("#menu li a[href='#A321neo']"));
+            updateUpperDiv("#A321neo");
+        });
+    </script>-->
+    <!--日期進度條-->
+    <!--<script>
+        window.addEventListener('DOMContentLoaded', function () {
+            var startDateTime = new Date('2024-01-30T12:50:00');
+            var endDateTime = new Date('2024-02-07T18:40:00');
+            var progressBar = document.getElementById('progress-bar');
+            var progressText = document.getElementById('progress-text');
+
+            function updateProgressBar() {
+                var currentTime = new Date();
+                var totalMilliseconds = endDateTime - startDateTime;
+                var currentMilliseconds = currentTime - startDateTime;
+                var progressPercentage = Math.min((currentMilliseconds / totalMilliseconds) * 100, 100);
+                progressPercentage = Math.max(progressPercentage, 0);
+
+                var stage = Math.ceil(progressPercentage / 10);
+                progressBar.style.width = stage * 10 + '%';
+                progressText.textContent = progressPercentage.toFixed(3) + '%';
+
+                if (progressPercentage < 100) {
+                    requestAnimationFrame(updateProgressBar);
+                }
+            }
+
+            requestAnimationFrame(updateProgressBar);
+        });
+    </script>-->
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            var startDateTime = new Date('2024-07-07T09:35:00');
+            var endDateTime = new Date('2024-07-18T18:55:00');
+            //var startDateTime = new Date('2024-06-30T14:50:00');
+            //var endDateTime = new Date('2024-06-30T14:51:00');
+            var progressBar = document.getElementById('progress-bar');
+            var progress = document.getElementById('progress');
+            var progressBarText = progress.querySelector('.progress-text');
+
+            function updateProgressBar() {
+                var currentTime = new Date();
+                var totalMilliseconds = endDateTime - startDateTime;
+                var currentMilliseconds = currentTime - startDateTime;
+                var progressPercentage = Math.min((currentMilliseconds / totalMilliseconds) * 100, 100);
+                progressPercentage = Math.max(progressPercentage, 0);
+
+                progressBar.style.width = progressPercentage + '%';
+                progressBar.setAttribute('aria-valuenow', progressPercentage.toFixed(3));
+                progressBarText.textContent = progressPercentage.toFixed(3) + '%';
+
+                if (progressPercentage < 100) {
+                    requestAnimationFrame(updateProgressBar);
+                }
+            }
+
+            requestAnimationFrame(updateProgressBar);
+        });
+    </script>
+    <style>
+        .progress-bar {
+            position: relative;
+        }
+
+        .progress-bar span {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            color: black;
+        }
+
+        .progress {
+            position: relative;
+        }
+
+        /* 小型裝置（手機） */
+        @media screen and (max-width: 767px) {
+
+            /* 在這裡添加針對手機的樣式調整 */
+            .progress {
+                width: calc(95%);
+                height: 25px;
+            }
+
+            .progress-text {
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+        }
+
+        /* 中型裝置（平板電腦） */
+        @media screen and (min-width: 768px) {
+
+            /* 在這裡添加針對平板電腦的樣式調整 */
+            .progress {
+                width: calc(70%);
+                height: 25px;
+            }
+
+            .progress-text {
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+        }
+
+        .progress .progress-text {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            z-index: 9;
+            pointer-events: none;
+        }
+    </style>
+    <!--日期進度條-->
+    <!--<style>
+        .progress-bar-container {
+            width: 60%;
+            height: 20px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #66B3FF;
+            width: 0;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            color: #000000;
+        }
+    </style>-->
+    <!--<script>
+        // 設定起始日期和結束日期
+        var startDate = new Date("2023-01-01");
+        var endDate = new Date("2023-12-31");
+
+        function updateProgressBar() {
+            // 取得當前日期
+            var currentDate = new Date();
+
+            // 計算日期進度百分比
+            var totalDays = (endDate - startDate) / (1000 * 60 * 60 * 24);
+            var currentDays = (currentDate - startDate) / (1000 * 60 * 60 * 24);
+            var progressPercent = (currentDays / totalDays) * 100;
+
+            // 更新進度條的值
+            var progressBar = document.getElementById("progress-bar");
+            progressBar.value = progressPercent;
+
+            // 更新百分比顯示
+            var progressPercentElement = document.getElementById("progress-percent");
+            progressPercentElement.textContent = progressPercent.toFixed(2) + "%";
+        }
+
+        // 每秒更新一次進度條
+        setInterval(updateProgressBar, 1000);
+    </script>-->
+    <!--機型選單-->
+    <!--<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 定義圖片路徑
+            var imagePaths = {
+                "#A321neo": "https://i.imgur.com/utsBQKH.jpg",
+                "#A330neo": "https://i.imgur.com/jnxQjuF.jpg",
+                "#A350-900": "https://i.imgur.com/ElJ4lX6.jpg",
+            };
+
+            // 監聽選單項目的點擊事件
+            var menuItems = document.querySelectorAll("li a");
+            for (var i = 0; i < menuItems.length; i++) {
+                menuItems[i].addEventListener("click", function (event) {
+                    event.preventDefault(); // 阻止連結的預設行為
+                    var target = this.getAttribute("href");
+                    showContent(target); // 顯示對應的內容
+                    setActiveMenuItem(this); // 設定選單項目的活動狀態
+                    updateUpperDiv(target); // 更新上方的 div 內容
+                });
+            }
+
+            // 顯示對應的內容
+            function showContent(target) {
+                var contents = document.querySelectorAll(".content");
+                for (var i = 0; i < contents.length; i++) {
+                    contents[i].style.display = "none"; // 隱藏所有內容
+                }
+                var selectedContent = document.querySelector(target);
+                if (selectedContent) {
+                    selectedContent.style.display = "block"; // 顯示選中的內容
+                }
+            }
+
+            // 設定選單項目的活動狀態
+            function setActiveMenuItem(selectedItem) {
+                var menuItems = document.querySelectorAll("li a");
+                for (var i = 0; i < menuItems.length; i++) {
+                    menuItems[i].classList.remove("active"); // 移除所有項目的活動狀態
+                }
+                selectedItem.classList.add("active"); // 添加選中項目的活動狀態
+            }
+
+            // 更新上方的 div 內容
+            function updateUpperDiv(target) {
+                var upperDiv = document.querySelector("#upperDiv");
+                upperDiv.innerHTML = ""; // 清空原有內容
+                var image = document.createElement("img");
+                image.src = imagePaths[target];
+                image.alt = "圖片";
+                image.style.maxWidth = "100%"; // 限制最大寬度
+                image.style.maxHeight = "200px"; // 限制最大高度
+                upperDiv.appendChild(image); // 添加圖片元素
+            }
+            // 顯示首頁內容
+            showContent("#A321neo");
+            setActiveMenuItem(document.querySelector("a[href='#A321neo']"));
+            updateUpperDiv("#A321neo");
+        });
+    </script>-->
+    <!--<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 定義圖片路徑
+            var imagePaths = {
+                "#A321neo": "https://i.imgur.com/utsBQKH.jpg",
+                "#A330neo": "https://i.imgur.com/jnxQjuF.jpg",
+                "#A350-900": "https://i.imgur.com/ElJ4lX6.jpg",
+            };
+
+            // 監聽選單項目的點擊事件
+            var menuItems = document.querySelectorAll("li a");
+            for (var i = 0; i < menuItems.length; i++) {
+                menuItems[i].addEventListener("click", function (event) {
+                    event.preventDefault(); // 阻止連結的預設行為
+                    var target = this.getAttribute("href");
+                    showContent(target); // 顯示對應的內容
+                    setActiveMenuItem(this); // 設定選單項目的活動狀態
+                    updateUpperDiv(target); // 更新上方的 div 內容
+                });
+            }
+
+            // 顯示對應的內容
+            function showContent(target) {
+                var contents = document.querySelectorAll(".content");
+                for (var i = 0; i < contents.length; i++) {
+                    contents[i].style.display = "none"; // 隱藏所有內容
+                }
+                var selectedContent = document.querySelector(target);
+                if (selectedContent) {
+                    selectedContent.style.display = "block"; // 顯示選中的內容
+                }
+            }
+
+            // 設定選單項目的活動狀態
+            function setActiveMenuItem(selectedItem) {
+                var menuItems = document.querySelectorAll("li a");
+                for (var i = 0; i < menuItems.length; i++) {
+                    menuItems[i].classList.remove("active"); // 移除所有項目的活動狀態
+                }
+                selectedItem.classList.add("active"); // 添加選中項目的活動狀態
+            }
+
+            // 更新上方的 div 內容
+            function updateUpperDiv(target) {
+                var upperDiv = document.querySelector("#upperDiv");
+                upperDiv.innerHTML = ""; // 清空原有內容
+                var image = document.createElement("img");
+                image.src = imagePaths[target];
+                image.alt = "圖片";
+                image.style.maxWidth = "100%"; // 限制最大寬度
+                image.style.maxHeight = ""; // 限制最大高度
+                upperDiv.appendChild(image); // 添加圖片元素
+            }
+
+            // 顯示首頁內容
+            showContent("#A321neo");
+            setActiveMenuItem(document.querySelector("a[href='#A321neo']"));
+            updateUpperDiv("#A321neo");
+        });
+    </script>-->
+    <!--日期倒數-->
+    <!--<script>
+        // 目標日期
+        var targetDate = new Date("2030-12-31 00:00");
+
+        // 更新倒計時
+        function updateCountdown() {
+            var currentDate = new Date();
+            var timeDifference = targetDate - currentDate;
+
+            // 計算剩餘天數、小時、分鐘和秒數
+            var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+            var minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+            var seconds = Math.floor((timeDifference / 1000) % 60);
+
+            // 將倒計時顯示在頁面上
+            var countdownElement = document.getElementById("countdown");
+            countdownElement.innerHTML =
+                "倒計時：" +
+                days +
+                "天 " +
+                hours +
+                "小時 " +
+                minutes +
+                "分鐘 " +
+                seconds +
+                "秒";
+
+            // 如果目標日期已過，則顯示倒計時結束
+            if (timeDifference <= 0) {
+                countdownElement.innerHTML = "倒計時結束";
+            }
+        }
+
+        // 每秒鐘更新倒計時
+        setInterval(updateCountdown, 1000);
+
+    </script>-->
+    <!--樣式表-->
+    <style>
+        table {
+            border: 1px;
+            solid whitesmoke
+        }
+
+        th,
+        td {
+            border: 2px;
+            solid blue;
+            empty-cells: show
+        }
+
+        @media only screen and (max-width: 600px) {
+
+            /* 手機 */
+            body {
+                padding-top: 10%;
+            }
+        }
+
+        @media only screen and (min-width: 601px) and (max-width: 1024px) {
+
+            /* 平板 */
+            body {
+                padding-top: 8%;
+            }
+        }
+
+        @media only screen and (min-width: 1025px) and (max-width: 1440px) {
+
+            /* 電腦 */
+            body {
+                padding-top: 5%;
+            }
+        }
+
+        @media only screen and (min-width: 1441px) {
+
+            /* 其他更大型裝置 */
+            body {
+                padding-top: 5%;
+            }
+        }
+
+        .space-10 {
+            width: 10px;
+            height: 10px;
+        }
+
+        .space-20 {
+            width: 20px;
+            height: 20px;
+        }
+
+        .space-50 {
+            width: 50px;
+            height: 50px;
+        }
+
+
+        .space_height-10 {
+            height: 10px;
+        }
+
+        .space_height-20 {
+            height: 20px;
+        }
+
+        .space_height-50 {
+            height: 50px;
+        }
+
+        .space_width-10 {
+            width: 10px;
+        }
+
+        .space_width-20 {
+            width: 20px;
+        }
+
+        .space_width-50 {
+            width: 50px;
+        }
+
+        .hotel {
+            text-decoration: none;
+            font-size: 5;
+        }
+
+        .hotelinformation {
+            text-decoration: none;
+            font-size: 3;
+        }
+
+        .copy {
+            background-color: #79FF79;
+            width: 55px;
+            height: 35px;
+            border: none;
+            border-radius: 10px;
+        }
+
+
+        .seatingmap {
+            width: 60%;
+        }
+    </style>
+    <!--<style>
+            .ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #f1f1f1;
+                display: flex;
+                justify-content: center;
+            }
+
+            li {
+                display: inline-block;
+                margin: 10px;
+            }
+
+            li a {
+                display: block;
+                color: #333;
+                text-align: center;
+                padding: 15px 50px;
+                text-decoration: none;
+                background-color: #ddd; /* 新增的背景顏色 */
+                color: #333; /* 新增的文字顏色 */
+            }
+
+            li a:hover {
+                background-color: #aaa; /* 滑鼠懸停時的背景顏色 */
+            }
+
+            .active {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            .content {
+                display: none;
+            }
+
+
+            .airplane {
+                width: 90%;
+                height: auto;
+            }
+        </style>-->
+    <!--機型選單-->
+    <!--<style>
+            /* CSS樣式 */
+            #menu {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #D0D0D0;
+                display: flex;
+                justify-content: center;
+            }
+        
+            #menu li {
+                display: inline-block;
+                margin: 10px;
+            }
+        
+            #menu li a {
+                display: block;
+                color: #333;
+                text-align: center;
+                padding: 15px 80px;
+                text-decoration: none;
+                background-color: #ddd;
+                color: #333;
+                border-radius: 10px;
+            }
+        
+            #menu li a:hover {
+                background-color: #aaa;
+            }
+        
+            #menu .active {
+                background-color: #4CAF50;
+                color: white;
+            }
+        
+            .content {
+                display: none;
+            }
+        
+            .airplane {
+                width: 90%;
+                height: auto;
+            }
+
+            .aircraftinformation {
+                background-color: #D0D0D0;
+                border: none;
+                border-radius: 20px;
+                width: 95%;
+            }
+        
+        </style>-->
+    <!--航班資訊-->
+    <!--<style>
+        .table-flightinformation {
+            border-collapse: collapse;
+            max-width: 40px;
+        }
+
+        .th-flightinformation,
+        .td-flightinformation {
+            border: 2px solid green;
+            padding: 8px;
+            height: 20px;
+        }
+    </style>-->
+    <!--顯示對應id-->
+    <script>
+        // 定義showPage函式
+        function showPage(id) {
+            // 取得所有具有class="page"的元素
+            var pages = document.getElementsByClassName("page");
+
+            // 隱藏所有元素
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].style.display = "none";
+            }
+
+            // 使用getElementById取得具有特定ID的元素
+            var element = document.getElementById(id);
+
+            // 檢查元素是否存在
+            if (element) {
+                // 將元素的display屬性設定為"block"，使其顯示
+                element.style.display = "block";
+            } else {
+                // 如果元素不存在，顯示錯誤訊息
+                console.error("找不到具有ID '" + id + "' 的元素。");
+            }
+        }
+    </script>
+    <!--顯示對應id-->
+    <style>
+        .page {
+            display: none;
+        }
+    </style>
+    <!--行程資訊-->
+    <!--<style>
+        .airport-info {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* 将元素水平居中 */
+            text-align: left; /* 设置文本左对齐 */
+        }
+        
+        .airport-icon {
+            margin-right: 5px; /* 调整图标和文本之间的间距 */
+        }
+    </style>-->
+    <!--載入時的Loading圖標-->
+    <script>
+        // 顯示loading圖示
+        var loading = document.getElementById('loading');
+        loading.style.display = 'block';
+        // 隱藏捲動軸
+        document.body.style.overflow = 'hidden';
+
+        // 等待整個文檔加載完成後
+        window.onload = function () {
+            // 在網頁完全載入後繼續顯示loading圖示
+            setTimeout(function () {
+                // 隱藏loading圖示
+                loading.style.display = 'none';
+                // 1秒後顯示捲動軸
+                document.body.style.overflow = 'auto';
+                showPage('home') // 顯示首頁
+            }, 1000); // 1秒後隱藏loading圖示
+        };
+    </script>
+    <!--載入時的Loading圖標-->
+    <style type="text/css">
+        /* 旋轉動畫 */
+        @keyframes rotateAnimation {
+            to {
+                transform: rotate(1turn);
+            }
+        }
+
+        /* 彈性伸縮動畫 */
+        @keyframes stretchAnimation {
+            0% {
+                stroke-dasharray: 1, 200;
+                stroke-dashoffset: 0;
+            }
+
+            50% {
+                stroke-dasharray: 90, 200;
+                stroke-dashoffset: -35px;
+            }
+
+            to {
+                stroke-dashoffset: -124px;
+            }
+        }
+
+        /* 圓環容器樣式 */
+        .Ring-container {
+            /* 使用變數設定旋轉動畫速度、圓環大小、和顏色 */
+            animation: rotateAnimation var(--animation-speed) linear infinite;
+            height: var(--ring-size);
+            transform-origin: center;
+            vertical-align: middle;
+            width: var(--ring-size);
+            will-change: transform;
+        }
+
+        /* 圓環樣式 */
+        .Ring-container circle {
+            fill: none;
+            stroke: var(--ring-color);
+            stroke-dasharray: 1, 200;
+            stroke-dashoffset: 0;
+            stroke-linecap: round;
+            /* 使用變數設定彈性伸縮動畫的速度 */
+            animation: stretchAnimation calc(var(--animation-speed) * 0.75) ease-in-out infinite;
+            will-change: stroke-dasharray, stroke-dashoffset;
+        }
+
+        .circle-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -300%);
+        }
+    </style>
+    <!--行程表-->
+    <style>
+        /*地點資訊*/
+        .place-info {
+            display: flex;
+            align-items: center;
+            /*justify-content: center;*/
+            /* 将元素水平居中 */
+            line-height: 25px;
+            text-align: left;
+            /* 设置文本左对齐 */
+            flex-direction: row;
+            /* 将子元素水平排列 */
+        }
+
+        .place-icon {
+            margin-right: 10px;
+            /* 调整图标和文本之间的间距 */
+        }
+
+        .place-text {
+            margin-top: 3px;
+            /* 调整文本的上边距 */
+        }
+
+        .Itinerary-information {
+            padding: 10px;
+            padding-left: 15px;
+            border: 3px solid #ADADAD;
+            width: calc(85%);
+        }
+
+        .place-name {
+            font-size: 30px;
+        }
+
+        .place-img {
+            width: calc(85%);
+        }
+
+        /*交通資訊*/
+
+        .custom-table {
+            width: 90%;
+            border-collapse: collapse;
+        }
+
+        .column {
+            width: 20%;
+        }
+
+        .column2 {
+            width: 60%;
+        }
+
+        .column3 {
+            width: 20%;
+        }
+
+        .cell {
+            border: 0px solid black;
+            height: 80px;
+            text-align: center;
+        }
+
+        .airport {
+            font-size: 60px;
+        }
+
+        .flight-progress {
+            border-top: 3px solid #BEBEBE;
+        }
+
+        .take_off-and-landing_time {
+            font-size: 30px;
+        }
+
+        .total-flight-time {
+            vertical-align: bottom;
+        }
+    </style>
+</head>
+
+<body onload="showPage('home')">
+</body>
+
+<body>
+    <!-- 導覽列 -->
+    <nav class="navbar navbar-light bg-light navbar-expand-md fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">旅遊計畫</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar1"><span
+                    class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbar1">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item active"><a class="nav-link" style="cursor: pointer;"
+                            onclick="showPage('home')">首頁</a></li>
+                    <li class="nav-item"><a class="nav-link" style="cursor: pointer;"
+                            onclick="showPage('journey')">行程表</a></li>
+                    <li class="nav-item"><a class="nav-link" style="cursor: pointer;"
+                            onclick="showPage('Traffic-information')">交通資訊</a></li>
+                    <li class="nav-item"><a class="nav-link" style="cursor: pointer;" onclick="showPage('tool')">工具</a>
+                    </li>
+                </ul>
+            </div>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="輸入景點">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <center>
+        <!-- 背景填滿整個網頁的div元素 -->
+        <div style="width: 100vw; height: 100vh; background-color: #ffffff; position: absolute; display: block; z-index: 2;"
+            id="loading">
+            <div class="circle-center">
+                <!-- SVG 圓環元素，套用上面定義的樣式 -->
+                <svg height="50" width="50" class="Ring-container" viewBox="25 25 50 50"
+                    style="--ring-size: 50px; --ring-color: black; --animation-speed: 2s;">
+                    <circle cx="50" cy="50" r="20" stroke-width="5"></circle>
+                </svg>
+            </div>
+        </div>
+
+        <div id="home" class="page">
+
+            <!--當前時間-->
+            <!--<body onload="startTime()">
+                當前時間：<font><span id="nowDateTimeSpan"></span></font>
+            </body>
+            <div class="space_width-20"></div>
+            <div class="space-50"></div>-->
+
+            <!--旅行進度條(舊版)-->
+            <!--<h2>旅行進度條</h2>
+            <div class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar"></div>
+                <div id="progress-text" class="progress-text">準備出發</div>
+            </div>-->
+
+            <!--旅行進度條-->
+            <h2>旅行進度條</h2>
+            <div class="progress" id="progress">
+                <div class="progress-text">準備出發</div>
+                <div id="progress-bar" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%;"
+                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+
+            <!--世界時鐘-->
+            <div class="clock" id="taipeiClock">
+                <div class="clock-info">
+                    <img src="https://i.imgur.com/TS3yEx5.png" alt="">
+                    <h2>台北時間</h2>
+                </div>
+                <p id="taipeiTime"></p>
+            </div>
+            <div class="clock" id="tokyoClock">
+                <div class="clock-info">
+                    <img src="https://i.imgur.com/TvOZA59.png" alt="">
+                    <h2>東京時間</h2>
+                </div>
+                <p id="tokyoTime"></p>
+            </div>
+
+            <!--桃園國際機場-->
+            <!--<p class="place-name">桃園國際機場</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：桃園國際機場</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：337桃園市大園區航站南路9號</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/4x3VpCVM9Z1Td34p9" target="_blank">https://maps.app.goo.gl/4x3VpCVM9Z1Td34p9</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26465.915328487627!2d121.17931178413369!3d25.06384870757084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34429fc062d215d5%3A0x70a3b690a9b5b109!2z5qGD5ZyS5ZyL6Zqb5qmf5aC0!5e1!3m2!1szh-TW!2stw!4v1706326021222!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>-->
+            <!--Taiwan Taoyuan International Airport Terminal 1 Departure hall-->
+            <p class="place-name">Taiwan Taoyuan International Airport Terminal 1 Departure hall</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：Taiwan Taoyuan International Airport Terminal 1
+                        Departure hall</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：337桃園市大園區航站南路15號</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/a8UqCFc7VbAFn8Lv5"
+                            target="_blank">https://maps.app.goo.gl/a8UqCFc7VbAFn8Lv5</a></span>
+                </div>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1806.7992096461244!2d121.2355572!3d25.0815967!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34429fbf89642c8d%3A0x346e5c29007eb590!2sTaiwan%20Taoyuan%20International%20Airport%20Terminal%201%20Departure%20hall!5e0!3m2!1szh-TW!2stw!4v1719726480443!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--桃園國際機場第二航廈-->
+            <!--<p class="place-name">桃園國際機場第二航廈</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：桃園國際機場第二航廈</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：33758桃園市大園區航站南路9號</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/CvwFZGR46rp7Hu9F8"
+                            target="_blank">https://maps.app.goo.gl/CvwFZGR46rp7Hu9F8</a></span>
+                </div>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14454.905201299907!2d121.21303118715822!3d25.07726420000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34429fb922c5d465%3A0x6afc0c2c6d525b27!2z5qGD5ZyS5ZyL6Zqb5qmf5aC056ys5LqM6Iiq5buI!5e0!3m2!1szh-TW!2stw!4v1719726363585!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>-->
+            <!--第三航廈工程辦公處-->
+            <!--<p class="place-name">第三航廈工程辦公處</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：第三航廈工程辦公處</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：337桃園市大園區海豐坡15鄰7-3號</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/f43YKwxr6i41jq8p7"
+                            target="_blank">https://maps.app.goo.gl/f43YKwxr6i41jq8p7</a></span>
+                </div>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.1243621995227!2d121.21254968041278!3d25.06377372054843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3468210973b65307%3A0x3d0660b943c79daa!2z56ys5LiJ6Iiq5buI5bel56iL6L6m5YWs6JmV!5e0!3m2!1szh-TW!2stw!4v1719726289919!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>-->
+            <!--成田國際機場-->
+            <!--<p class="place-name">成田國際機場</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：成田國際機場</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：1-1 Furugome, Narita, Chiba 282-0004日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/aq7cqJZ7HVtp3GQJ7" target="_blank">https://maps.app.goo.gl/aq7cqJZ7HVtp3GQJ7</a></span>
+                </div>
+                <br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2963.2286970993!2d140.3794505817459!3d35.77018225434479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6022f379d1bd3757%3A0xd56e29a162771aa1!2z5oiQ55Sw5ZyL6Zqb5qmf5aC0!5e1!3m2!1szh-TW!2stw!4v1706326376521!5m2!1szh-TW!2stw" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>-->
+            <!--Narita Airport Terminal 1-->
+            <!--<p class="place-name">Narita Airport Terminal 1</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：Narita Airport Terminal 1</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：Kinone, 成田市千葉縣 286-0105日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/vEGqPm82S9VyHG167"
+                            target="_blank">https://maps.app.goo.gl/vEGqPm82S9VyHG167</a></span>
+                </div>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6474.564426685911!2d140.3806058!3d35.7684434!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6022f30b656c4ea7%3A0xbc0cd6366869370d!2sNarita%20Airport%20Terminal%201!5e0!3m2!1szh-TW!2stw!4v1719726048537!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>-->
+            <!--成田國際機場第二航廈-->
+            <p class="place-name">成田國際機場第二航廈</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：成田國際機場第二航廈</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：Furugome, 成田市千葉縣 286-0104日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/nPRdfD3ZXzbSF6zw5"
+                            target="_blank">https://maps.app.goo.gl/nPRdfD3ZXzbSF6zw5</a></span>
+                </div>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3237.088066587518!2d140.38277939678954!3d35.77321299999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6022f3764fc26239%3A0xc6bbc46b9f31ea49!2z5oiQ55Sw5ZyL6Zqb5qmf5aC056ys5LqM6Iiq5buI!5e0!3m2!1szh-TW!2stw!4v1719726097546!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--成田機場第三旅客航站樓-->
+            <p class="place-name">成田機場第三旅客航站樓</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：成田機場第三旅客航站樓</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：Tokko, 成田市千葉縣 286-0106日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/L1dvTA5vWZzTPLGh8"
+                            target="_blank">https://maps.app.goo.gl/L1dvTA5vWZzTPLGh8</a></span>
+                </div>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12948.842410753323!2d140.3717257967854!3d35.77020272186986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6022f37bbff19d75%3A0x998c414bc12c76a7!2z5oiQ55Sw5qmf5aC056ys5LiJ5peF5a6i6Iiq56uZ5qiT!5e0!3m2!1szh-TW!2stw!4v1719726146956!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--福岡國際機場-->
+            <p class="place-name">福岡國際機場</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：福岡國際機場</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：778-1 Shimousui, Hakata Ward, Fukuoka, 812-0003日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/MrNr1G2Pjh4sqvyC7"
+                            target="_blank">https://maps.app.goo.gl/MrNr1G2Pjh4sqvyC7</a></span>
+                </div>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1661.901879295745!2d130.44525783872135!3d33.5844441433342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35419016426901ad%3A0x16e67f46584e1fb7!2z56aP5bKh5ZyL6Zqb5qmf5aC0!5e0!3m2!1szh-TW!2stw!4v1719727128892!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--博多站前靜鐵PREZIO飯店-->
+            <p class="place-name">博多站前靜鐵PREZIO飯店</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：博多站前靜鐵PREZIO飯店</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：4 Chome-17-6 Hakata Ekimae, Hakata Ward, Fukuoka, 812-0011日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">入住時間：2024/07/07～2024/07/11</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/P1jGSNq5XziwACpc6"
+                            target="_blank">https://maps.app.goo.gl/P1jGSNq5XziwACpc6</a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                    《 住宿飯店 》<br>
+                    福岡靜鐵飯店 Prezio Hospitality（博多站前）<br><br>
+
+                    《 住宿期間 》<br>
+                    2024年7月7日至7月11日（4晚）<br><br>
+
+                    《 交通方式 》<br>
+                    福岡地下鐵空港線 至 博多站（約5分鐘）<br>
+                    徒步 至飯店（約6分鐘）<br>
+                    建議從博多口出發，往KITTE博多方向走，沿著鐵路旁的大馬路步行約6-7分鐘可到達<br><br>
+
+                    《 飯店特色 》<br>
+                    房間特色：設有鐵道眺望房間（七樓的710號房間），適合鐵道迷觀看列車進出<br>
+                    房內有兩個小桌椅供休息，旁邊有列車進出站的時刻表<br><br>
+
+                    《 飯店設施 》<br>
+                    2F：餐廳/Lobby<br>
+                    12F：洗衣間/微波爐<br><br>
+
+                    《 入住/退房時間 》<br>
+                    Check in：15:00<br>
+                    Check out：11:00<br><br>
+
+                    《 早餐時間 》<br>
+                    6:30 ~ 10:00<br><br>
+
+                    集中於福岡市區內建議使用「FUKUOKA TOURIST CITY PASS（福岡悠遊卡/福岡一票通）」<br>
+                    能在一天之內無限次搭乘JR普通及快速列車、福岡市營地下鐵，非常划算！<br>
+                </p>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.768492015706!2d130.41736347553976!3d33.58535967333642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x354191e00f4c156f%3A0xc7c526d3ef38eb8a!2z5Y2a5aSa56uZ5YmN6Z2c6ZC1UFJFWklP6aOv5bqX!5e0!3m2!1szh-TW!2stw!4v1720050083338!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--日本橋茅場町相鐵FRESA INN-->
+            <p class="place-name">日本橋茅場町相鐵FRESA INN</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：日本橋茅場町相鐵FRESA INN</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：1 Chome-3-10 Nihonbashikayabacho, Chuo City, Tokyo 103-0025日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">入住時間：2024/07/11～2024/07/15</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/hHzQdmVR6pophcja8"
+                            target="_blank">https://maps.app.goo.gl/hHzQdmVR6pophcja8</a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                    《 住宿飯店 》<br>
+                    相鐵Fresa Inn 日本橋茅場町<br><br>
+
+                    《 入住/退房時間 》<br>
+                    Check in：14:00<br>
+                    Check out：12:00<br><br>
+
+                    《 早餐時間 》<br>
+                    06:30 ~ 09:30<br><br>
+
+                    《 交通方式 》<br>
+                    鄰近的地下鐵出口<br>
+                    4號出口（A4）：有電梯<br>
+                    7號出口：需要爬樓梯<br><br>
+
+                    往返機場<br>
+                    可從日本橋站坐地鐵，不須換程即可往返機場，車次頻繁<br><br>
+
+                    車站距離<br>
+                    距離茅場町站4A出口120米<br>
+                    距離日本橋站及八丁崛站約10分鐘步行<br><br>
+
+                    《 飯店特色 》<br>
+                    早餐：簡單套餐式，可外帶或內用<br>
+                    洗衣設施：提供洗衣機，可用電視觀看使用狀況<br>
+                    交通不便：回上野方向的日比谷線，在車站內無電梯或手扶梯，需過地下通道樓梯，推行李箱時需搬上搬下<br><br>
+
+                    《 附近設施 》<br>
+                    日本橋站為多條地鐵轉乘站<br>
+                    地鐵出口有成城石井超市（營業時間：8:00-23:00）<br>
+                    飯店路口有藥妝店及便利商店<br><br>
+
+                    《 交通路線 》<br>
+                    東西線/日比谷線「茅場町站」7號出口步行1分鐘<br>
+                    銀座線/淺草線/東西線「日本橋站」D2出口（有手扶梯）步行7分鐘<br>
+                </p>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.8469416916473!2d139.77738047563474!3d35.680770572587306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188955e79874e9%3A0x9460450a486cfa4f!2z5pel5pys5qmL6IyF5aC055S655u46ZC1RlJFU0EgSU5O!5e0!3m2!1szh-TW!2stw!4v1720051186175!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--錦糸町樂天城市飯店-->
+            <p class="place-name">錦糸町樂天城市飯店</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：錦糸町樂天城市飯店</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：4 Chome-6-1 Kinshi, Sumida City, Tokyo 130-0013日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">入住時間：2024/07/15～2024/07/18</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/h2jq6ACJNQgP6vTK9"
+                            target="_blank">https://maps.app.goo.gl/h2jq6ACJNQgP6vTK9</a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                    《 住宿飯店 》<br>
+                    東京錦糸町樂天城市酒店<br><br>
+
+                    《 住宿期間 》<br>
+                    2024年7月15日至7月18日（3晚）<br><br>
+
+                    《 入住/退房時間 》<br>
+                    Check in：15:00<br>
+                    Check out：11:00<br><br>
+
+                    《 早餐時間 》<br>
+                    07:00 ~ 09:30<br><br>
+
+                    《 交通方式 》<br>
+                    從成田機場到酒店：<br>
+                    從JR總武線到達錦糸町站，從北口出來右邊約100米。<br>
+                    從地鐵半藏門線錦系町站五號出口，一樓旁邊坐電梯直達酒店B2，距離JR錦糸町駅徒步約3分鐘。<br><br>
+
+                    從酒店到成田機場：<br>
+                    搭京成access（1200日元/約1小時）到押上，然後搭一站地鐵到錦系町，再搭乘錦系町3番富士迴遊（一天只有一班，發車時間為早上7:08）。<br><br>
+
+                    《 酒店特色 》<br>
+                    館內設施包括自助式早餐，含日式料理和全天供應的巧克力店。<br>
+                    附近有超市、Yodobashi、Uniqlo、無印良品、ZARA、GU、大創（DAISO）等便利商店。<br><br>
+
+                    集中於福岡市區內建議使用「FUKUOKA TOURIST CITY PASS（福岡悠遊卡/福岡一票通）」，能在一天之內無限次搭乘JR普通及快速列車、福岡市營地下鐵，非常划算！<br>
+                </p>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.167932735955!2d139.81287327563547!3d35.697484872581974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601888d796c0fa37%3A0x5ec66bed582261e5!2z6Yym57O455S65qiC5aSp5Z-O5biC6aOv5bqX!5e0!3m2!1szh-TW!2stw!4v1720051729276!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+        <!-------------------------------------------------------------------------------->
+
+        <div id="journey" class="page">
+            <!--第一天 Day_1-->
+            <h2 id="day_1" style="text-align: left; margin-left: 100px;">第一天</h2>
+            <!--地點1-->
+            <p class="place-name">博多站前靜鐵PREZIO飯店</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：博多站前靜鐵PREZIO飯店</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：4 Chome-17-6 Hakata Ekimae, Hakata Ward, Fukuoka, 812-0011日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">入住時間：2024/07/07～2024/07/11</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/P1jGSNq5XziwACpc6"
+                            target="_blank">https://maps.app.goo.gl/P1jGSNq5XziwACpc6</a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                    《 住宿飯店 》<br>
+                    福岡靜鐵飯店 Prezio Hospitality（博多站前）<br><br>
+
+                    《 住宿期間 》<br>
+                    2024年7月7日至7月11日（4晚）<br><br>
+
+                    《 交通方式 》<br>
+                    福岡地下鐵空港線 至 博多站（約5分鐘）<br>
+                    徒步 至飯店（約6分鐘）<br>
+                    建議從博多口出發，往KITTE博多方向走，沿著鐵路旁的大馬路步行約6-7分鐘可到達<br><br>
+
+                    《 飯店特色 》<br>
+                    房間特色：設有鐵道眺望房間（七樓的710號房間），適合鐵道迷觀看列車進出<br>
+                    房內有兩個小桌椅供休息，旁邊有列車進出站的時刻表<br><br>
+
+                    《 飯店設施 》<br>
+                    2F：餐廳/Lobby<br>
+                    12F：洗衣間/微波爐<br><br>
+
+                    《 入住/退房時間 》<br>
+                    Check in：15:00<br>
+                    Check out：11:00<br><br>
+
+                    《 早餐時間 》<br>
+                    6:30 ~ 10:00<br><br>
+
+                    集中於福岡市區內建議使用「FUKUOKA TOURIST CITY PASS（福岡悠遊卡/福岡一票通）」<br>
+                    能在一天之內無限次搭乘JR普通及快速列車、福岡市營地下鐵，非常划算！<br>
+                </p>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.768492015706!2d130.41736347553976!3d33.58535967333642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x354191e00f4c156f%3A0xc7c526d3ef38eb8a!2z5Y2a5aSa56uZ5YmN6Z2c6ZC1UFJFWklP6aOv5bqX!5e0!3m2!1szh-TW!2stw!4v1720050083338!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">午餐&去車站領周遊卷</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：午餐&去車站領周遊卷</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                    《 福岡美食推薦 》<br><br>
+
+                    Rota Café Daimyo Honten<br>
+                    位置：距離藥院站步行4分鐘<br><br>
+
+                    Sonu Sonu<br>
+                    位置：位於1樓，距離福岡市營地鐵機場線天神站步行4分鐘<br>
+                    提供：漢堡、薯條、簡餐、Pizza<br><br>
+
+                    Soup Stock Tokyo（葷素餐館）<br>
+                    營業時間：8:00-20:30<br>
+                    位置：JR九州博多站中央街B1<br>
+                    提供：湯/粥，每樣湯品粥品可搭配白飯或麵包，還有飲料選擇，十多款咖哩飯可選<br>
+                    <img src="https://i.imgur.com/SPdEw5s.jpeg" alt="" class="place-img"><br><br>
+
+                    BUGURO ALL VEGAN<br>
+                    營業時間：12:00-17:30<br>
+                    價格：每人3500円（全店只有3個座位/預約制）<br>
+                    位置：六本松站和大濠公園中間的小巷弄內，離大濠公園南側走路約10分鐘，出六本松地鐵站走路約10分鐘<br>
+                    提供：純素拉麵、甜點，老闆製作純素料理20年以上，供應特製的「博多風純素拉麵」與「純素擔擔麵」，附可選擇的純素甜點、飲料<br><br>
+
+                    Co Co壹番屋博多住吉店<br>
+                    提供：蔬菜咖哩醬可換成 ココイチベジソース<br><br>
+
+                    《 博多車站指南 》<br><br>
+
+                    《 服務中心 》<br>
+                    博多車站有兩個JR服務中心，需前往九州JR服務中心，不是轉角的那個<br><br>
+
+                    《 綠色窗口 》<br>
+                    位置：位於JR博多車站筑紫口入口左手邊，服務台窗口大，非常好認<br>
+                    注意事項：換好北九州鐵路周遊券後，所有指定席可一次當場換完，請先填好表格<br>
+                </p>
+                <br>
+                <!--<iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>-->
+            </div>
+            <!--地點3-->
+            <p class="place-name">Life-Size RX-93ff 𝛎 Gundam Statue</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：Life-Size RX-93ff 𝛎 Gundam Statue</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：6 Chome-23-4 Naka, Hakata Ward, Fukuoka, 812-0893日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/UnYCo74ZRLMi12oz6"
+                            target="_blank">https://maps.app.goo.gl/UnYCo74ZRLMi12oz6</a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                    《 午餐後活動 》<br><br>
+
+                    博多公車總站內活動<br>
+                    午餐後至博多公車總站內一樓，13號月台搭乘44-45號公車至「LaLaport 福岡」約20分鐘，票價220円<br>
+                    連接站點：「博多巴士站」、「西鐵大橋車站」、「JR竹下車站」，設有直達的接駁巴士，班次頻繁，尤其往返福岡機場的接駁車約每半小時發車一次，營運時間為10:00-20:00<br><br>
+
+                    免稅店及購物優惠<br>
+                    免稅店舖可申請退稅，出示護照可獲得優惠券<br>
+                    從博多巴士站、福岡機場都可搭巴士直達<br>
+                    最吸睛的是門口豎立的實物大小鋼彈立像「RX-93ff v GUNDAM」，整點有演出，周邊商品在4樓<br>
+                    1樓有九州特有的「BUTTER & bee」奶油費南雪，在服務台出示護照可獲得優惠券，掃描QR
+                    Code後消費5000日圓以上可獲得500円折價券，買越多越划算！（部分商店直接在店內辦理退稅，有些則需到免稅服務台辦理）<br><br>
+
+                    茅乃舍炸薯條<br>
+                    意外發現的美食，在廣場旁的臨時餐車販售<br>
+                    毛乃舍炸薯條是九州必買清單之一，味道不錯<br>
+                </p>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3324.5523280908433!2d130.43882877553884!3d33.56500587334434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x354191e81616fde3%3A0xc9f943e9d87753c6!2sLife-Size%20RX-93ff%20%F0%9D%9B%8E%20Gundam%20Statue!5e0!3m2!1szh-TW!2stw!4v1720177772770!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">UNIQLO Lalaport福岡店</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：UNIQLO Lalaport福岡店</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：日本〒812-0893 Fukuoka, Hakata Ward, Naka, 6 Chome−23−1 ららぽーと福岡
+                        モール棟２階</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：10:00～21:00</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/CwdJGmp6TzMXnzmC9"
+                            target="_blank">https://maps.app.goo.gl/CwdJGmp6TzMXnzmC9</a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                    樓層簡介<br>
+                    https://mitsui-shopping-park.com/lalaport/fukuoka/special/recommendshop/pdf/fukuoka_floorguide_HAN.pdf<br>
+                </p>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3324.565760765245!2d130.4374353755387!3d33.56465697334427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x354191dbd24fcbeb%3A0x2124b43f80aaa5b!2zVU5JUUxPIExhbGFwb3J056aP5bKh5bqX!5e0!3m2!1szh-TW!2stw!4v1720177929463!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點5-->
+            <p class="place-name">晚餐——拉麵競技場</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：晚餐——拉麵競技場</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：1 Chome-2 Sumiyoshi, Hakata Ward, Fukuoka, 812-0018日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：11:00～23:30</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/JA8qUPpxM3d2uNad9"
+                            target="_blank">https://maps.app.goo.gl/JA8qUPpxM3d2uNad9</a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                    《 博多運河城拉麵競技場 》<br><br>
+
+                    《 位置與營業時間 》<br>
+                    位置：博多運河城5F<br>
+                    營業時間：AM11:00-PM11:00<br><br>
+
+                    《 交通方式 》<br>
+                    從地鐵（機場線・箱崎線）「中洲川端站」5號出口徒步約10分鐘<br>
+                    或從JR「博多站」博多口徒步約10分鐘<br><br>
+
+                    《 拉麵特色 》<br>
+                    拉麵競技場裡的元祖番茄拉麵可素食<br>
+                    門口有自動售票機，有英文菜單，提供豆漿蔬菜拉麵、番茄辛拉麵、純味增拉麵<br>
+                </p>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.6192726777185!2d130.40634298266684!3d33.589233204580594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x354191958bbfffff%3A0xab7a1498173e7a2b!2z5ouJ6bq156u25oqA5aC0!5e0!3m2!1szh-TW!2stw!4v1720178574004!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第二天 Day_2-->
+            <h2 id="day_2" style="text-align: left; margin-left: 100px;">第二天</h2>
+            <!--地點1-->
+            <p class="place-name">別府地獄之旅</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：別府地獄之旅</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：559-1 Kannawa, Beppu, Oita 874-0000日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：08:00～17:00</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/uvCCYaLZKMwPrThs7"
+                            target="_blank">https://maps.app.goo.gl/uvCCYaLZKMwPrThs7</a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                    《 別府一日遊 》<br><br>
+
+                    《 去程 》<br>
+                    博多到別府：9:01-10:55 音速9號(往大分) 2號線出發，約2小時<br><br>
+
+                    <img src="https://i.imgur.com/AHByZvi.png" alt="" class="place-img"><br><br>
+
+                    《 地獄套票組合 》<br>
+                    別府地獄套票組合：成人2200円，國中生1000円<br>
+                    別府龜之井巴士一日券：成人1100円，國中生900円<br><br>
+
+                    《 行程規劃 》<br>
+
+                    **方案一：**<br>
+                    別府(上野口)到鐵輪約20分 -- 午餐 -- 海地獄 -- 巴士到血地獄(30分) -- 明礬湯之里(30分) -- 返回別府車站<br><br>
+
+                    **方案二：**<br>
+                    別府(上野口)到地藏湯前約30分 -- 明礬湯之里(15分) -- 午餐 -- 海地獄 -- 巴士到血地獄(35分) -- 返回別府車站<br><br>
+
+                    《 巴士路線 》<br>
+                    從JR別府站出發，可以先到車站裡的觀光案內所，購買別府龜之井巴士一日券。<br>
+                    搭龜之井巴士5、7號車到「海地獄前站」下車，每小時都有車，非常方便。<br>
+                    ★ 上車地點：JR別府站西口的2號巴士站<br><br>
+
+                    《 別府八大地獄路線規劃攻略 》<br>
+                    1. 先搭龜之井巴士5、7號車到海地獄前站下車，這裡有6個地獄溫泉。<br>
+                    2. 最後走到鐵輪巴士總站再換搭16號車抵達血池地獄前站，逛最後兩個。<br>
+                    3. 接下來可搭16號巴士回鐵輪總站吃地獄蒸工房鐵輪或搭回別府站。<br><br>
+
+                    《 地獄溫泉介紹 》<br>
+                    別府八大地獄溫泉：泥漿、熱水、間歇泉，均不能泡，只能觀賞。可導入足湯，建議準備毛巾。<br><br>
+
+                    1. 海地獄（國指定名勝，有足湯）<br>
+                    2. 血池地獄（國指定名勝，有足湯）<br>
+                    3. 龍卷地獄（國指定名勝）<br>
+                    4. 白池地獄（國指定名勝）<br>
+                    5. 鬼石坊主地獄（附有足湯）<br>
+                    6. 鬼山地獄（鱷魚地獄）<br>
+                    7. 灶地獄（附有足湯）<br>
+                    8. 山地獄<br><br>
+
+                    <img src="https://i.imgur.com/PRDim7f.jpeg" alt="" class="place-img"><br>
+                    <img src="https://i.imgur.com/KABWqGx.jpeg" alt="" class="place-img"><br><br>
+
+                    《 地獄蒸工房鐵輪 》<br>
+                    地址：別府市風呂本5組<br>
+                    營業時間：10:00~19:00(最後點餐18:00)每月第3個週三定休<br>
+                    料金：蒸籠30分鐘內(小)510円(大)820円，並選購食材來蒸煮<br>
+                    交通：巴士鉄輪站下車，步行1分鐘(myべっぷ Free巴士券適用)旁邊有免費足湯、足蒸(開放時間 09:30~19:30)<br><br>
+
+                    《 別府地獄巡禮 》<br>
+                    營業時間：8:00～17:00<br>
+                    共同觀覽券：大人2200円，國中生1000円<br><br>
+
+                    《 明礬湯之里 》<br>
+                    門票：大人600円，兒童300円<br>
+                    交通：亀の井バスJR別府駅西口，搭5號、24號、41號巴士“地藏湯前站”下車<br>
+                    獨立湯屋可泡湯，買湯之花，了解製作過程<br>
+                    明礬湯之里是江戶時期以來的「湯之花」產地。可泡大型露天岩盤浴，或參觀製作「湯之花」的茅草小屋。<br>
+                    周邊紀念品店販售「湯之花」相關產品，適合作為伴手禮。<br>
+                    推薦必吃的「地獄蒸布丁」，利用天然溫泉的高溫蒸氣製作，綿密布丁口感搭配微苦的焦糖醬，滋味非常好。<br><br>
+
+                    《 地獄溫泉博物館 》<br>
+                    門票：大人1500円，國中生1000円<br>
+                    2022年12月開幕，展示別府地獄溫泉的歷史文化。<br>
+                    博物館內有咖啡廳「50CAFE」，供應精品咖啡、美味的「地獄溫泉熱狗堡」。<br><br>
+
+                    《 別府藝術博物館 》<br>
+                    門票：大人1000円，國中生800円<br>
+                    別府塔2F，展覽當地藝術文化。<br><br>
+
+                    《 別府塔展望台 》<br>
+                    門票：大人800円，國中生600円<br>
+                    提供全景觀景平台。<br><br>
+
+                    《 回程 》<br>
+                    別府到博多：17:53-19:50 音速50號(往博多) 7號線到達，約2小時<br>
+
+                    <img src="https://i.imgur.com/ae80qOH.png" alt="" class="place-img"><br>
+                </p>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3334.112153806764!2d131.4670995755278!3d33.315883273443035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3546a7b960bca539%3A0x8bdccd2d35d910f2!2z5Yil5bqc5Zyw542E5LmL5peF!5e0!3m2!1szh-TW!2stw!4v1720178843337!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點5-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第三天 Day_3-->
+            <h2 id="day_3" style="text-align: left; margin-left: 100px;">第三天</h2>
+            <!--地點1-->
+            <p class="place-name">午餐</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：午餐</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                    《 去程 》<br>
+                    博多到由布院：9:17-11:31 由布院之森1號（往由布院）6號線出發，約2小時14分<br><br>
+
+                    <img src="https://i.imgur.com/IWuVRYR.png" alt="" class="place-img"><br><br>
+
+                    《 中午 》<br>
+                    我們首先步行到金鱗湖畔（建議早點經過bspeak預約，下午再來取物，因為下午通常售罄或僅剩大尺寸）<br><br>
+
+                    《 午餐 》<br>
+                    1. 泉 手打蕎麥麵金鱗湖店<br>
+                    地址：由布院小巷內<br>
+                    排隊名店，建議中午前先登記候位，人潮眾多，餐廳面向金鱗湖畔內側。<br>
+                    推薦素食手打麵（需說明不加肉）、冷蕎麥麵（兩層1296円）、蘿蔔泥蕎麥麵（おろしそば）、飯糰（おにぎり），還有金鱗湖前的烤大香菇。<br><br>
+
+                    2. 湯布院神樂<br>
+                    位於JR久大本線 由布院站，步行15分鐘可達。<br>
+                    提供素食菜單。<br><br>
+
+                    在金鱗湖吃完飯後，別忘了繞湖散步約30分鐘，途中可以看到天祖神社的水上鳥居，是拍照的好地方。<br>
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">湯の坪街道(Yunotsubo Street)</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：湯の坪街道(Yunotsubo Street)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：日本〒879-5102 Oita, Yufu, Yufuincho Kawakami, 1505-6 1505-6</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/c7Mo1LgYJJiJ4JYHA"
+                            target="_blank">https://maps.app.goo.gl/c7Mo1LgYJJiJ4JYHA</a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                    《湯之坪街道》<br>
+                    Milch店裡主打左邊的起司蛋糕和右邊的布丁，起司蛋糕和我們習慣的口感很不一樣，湯匙切下去裡面香濃的起司整個就像爆漿般流出來，完全不會膩口，而且小小一份吃起來不會感到負擔，大推薦。<br><br>
+
+                    《花麴菊家ぷりんどら》<br>
+                    這間也是日本雜誌推薦由布院必吃美食，尤其以布丁銅鑼燒最受歡迎，有很多種口味可以挑，像是抹茶、原味、草莓⋯等。因為需要冷藏，建議不是馬上要離開回飯店的話，別一口氣帶太多，口味偏甜，搭配無糖的茶飲相當不賴。<br><br>
+
+                    <img src="https://i.imgur.com/klM3fJn.jpeg" alt="" class="place-img"><br><br>
+
+                    《鞠智銅鑼燒》<br>
+                    在熱鬧的湯之坪街道上，每天店內現做，餅皮厚鬆，內夾綿細又不過甜的紅豆餡。<br><br>
+
+                    《金賞可樂餅（起士）》<br>
+                    Canele Carandonel 可麗露<br>
+                </p>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53370.518176443824!2d131.3173674913509!3d33.275460805286706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3546afd0bb442331%3A0xb6cbbb7eb88e0909!2sYunotsubo%20Street!5e0!3m2!1szh-TW!2stw!4v1720180478019!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">湯布院花卉村</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：湯布院花卉村</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：1503-3 Yufuincho Kawakami, Yufu, Oita 879-5102日本</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：09:30～17:00</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="https://maps.app.goo.gl/vraCfV8ef2LLVsYb8"
+                            target="_blank">https://maps.app.goo.gl/vraCfV8ef2LLVsYb8</a></span>
+                </div>
+                <p>
+                    《湯布院 Floral Village》<br>
+                    湯布院Floral Village是一個以花園和手工藝品聞名的景點，適合悠閒漫步和購物。<br>
+                    
+                    《Miffy森之廚房》<br>
+                    Miffy森之廚房以可愛的兔子Miffy為主題，提供精緻的糕點和輕食。<br>
+                    
+                    《Snoppy茶屋》<br>
+                    Snoppy茶屋是一個放鬆身心的理想場所，以其舒適的氛圍和新鮮的茶點而聞名。<br>
+                    
+                    《COMICO ART MUSEUMYUFUIN》<br>
+                    COMICO ART MUSEUMYUFUIN是一座展示現代藝術和插畫的博物館，吸引許多藝術愛好者。<br>
+                    
+                    《龍貓專賣店》<br>
+                    龍貓專賣店是一個宮崎駿動畫作品《龍貓》主題的精品店，販售各種周邊商品。<br>
+                    
+                    《蜂巢木屋》<br>
+                    蜂巢木屋是由布院的一個獨特建築，以其獨特的設計和自然環境著稱。<br>
+                    
+                    《由布院彩色玻璃美術館》<br>
+                    由布院彩色玻璃美術館展示了精美的彩色玻璃藝術作品，吸引了許多藝術愛好者和遊客。<br>
+                    
+                    《由布院遊客中心》<br>
+                    由布院遊客中心提供旅遊資訊和服務，是遊客了解由布院各種活動和景點的重要資源。<br>
+                    
+                    《回程》<br>
+                    15:56-18:10 由布院之森<br>
+                    17:17-19:28 由布院之森<br>
+                    19:26-21:33 由布<br><br>
+                    
+                    晚餐計劃：<br>
+                    20:00前要回到博多才能吃湯咖哩，否則需改變餐廳選擇。<br>
+                </p>
+                <br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1050.7676955990678!2d131.36320782137224!3d33.267035254093415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3546ae7e6e7eac59%3A0x256cce7aa8e6b278!2z5rmv5biD6Zmi6Iqx5Y2J5p2R!5e0!3m2!1szh-TW!2stw!4v1720180896784!5m2!1szh-TW!2stw"
+                    width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">晚餐</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：晚餐</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                    《晚餐》<br>
+                    1. Chandan Cafe (チャンダンカフェ) - 提供素食菜單，主打藥用湯咖哩。<br>
+                    位置：從地鐵機場線藤崎站步行1分鐘，距離藤崎站約82m，車費300円，約20分鐘。<br><br>
+
+                    2. Vegespa 湯咖哩 - 提供素食菜單，最晚營業至21:00。<br>
+                    位置：距離天神赤坂藥院各站步行7分鐘，距離藥院大通約500m。<br><br>
+
+                    <img src="https://i.imgur.com/rkbnM8r.png" alt="" class="place-img"><br>
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點5-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第四天 Day_4-->
+            <h2 id="day_4" style="text-align: left; margin-left: 100px;">第四天</h2>
+            <!--地點1-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                    《熊本》<br>
+                    去程 博多到熊本<br>
+                    8:30-9:02新幹線 瑞穗601號(N700系)往鹿兒島中央<br>
+                    15號線出發13號線到達(32分鐘)<br><br>
+
+                    <img src="https://i.imgur.com/0t84Ud3.png" alt="" class="place-img"><br><br>
+                    
+                    《熊本博物館》<br>
+                    熊本博物館是一座展示熊本地區歷史和文化的重要博物館，內有豐富的藏品和展覽。<br><br>
+                    
+                    《歷史文化體驗 湧湧座》<br>
+                    湧湧座是一個讓遊客體驗和了解熊本歷史文化的場所，包括傳統工藝和文化表演。<br><br>
+                    
+                    《櫻之馬場 城彩苑》<br>
+                    櫻之馬場 城彩苑是熊本的一處美麗花園，以其壯麗的櫻花聞名，是賞花的絕佳場所。<br><br>
+                    
+                    《熊本城》<br>
+                    熊本城是日本重要的歷史建築，擁有壯麗的城池和石牆，是熊本市的象徵。<br><br>
+                    
+                    《熊本城稻荷神社》<br>
+                    熊本城稻荷神社是位於熊本城內的神社，供奉著神明，是參拜和觀光的重要場所。<br><br>
+                    
+                    《午餐 鑑真食堂》<br>
+                    鑑真食堂是一家提供傳統日式料理的餐廳，以其美味的地道料理和舒適的用餐環境而著稱。<br><br>
+                    
+                    《熊本熊廣場》<br>
+                    熊本熊廣場是以熊本縣吉祥物熊本熊為主題的廣場，可以看到各種可愛的熊本熊形象和紀念品。<br><br>
+                    
+                    《水前寺成趣園》<br>
+                    水前寺成趣園是一座日本庭園，設計精美，充滿了自然美和寧靜氛圍。<br><br>
+                    
+                    《海賊王魯夫雕像》<br>
+                    海賊王魯夫雕像是根據日本漫畫《One Piece》中的角色設置的雕像，吸引了眾多漫迷前來參觀。<br><br>
+                    
+                    《回程 熊本到博多》<br>
+                    8:30-9:02新幹線 瑞穗601號(N700系)往鹿兒島中央<br>
+                    15號線出發13號線到達(32分鐘)<br><br>
+                    
+                    晚餐如果要吃百宝Bioboo(只有這天能吃)<br>
+                    16:00前要回到博多<br><br>
+
+                    <img src="https://i.imgur.com/zS8GeYi.png" class="place-img"><br>
+
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點5-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第五天 Day_5-->
+            <h2 id="day_5" style="text-align: left; margin-left: 100px;">第五天</h2>
+            <!--地點1-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點5-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+
+            <!--第六天 Day_6-->
+            <h2 id="day_6" style="text-align: left; margin-left: 100px;">第六天</h2>
+            <!--地點1-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點5-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第七天 Day_7-->
+            <h2 id="day_7" style="text-align: left; margin-left: 100px;">第七天</h2>
+            <!--地點1-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點5-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第八天 Day_8-->
+            <h2 id="day_8" style="text-align: left; margin-left: 100px;">第八天</h2>
+            <!--地點1-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點5-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第九天 Day_9-->
+            <h2 id="day_9" style="text-align: left; margin-left: 100px;">第九天</h2>
+            <!--地點1-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點5-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第十天 Day_10-->
+            <h2 id="day_10" style="text-align: left; margin-left: 100px;">第十天</h2>
+            <!--地點1-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點5-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第十一天 Day_11-->
+            <h2 id="day_11" style="text-align: left; margin-left: 100px;">第十一天</h2>
+            <!--地點1-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點5-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第十二天 Day_12-->
+            <h2 id="day_12" style="text-align: left; margin-left: 100px;">第十二天</h2>
+            <!--地點1-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點5-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第十三天 Day_13-->
+            <h2 id="day_13" style="text-align: left; margin-left: 100px;">第十三天</h2>
+            <!--地點1-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點5-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+            <!--第十四天 Day_14-->
+            <h2 id="day_14" style="text-align: left; margin-left: 100px;">第十四天</h2>
+            <!--地點1-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點2-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點3-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點4-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!--地點5-->
+            <p class="place-name">地點/商家名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <p>
+                    <!--說明-->
+                </p>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+
+
+
+
+
+
+            <!--地點範本-->
+            <!--<p class="place-name">地點名稱</p>
+            <div class="Itinerary-information">
+                <div class="place-info">
+                    <span class="merchant-icon place-icon bi bi-postcard-fill"></span>
+                    <span class="merchant-text place-text">地點/商家名稱：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-geo-alt-fill"></span>
+                    <span class="place-text">地址：</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-calendar-check-fill"></span>
+                    <span class="place-text">營業時間：00:00～23:59 (24H)</span>
+                </div>
+                <div class="place-info">
+                    <span class="place-icon bi bi-link-45deg"></span>
+                    <span class="place-text">地圖網址：<a href="" target="_blank"></a></span>
+                </div>
+                <br>
+                <iframe src="" width="95%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>-->
+        </div>
+
+        <!-------------------------------------------------------------------------------->
+
+        <div id="Traffic-information" class="page">
+            <!--航班資訊-->
+            <!--<h2 id="flightinformation">航班資訊</h2>
+            <div class="space_height-10"></div>
+
+            <table class="custom-table">
+                <tr>
+                    <th class="column"></th>
+                    <th class="column2"></th>
+                    <th class="column3"></th>
+                </tr>
+                <tr>
+                    <td class="cell column airport">TPE</td>
+                    <td class="cell column2 total-flight-time">總時間 3小時 0分鐘</td>
+                    <td class="cell column3 airport">NRT</td>
+                </tr>
+                <tr>
+                    <td class="cell column take_off-and-landing_time">12:50</td>
+                    <td class="cell column2 flight-progress">波音777-300</td>
+                    <td class="cell column3 take_off-and-landing_time">16:50</td>
+                </tr>
+                <tr>
+                    <td class="cell column"></td>
+                    <td class="cell column2"></td>
+                    <td class="cell column3"></td>
+                </tr>
+                <tr>
+                    <td class="cell column airport">NRT</td>
+                    <td class="cell column2 total-flight-time">總時間 4小時 20分鐘</td>
+                    <td class="cell column3 airport">TPE</td>
+                </tr>
+                <tr>
+                    <td class="cell column take_off-and-landing_time">15:20</td>
+                    <td class="cell column2 flight-progress">波音777-300</td>
+                    <td class="cell column3 take_off-and-landing_time">18:40</td>
+                </tr>
+                <tr>
+                    <td class="cell column"></td>
+                    <td class="cell column2"></td>
+                    <td class="cell column3"></td>
+                </tr>
+            </table>
+            -->
+            <img src="https://i.imgur.com/WNE2XF7.png" alt="" style="width: 90%;">
+            <img src="https://i.imgur.com/FbKS2QD.png" alt="" style="width: 90%;">
+            <img src="https://i.imgur.com/NOlfjjC.png" alt="" style="width: 90%;">
+            <img src="https://i.imgur.com/sEIDgSx.png" alt="" style="width: 90%;">
+            <div class="space_height-20"></div>
+        </div>
+    </center>
+
+    <!-------------------------------------------------------------------------------->
+
+    <center>
+
+        <div id="tool" class="page">
+            <!--碼表-->
+            <h3>碼表</h3>
+            <div class="color-box">
+                <div>
+                    <span id="timer-display">00:00:00.000</span>
+                </div>
+            </div>
+            <div class="space_height-10"></div>
+            <button id="start-button" class="stopwatch">開始</button>
+            <button id="stop-button" class="stopwatch">暫停</button>
+            <button id="reset-button" class="stopwatch">重置</button>
+            <div class="space_height-20"></div>
+
+            <!--計時器-->
+            <h3>計時器</h3>
+            <div class="space_height-10"></div>
+            <h2 id="timer">00:00:00.000</h2>
+            <div>
+                <label>小時：</label>
+                <input type="number" id="hours" min="0" placeholder="小時">
+            </div>
+            <div class="space_height-10"></div>
+            <div>
+                <label>分鐘：</label>
+                <input type="number" id="minutes" min="0" placeholder="分鐘">
+            </div>
+            <div class="space_height-10"></div>
+            <div>
+                <label>秒鐘：</label>
+                <input type="number" id="seconds" min="0" placeholder="秒鐘">
+            </div>
+            <div class="space_height-10"></div>
+            <button id="startBtn" onclick="toggleTimer()">開始</button>
+            <button onclick="resetTimer()" id="resetBtn">重置</button>
+            <div class="space_height-20"></div>
+
+            <!--隨機數字-->
+            <h3>隨機數字</h3>
+            <div class="space_height-10"></div>
+            <input type="number" id="min-input" placeholder="最小值">
+            <div class="space_height-10"></div>
+            <input type="number" id="max-input" placeholder="最大值">
+            <div class="space_height-20"></div>
+            <button onclick="generateRandomNumber()" id="randomnumbergeneration">生成隨機數</button>
+            <div id="result"></div>
+            <div class="space_height-20"></div>
+            <div class="space_height-50"></div>
+
+            <!--倒數計時-->
+            <h5 id="outbound">去程</h5>
+            <iframe width="300" height="150"
+                src="https://naozhong.tw/embed/jishiqi/#date=2024-01-30T12:50:00&title=%E8%B5%B7%E9%A3%9B%E6%99%82%E9%96%93&theme=0&ampm=1&sound=xylophone"
+                frameborder="0" allowfullscreen></iframe>
+            <iframe width="300" height="150"
+                src="https://naozhong.tw/embed/jishiqi/#date=2024-01-30T16:50:00&title=%E9%99%8D%E8%90%BD%E6%99%82%E9%96%93&theme=0&ampm=1&sound=xylophone"
+                frameborder="0" allowfullscreen></iframe>
+            <h5 id="returnjourney">回程</h5>
+            <iframe width="300" height="150"
+                src="https://naozhong.tw/embed/jishiqi/#date=2024-02-07T15:20:00&title=%E8%B5%B7%E9%A3%9B%E6%99%82%E9%96%93&theme=0&ampm=1&sound=xylophone"
+                frameborder="0" allowfullscreen></iframe>
+            <iframe width="300" height="150"
+                src="https://naozhong.tw/embed/jishiqi/#date=2024-02-07T18:40:00&title=%E9%99%8D%E8%90%BD%E6%99%82%E9%96%93&theme=0&ampm=1&sound=xylophone"
+                frameborder="0" allowfullscreen></iframe>
+        </div>
+    </center>
+
+    <!-------------------------------------------------------------------------------->
+
+    <footer class="container-fluid">
+        <hr>
+        <p class="float-end"><a href="#">Back to top</a></p>
+        <p>© 2024日本東京 · <a href="#">隱私權</a> · <a href="#">聯絡我們</a></p>
+    </footer>
+
+    <!--顯示對應id-->
+    <!--<script>
+        // 定義showPage函式
+        function showPage(id) {
+            // 取得所有具有class="page"的元素
+            var pages = document.getElementsByClassName("page");
+
+            // 隱藏所有元素
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].style.display = "none";
+            }
+
+            // 使用getElementById取得具有特定ID的元素
+            var element = document.getElementById(id);
+
+            // 檢查元素是否存在
+            if (element) {
+                // 將元素的display屬性設定為"block"，使其顯示
+                element.style.display = "block";
+            } else {
+                // 如果元素不存在，顯示錯誤訊息
+                console.error("找不到具有ID '" + id + "' 的元素。");
+            }
+        }
+    </script>-->
+    <!--工具選單-->
+
+    <!--碼表-->
+    <script>
+        // 碼表背景變顏色
+        var box = document.querySelector('.color-box');
+        var interval = setInterval(changeColor, 2000); // 每2秒更新顏色
+
+        function changeColor() {
+            var color = getRandomColor();
+            box.style.backgroundColor = color;
+        }
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // 碼表文字變顏色
+        /*function changeTextColor() {
+            var textElement = document.getElementById("timer-text");
+            var currentTime = new Date().getTime();
+            var hue = (currentTime / 10) % 360; // 根據時間計算色相值
+            var color = "hsl(" + hue + ", 100%, 50%)"; // 使用HSL颜色模式設置顏色
+            textElement.style.color = color;
+        }
+
+        // 每隔一段時間調用changeTextColor函數
+        setInterval(changeTextColor, 100);*/
+    </script>
+    <!--碼表-->
+    <style>
+        .color-box {
+            width: 200px;
+            height: 200px;
+            background-color: #ffffff;
+            transition: background-color 10s ease;
+            border-radius: 50%;
+            border: 5px solid #F0F0F0;
+            box-shadow: 0px 0px 20px #F0F0F0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /*.stopwatch {
+                width: 80px;
+                height: 50px;
+                border: none;
+                border-radius: 10px;
+                background-color: #79FF79;
+                font-size: 15px;
+            
+            
+            
+            }*/
+
+        #start-button {
+            background-color: #00DB00;
+            border: none;
+            border-radius: 10px;
+            width: 70px;
+            height: 40px;
+        }
+
+        #stop-button {
+            background-color: #FF0000;
+            border: none;
+            border-radius: 10px;
+            width: 70px;
+            height: 40px;
+        }
+
+        #reset-button {
+            background-color: #46A3FF;
+            border: none;
+            border-radius: 10px;
+            width: 70px;
+            height: 40px;
+        }
+
+        #timer-display {
+            font-size: 25px;
+        }
+    </style>
+    <!--碼表-->
+    <script>
+        var remainingTime = 0;
+        var endTime;
+        var timerInterval;
+        var isRunning = false;
+        var isPaused = false;
+        var pausedTime = 0;
+
+        function toggleTimer() {
+            if (isRunning) {
+                if (isPaused) {
+                    resumeTimer();
+                } else {
+                    pauseTimer();
+                }
+            } else {
+                startTimer();
+            }
+        }
+
+        function startTimer() {
+            var hoursInput = document.getElementById("hours");
+            var minutesInput = document.getElementById("minutes");
+            var secondsInput = document.getElementById("seconds");
+
+            var hours = parseInt(hoursInput.value) || 0;
+            var minutes = parseInt(minutesInput.value) || 0;
+            var seconds = parseInt(secondsInput.value) || 0;
+
+            remainingTime = hours * 3600000 + minutes * 60000 + seconds * 1000;
+
+            if (!isRunning) {
+                endTime = Date.now() + remainingTime;
+                isRunning = true;
+                updateTimer();
+                updateButtonLabel();
+            }
+        }
+
+        function pauseTimer() {
+            if (isRunning && !isPaused) {
+                clearInterval(timerInterval);
+                isPaused = true;
+                pausedTime = remainingTime;
+                updateButtonLabel();
+            }
+        }
+
+        function resumeTimer() {
+            if (isRunning && isPaused) {
+                endTime = Date.now() + pausedTime;
+                isPaused = false;
+                updateTimer();
+                updateButtonLabel();
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            isPaused = false;
+            remainingTime = 0;
+            pausedTime = 0;
+            document.getElementById("timer").innerHTML = "00:00:00.000";
+            updateButtonLabel();
+        }
+
+        function updateTimer() {
+            timerInterval = setInterval(function () {
+                var currentTime = Date.now();
+                remainingTime = endTime - currentTime;
+
+                if (remainingTime <= 0) {
+                    clearInterval(timerInterval);
+                    isRunning = false;
+                    document.getElementById("timer").innerHTML = "計時結束！";
+                    updateButtonLabel();
+                } else {
+                    var hours = Math.floor(remainingTime / 3600000);
+                    var minutes = Math.floor((remainingTime % 3600000) / 60000);
+                    var seconds = Math.floor((remainingTime % 60000) / 1000);
+                    var milliseconds = Math.floor(remainingTime % 1000);
+
+                    var timeStr = ("0" + hours).slice(-2) + ":" + ("0" + minutes).slice(-2) + ":" + ("0" + seconds).slice(-2) + "." + ("00" + milliseconds).slice(-3);
+                    document.getElementById("timer").innerHTML = timeStr;
+                }
+            }, 10);
+        }
+
+        function updateButtonLabel() {
+            var startBtn = document.getElementById("startBtn");
+            if (isRunning) {
+                if (isPaused) {
+                    startBtn.innerHTML = "繼續";
+                } else {
+                    startBtn.innerHTML = "暫停";
+                }
+            } else {
+                startBtn.innerHTML = "開始";
+            }
+        }
+    </script>
+    <!--碼表-->
+    <style>
+        #startBtn {
+            background-color: #46A3FF;
+            border: none;
+            border-radius: 10px;
+            width: 70px;
+            height: 40px;
+        }
+
+        #resetBtn {
+            background-color: #FF2D2D;
+            border: none;
+            border-radius: 10px;
+            width: 70px;
+            height: 40px;
+        }
+    </style>
+    <!--隨機數字-->
+    <script>
+        function generateRandomNumber() {
+            var min = parseInt(document.getElementById("min-input").value);
+            var max = parseInt(document.getElementById("max-input").value);
+
+            if (isNaN(min) || isNaN(max)) {
+                document.getElementById("result").innerText = "請輸入有效的數字";
+                return;
+            }
+
+            if (min >= max) {
+                document.getElementById("result").innerText = "最小值必須小於最大值";
+                return;
+            }
+
+            var randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+            document.getElementById("result").innerText = "隨機數: " + randomNumber;
+        }
+    </script>
+    <!--隨機數字-->
+    <style>
+        #randomnumbergeneration {
+            background-color: #00DB00;
+            border: none;
+            border-radius: 10px;
+            width: 120px;
+            height: 50px;
+        }
+    </style>
+    <!--計時器-->
+    <!--<script>
+        var timerElement = document.getElementById("timer");
+        var hoursInput = document.getElementById("hours");
+        var minutesInput = document.getElementById("minutes");
+        var secondsInput = document.getElementById("seconds");
+        var startPauseButton = document.getElementById("start-pause-button");
+        var intervalId;
+        var totalSeconds = 0;
+        var isPaused = false;
+
+
+
+        function startTimer() {
+            if (intervalId) {
+                // 計時器已經在運行，不重複啟動
+                return;
+            }
+
+            // 取得輸入的時間
+            var hours = parseInt(hoursInput.value) || 0;
+            var minutes = parseInt(minutesInput.value) || 0;
+            var seconds = parseInt(secondsInput.value) || 0;
+
+            // 將時間轉換為總秒數
+            totalSeconds = hours * 3600 + minutes * 60 + seconds;
+
+            // 更新計時器顯示
+            updateTimerDisplay(totalSeconds);
+
+            // 開始計時器
+            intervalId = setInterval(function () {
+                if (!isPaused) {
+                    if (totalSeconds > 0) {
+                        totalSeconds -= 0.001; // 減去 0.001 秒（1 毫秒）
+                        updateTimerDisplay(totalSeconds);
+                    } else {
+                        stopTimer();
+                        alert("時間到！");
+                    }
+                }
+            }, 1); // 每毫秒更新一次計時器
+
+            startPauseButton.innerText = "暫停";
+        }
+
+        function pauseTimer() {
+            isPaused = !isPaused;
+
+            if (isPaused) {
+                startPauseButton.innerText = "繼續";
+            } else {
+                startPauseButton.innerText = "暫停";
+            }
+        }
+
+        function stopTimer() {
+            clearInterval(intervalId);
+            intervalId = null;
+            totalSeconds = 0;
+            isPaused = false;
+            updateTimerDisplay(totalSeconds);
+            startPauseButton.innerText = "開始計時";
+        }
+
+        function updateTimerDisplay(totalSeconds) {
+            var hours = Math.floor(totalSeconds / 3600);
+            var minutes = Math.floor((totalSeconds % 3600) / 60);
+            var seconds = Math.floor(totalSeconds % 60);
+            var milliseconds = Math.floor((totalSeconds % 1) * 1000); // 取得毫秒部分
+
+            // 格式化顯示的時間，將毫秒部分加入顯示
+            var formattedTime = padZero(hours) + ":" + padZero(minutes) + ":" + padZero(seconds) + "." + padZero(milliseconds, 3);
+
+            // 更新計時器顯示
+            timerElement.innerText = formattedTime;
+        }
+
+        function padZero(number, length = 2) {
+            return number.toString().padStart(length, "0");
+        }
+
+
+    </script>-->
+    <!--計時器-->
+    <script>
+        // 計時器對象
+        var timer = {
+            startTime: 0,
+            elapsedTime: 0,
+            intervalId: null,
+            isRunning: false,
+
+            // 開始計時
+            start: function () {
+                if (!this.isRunning) {
+                    this.startTime = Date.now() - this.elapsedTime;
+                    this.intervalId = setInterval(function () {
+                        this.elapsedTime = Date.now() - this.startTime;
+                        this.displayTime();
+                    }.bind(this), 10);
+                    this.isRunning = true;
+                    console.log("計時開始");
+                }
+            },
+
+            // 停止計時
+            stop: function () {
+                if (this.isRunning) {
+                    clearInterval(this.intervalId);
+                    this.intervalId = null;
+                    this.isRunning = false;
+                    console.log("計時停止");
+                }
+            },
+
+            // 重置計時器
+            reset: function () {
+                this.startTime = 0;
+                this.elapsedTime = 0;
+                this.displayTime();
+                console.log("計時重置");
+            },
+
+            // 獲取當前計時器總時間（以毫秒為單位）
+            getTime: function () {
+                return this.elapsedTime;
+            },
+
+            // 將時間顯示在頁面上
+            displayTime: function () {
+                var milliseconds = Math.floor(this.elapsedTime % 1000);
+                var seconds = Math.floor((this.elapsedTime / 1000) % 60);
+                var minutes = Math.floor((this.elapsedTime / (1000 * 60)) % 60);
+                var hours = Math.floor((this.elapsedTime / (1000 * 60 * 60)) % 24);
+
+                var timeString = formatTime(hours, minutes, seconds, milliseconds);
+                document.getElementById("timer-display").textContent = timeString;
+            }
+        };
+
+        // 格式化時間
+        function formatTime(hours, minutes, seconds, milliseconds) {
+            return (
+                (hours < 10 ? "0" + hours : hours) +
+                ":" +
+                (minutes < 10 ? "0" + minutes : minutes) +
+                ":" +
+                (seconds < 10 ? "0" + seconds : seconds) +
+                "." +
+                (milliseconds < 100 ? (milliseconds < 10 ? "00" : "0") : "") +
+                milliseconds
+            );
+        }
+
+        // 初始化頁面
+        function init() {
+            var startButton = document.getElementById("start-button");
+            var stopButton = document.getElementById("stop-button");
+            var resetButton = document.getElementById("reset-button");
+
+            startButton.addEventListener("click", function () {
+                timer.start();
+            });
+
+            stopButton.addEventListener("click", function () {
+                timer.stop();
+            });
+
+            resetButton.addEventListener("click", function () {
+                timer.reset();
+            });
+        }
+
+        // 頁面加載完成後初始化
+        window.addEventListener("load", function () {
+            init();
+        });
+    </script>
+    <script>
+        // 顯示loading圖示
+        var loading = document.getElementById('loading');
+        loading.style.display = 'block';
+        // 隱藏捲動軸
+        document.body.style.overflow = 'hidden';
+
+        // 等待整個文檔加載完成後
+        window.onload = function () {
+            // 在網頁完全載入後繼續顯示loading圖示
+            setTimeout(function () {
+                // 隱藏loading圖示
+                loading.style.display = 'none';
+                // 1秒後顯示捲動軸
+                document.body.style.overflow = 'auto';
+                showPage('home') // 顯示首頁
+            }, 1000); // 1秒後隱藏loading圖示
+        };
+    </script>
+</body>
+
+</html>

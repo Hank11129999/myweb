@@ -192,8 +192,51 @@
         window.addEventListener('DOMContentLoaded', function () {
             var startDateTime = new Date('2024-07-07T09:35:00');
             var endDateTime = new Date('2024-07-18T18:55:00');
-            //var startDateTime = new Date('2024-06-30T14:50:00');
-            //var endDateTime = new Date('2024-06-30T14:51:00');
+            var progressBar = document.getElementById('progress-bar');
+            var progressBarText = document.querySelector('.progress-text');
+
+            function updateProgressBar() {
+                var currentTime = new Date();
+
+                if (currentTime < startDateTime) {
+                    // 如果當前時間小於開始時間，顯示準備出發狀態或其他狀態
+                    progressBarText.textContent = '準備出發';
+                    progressBar.style.width = '0%';
+                    progressBar.setAttribute('aria-valuenow', '0');
+                } else if (currentTime < endDateTime) {
+                    // 如果當前時間在開始和結束時間之間，計算並更新進度條
+                    var elapsedTime = currentTime - startDateTime;
+                    var totalMilliseconds = endDateTime - startDateTime;
+                    var currentMilliseconds = Math.min(elapsedTime, totalMilliseconds);
+                    var progressPercentage = Math.min((currentMilliseconds / totalMilliseconds) * 100, 100);
+                    progressPercentage = Math.max(progressPercentage, 0);
+
+                    progressBar.style.width = progressPercentage + '%';
+                    progressBar.setAttribute('aria-valuenow', progressPercentage.toFixed(3));
+                    progressBarText.textContent = progressPercentage.toFixed(3) + '%';
+                } else {
+                    // 如果當前時間大於等於結束時間，顯示旅行結束狀態
+                    progressBarText.textContent = '旅行結束';
+                    progressBar.style.width = '100%';
+                    progressBar.setAttribute('aria-valuenow', '100');
+                }
+
+                if (currentTime < endDateTime) {
+                    requestAnimationFrame(updateProgressBar);
+                }
+            }
+
+            updateProgressBar(); // 初始更新一次進度條
+        });
+
+
+
+
+        /*window.addEventListener('DOMContentLoaded', function () {
+            //var startDateTime = new Date('2024-07-07T09:35:00');
+            //var endDateTime = new Date('2024-07-18T18:55:00');
+            var startDateTime = new Date('2024-07-06T19:59:00');
+            var endDateTime = new Date('2024-07-06T20:03:00');
             var progressBar = document.getElementById('progress-bar');
             var progress = document.getElementById('progress');
             var progressBarText = progress.querySelector('.progress-text');
@@ -215,7 +258,7 @@
             }
 
             requestAnimationFrame(updateProgressBar);
-        });
+        });*/
     </script>
     <style>
         .progress-bar {

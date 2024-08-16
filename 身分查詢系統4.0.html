@@ -1,0 +1,3154 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學生資料查詢系統</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0056b3;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #0056b3;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #004494;
+        }
+
+        #results {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #results p {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #results p:last-child {
+            border-bottom: none;
+        }
+
+        #results p span {
+            display: inline-block;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #999;
+        }
+    </style>
+    <script>
+        // 模擬資料庫
+        const students = [
+            {
+                "class": '班級',
+                "Seat_number": '座號',
+                "Student_number": '學號',
+                "Name": '姓名',
+                "gender": '性別',
+                "Birthday": '生日',
+                "constellation": '星座',
+                "email": '電子郵件',
+                "telephone_number": '電話號碼',
+                "home": '住家'
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '1',
+                "Student_number": '112001',
+                "Name": '王言心',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112001@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '2',
+                "Student_number": '112014',
+                "Name": '盧沛妘',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112014@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '3',
+                "Student_number": '112003',
+                "Name": '江依璇',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112003@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '4',
+                "Student_number": '112015',
+                "Name": '蕭敬賢',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112015@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '5',
+                "Student_number": '112005',
+                "Name": '李昱嫻',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112005@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '6',
+                "Student_number": '112016',
+                "Name": '戴妙蓉',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112016@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '7',
+                "Student_number": '112007',
+                "Name": '邱若芹',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112007@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '8',
+                "Student_number": '112017',
+                "Name": '羅慧雲',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112017@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '9',
+                "Student_number": '112009',
+                "Name": '郭子瑈',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112009@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '10',
+                "Student_number": '112010',
+                "Name": '陳可欣',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112010@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '11',
+                "Student_number": '112011',
+                "Name": '馮薏宸',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112011@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '12',
+                "Student_number": '112012',
+                "Name": '葉丞芸',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112012@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '13',
+                "Student_number": '112013',
+                "Name": '劉子彤',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112013@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '14',
+                "Student_number": '112022',
+                "Name": '洪家程',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112022@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '15',
+                "Student_number": '112015',
+                "Name": '陳廷侑',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112015@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '16',
+                "Student_number": '112027',
+                "Name": '趙師',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112027@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '17',
+                "Student_number": '112028',
+                "Name": '劉禹濰',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112028@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '18',
+                "Student_number": '112030',
+                "Name": '蕭𦘒傑',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112030@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '19',
+                "Student_number": '112031',
+                "Name": '謝迦南',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112031@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '20',
+                "Student_number": '112020',
+                "Name": '李亞諭',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112020@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '21',
+                "Student_number": '112033',
+                "Name": '羅立倫',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112033@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '22',
+                "Student_number": '112140',
+                "Name": '周楷峻',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112140@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '23',
+                "Student_number": '112146',
+                "Name": '陳瑞騰',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112146@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '24',
+                "Student_number": '112147',
+                "Name": '曾啟紘',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112147@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '25',
+                "Student_number": '112151',
+                "Name": '戴廷安',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112151@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '26',
+                "Student_number": '112200',
+                "Name": '林冠汯',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112200@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '27',
+                "Student_number": '318038',
+                "Name": '黃思喆',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '318038@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '28',
+                "Student_number": '318033',
+                "Name": '陳湘昀',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '318033@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '29',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '30',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '31',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '32',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '33',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '34',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '35',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '36',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '37',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '38',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '39',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二甲',
+                "Seat_number": '40',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '',
+                "Seat_number": '',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '1',
+                "Student_number": '112035',
+                "Name": '李玥',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112035@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '2',
+                "Student_number": '112036',
+                "Name": '李芝菱',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112036@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '3',
+                "Student_number": '112037',
+                "Name": '徐洛妍',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112037@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '4',
+                "Student_number": '112038',
+                "Name": '張可芳',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112038@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '5',
+                "Student_number": '112039',
+                "Name": '張如慧',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112039@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '6',
+                "Student_number": '112040',
+                "Name": '許家家',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112040@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '7',
+                "Student_number": '112041',
+                "Name": '陳涓涓',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112041@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '8',
+                "Student_number": '112042',
+                "Name": '彭羽崴',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112042@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '9',
+                "Student_number": '112043',
+                "Name": '黃奕璇',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112043@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '10',
+                "Student_number": '112216',
+                "Name": '沈芳伃',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112216@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '11',
+                "Student_number": '112045',
+                "Name": '劉子以',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112045@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '12',
+                "Student_number": '112046',
+                "Name": '鄭曼殊',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112046@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '13',
+                "Student_number": '112047',
+                "Name": '簡芮恩',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112047@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '14',
+                "Student_number": '112048',
+                "Name": '羅心汝',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112048@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '15',
+                "Student_number": '112188',
+                "Name": '吳印俞',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112188@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '16',
+                "Student_number": '112189',
+                "Name": '黃子萁',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112189@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '17',
+                "Student_number": '112129',
+                "Name": '林洺安',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112129@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '18',
+                "Student_number": '112052',
+                "Name": '林三德',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112052@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '19',
+                "Student_number": '112053',
+                "Name": '林大利',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112053@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '20',
+                "Student_number": '112049',
+                "Name": '王宥翔',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112049@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '21',
+                "Student_number": '112055',
+                "Name": '林彥鈞',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112055@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '22',
+                "Student_number": '112056',
+                "Name": '徐子軒',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112056@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '23',
+                "Student_number": '112057',
+                "Name": '張宇翎',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112057@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '24',
+                "Student_number": '112058',
+                "Name": '陳宥瑜',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112058@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '25',
+                "Student_number": '112059',
+                "Name": '彭柏翔',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112059@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '26',
+                "Student_number": '112060',
+                "Name": '曾柏絲',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112060@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '27',
+                "Student_number": '112061',
+                "Name": '湯承翰',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112061@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '28',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '29',
+                "Student_number": '112063',
+                "Name": '蔡鼎勝',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112063@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '30',
+                "Student_number": '112064',
+                "Name": '鄭庭潤',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112064@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '31',
+                "Student_number": '112219',
+                "Name": '呂書懷',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112219@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '32',
+                "Student_number": '112050',
+                "Name": '余正雍',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112050@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '33',
+                "Student_number": '112051',
+                "Name": '卓品澄',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112051@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '34',
+                "Student_number": '112187',
+                "Name": '劉品澄',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112187@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '35',
+                "Student_number": '112152',
+                "Name": '簡浩鈞',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112152@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '36',
+                "Student_number": '318012',
+                "Name": '陳紫榆',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '318012@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '37',
+                "Student_number": '318031',
+                "Name": '吳佩穎',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '318031@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '38',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '39',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二乙',
+                "Seat_number": '40',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '',
+                "Seat_number": '',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '1',
+                "Student_number": '112065',
+                "Name": '江禮安',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112065@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '2',
+                "Student_number": '112220',
+                "Name": '姜彥妤',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112220@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '3',
+                "Student_number": '112067',
+                "Name": '宋沛汝',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112067@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '4',
+                "Student_number": '112068',
+                "Name": '林霏',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112068@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '5',
+                "Student_number": '112076',
+                "Name": '盧苡嬑',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112076@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '6',
+                "Student_number": '112070',
+                "Name": '曹庭芸',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112070@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '7',
+                "Student_number": '112077',
+                "Name": '賴沛昀',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112077@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '8',
+                "Student_number": '112072',
+                "Name": '曾翔苡',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112072@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '9',
+                "Student_number": '112073',
+                "Name": '黃品喬',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112073@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '10',
+                "Student_number": '112074',
+                "Name": '黃馨霈',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112074@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '11',
+                "Student_number": '112075',
+                "Name": '蔡妮妮',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112075@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '12',
+                "Student_number": '112196',
+                "Name": '林品妤',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112196@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '13',
+                "Student_number": '112127',
+                "Name": '林佳儀',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112127@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '14',
+                "Student_number": '112128',
+                "Name": '林佳瑩',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112128@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '15',
+                "Student_number": '112130',
+                "Name": '唐婕恩',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112130@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '16',
+                "Student_number": '112132',
+                "Name": '陳予芊',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112132@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '17',
+                "Student_number": '112133',
+                "Name": '潘妮',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112133@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '18',
+                "Student_number": '112201',
+                "Name": '顏榕柔',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112201@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '19',
+                "Student_number": '112204',
+                "Name": '劉秀妃',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112204@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '20',
+                "Student_number": '112083',
+                "Name": '許荏凱',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112083@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '21',
+                "Student_number": '112084',
+                "Name": '許堰勛',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112084@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '22',
+                "Student_number": '112085',
+                "Name": '郭睿廷',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112085@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '23',
+                "Student_number": '112079',
+                "Name": '余宥增',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112079@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '24',
+                "Student_number": '112080',
+                "Name": '林同軒',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112080@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '25',
+                "Student_number": '112088',
+                "Name": '陳稟翔',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112088@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '26',
+                "Student_number": '112089',
+                "Name": '黃仕安',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112089@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '27',
+                "Student_number": '112082',
+                "Name": '洪右澄',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112082@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '28',
+                "Student_number": '112091',
+                "Name": '蔡傑丞',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112091@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '29',
+                "Student_number": '112092',
+                "Name": '謝哲淯',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112092@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '30',
+                "Student_number": '112190',
+                "Name": '陳奕森',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112190@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '31',
+                "Student_number": '112078',
+                "Name": '邱楷軒',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112078@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '32',
+                "Student_number": '112195',
+                "Name": '謝侑倫',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112195@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '33',
+                "Student_number": '112192',
+                "Name": '陳柏翰',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112192@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '34',
+                "Student_number": '112193',
+                "Name": '黃紹瑜',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112193@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '35',
+                "Student_number": '112142',
+                "Name": '林哲楷',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112142@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '36',
+                "Student_number": '318007',
+                "Name": '黃品承',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '318007@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '37',
+                "Student_number": '318045',
+                "Name": '李芳頡',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '318045@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '38',
+                "Student_number": '318037',
+                "Name": '林靖亭',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '318037@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '39',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丙',
+                "Seat_number": '40',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '',
+                "Seat_number": '',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '1',
+                "Student_number": '112093',
+                "Name": '王宥貽',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112093@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '2',
+                "Student_number": '112094',
+                "Name": '王韋姍',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112094@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '3',
+                "Student_number": '112095',
+                "Name": '甘珺羽',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112095@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '4',
+                "Student_number": '112096',
+                "Name": '周品甄',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112096@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '5',
+                "Student_number": '112097',
+                "Name": '洪紜萱',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112097@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '6',
+                "Student_number": '112098',
+                "Name": '徐惟晴',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112098@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '7',
+                "Student_number": '112212',
+                "Name": '吳沛寰',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112212@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '8',
+                "Student_number": '112198',
+                "Name": '陳芷瑩',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112198@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '9',
+                "Student_number": '112101',
+                "Name": '陳予晴',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112101@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '10',
+                "Student_number": '112102',
+                "Name": '陳湘淇',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112102@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '11',
+                "Student_number": '112103',
+                "Name": '曾柔棋',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112103@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '12',
+                "Student_number": '112104',
+                "Name": '黃彥蓁',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112104@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '13',
+                "Student_number": '112209',
+                "Name": '楊芷宜',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112209@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '14',
+                "Student_number": '112106',
+                "Name": '蘇琬淯',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112106@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '15',
+                "Student_number": '112124',
+                "Name": '余黛妍',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112124@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '16',
+                "Student_number": '112135',
+                "Name": '簡邑帆',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112135@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '17',
+                "Student_number": '112136',
+                "Name": '蘇柔瑄',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112136@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '18',
+                "Student_number": '112110',
+                "Name": '林琮晏',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112110@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '19',
+                "Student_number": '112111',
+                "Name": '林聖融',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112111@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '20',
+                "Student_number": '112112',
+                "Name": '邱明昱',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112112@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '21',
+                "Student_number": '112113',
+                "Name": '高立炘',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112113@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '22',
+                "Student_number": '112108',
+                "Name": '李承蔚',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112108@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '23',
+                "Student_number": '112115',
+                "Name": '莊善至',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112115@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '24',
+                "Student_number": '112116',
+                "Name": '陳奕愷',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112116@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '25',
+                "Student_number": '112117',
+                "Name": '陳首邑',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112117@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '26',
+                "Student_number": '112118',
+                "Name": '陳書愷',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112118@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '27',
+                "Student_number": '112119',
+                "Name": '曾翔偉',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112119@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '28',
+                "Student_number": '112120',
+                "Name": '黃昶元',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112120@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '29',
+                "Student_number": '112121',
+                "Name": '黃琮諺',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112121@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '30',
+                "Student_number": '112109',
+                "Name": '沈啟霖',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112109@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '31',
+                "Student_number": '112123',
+                "Name": '蔡承霖',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112123@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '32',
+                "Student_number": '112107',
+                "Name": '江玟震',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112107@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '33',
+                "Student_number": '112138',
+                "Name": '余宸恩',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112138@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '34',
+                "Student_number": '112153',
+                "Name": '蘇品哲',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112153@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '35',
+                "Student_number": '318047',
+                "Name": '林威佑',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '318047@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '36',
+                "Student_number": '318023',
+                "Name": '陳琦沛',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '318023@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '37',
+                "Student_number": '318041',
+                "Name": '游閔淇',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '318041@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '38',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '39',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二丁',
+                "Seat_number": '40',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '',
+                "Seat_number": '',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '1',
+                "Student_number": '112154',
+                "Name": '艾玥廷',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112154@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '2',
+                "Student_number": '112155',
+                "Name": '何芷儀',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112155@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '3',
+                "Student_number": '112156',
+                "Name": '林芯儀',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112156@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '4',
+                "Student_number": '112214',
+                "Name": '黃莘雅',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112214@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '5',
+                "Student_number": '112158',
+                "Name": '張維媛',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112158@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '6',
+                "Student_number": '112159',
+                "Name": '彭若涵',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112159@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '7',
+                "Student_number": '112160',
+                "Name": '賀心妤',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112160@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '8',
+                "Student_number": '112161',
+                "Name": '黃邑婕',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112161@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '9',
+                "Student_number": '112162',
+                "Name": '黃唯苓',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112162@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '10',
+                "Student_number": '112168',
+                "Name": '賴玉儒',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112168@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '11',
+                "Student_number": '112164',
+                "Name": '劉芸岑',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112164@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '12',
+                "Student_number": '112165',
+                "Name": '蔡佳沂',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112165@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '13',
+                "Student_number": '112166',
+                "Name": '蔡宥琳',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112166@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '14',
+                "Student_number": '112125',
+                "Name": '吳采樺',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112125@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '15',
+                "Student_number": '112126',
+                "Name": '宋沛涵',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112126@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '16',
+                "Student_number": '112134',
+                "Name": '謝艾欣',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112134@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '17',
+                "Student_number": '112202',
+                "Name": '官以媃',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112202@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '18',
+                "Student_number": '112213',
+                "Name": '彭季蓁',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112213@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '19',
+                "Student_number": '112172',
+                "Name": '何宥葳',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112172@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '20',
+                "Student_number": '112171',
+                "Name": '石宗翰',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112171@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '21',
+                "Student_number": '112170',
+                "Name": '方思永',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112170@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '22',
+                "Student_number": '112175',
+                "Name": '方岳晟',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112175@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '23',
+                "Student_number": '112176',
+                "Name": '徐佑恩',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112176@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '24',
+                "Student_number": '112207',
+                "Name": '黃柏翔',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112207@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '25',
+                "Student_number": '112184',
+                "Name": '謝秉昀',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112184@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '26',
+                "Student_number": '112205',
+                "Name": '施伯翰',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112205@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '27',
+                "Student_number": '112180',
+                "Name": '彭宇恩',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112180@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '28',
+                "Student_number": '112181',
+                "Name": '曾意修',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112181@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '29',
+                "Student_number": '112208',
+                "Name": '黃煜㥂',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112208@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '30',
+                "Student_number": '112139',
+                "Name": '吳丞洋',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112139@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '31',
+                "Student_number": '112141',
+                "Name": '林士瑋',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112141@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '32',
+                "Student_number": '112144',
+                "Name": '施善喆',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112144@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '33',
+                "Student_number": '112145',
+                "Name": '陳則安',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112145@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '34',
+                "Student_number": '112149',
+                "Name": '馮程翔',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112149@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '35',
+                "Student_number": '112150',
+                "Name": '廖士朋',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112150@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '36',
+                "Student_number": '112221',
+                "Name": '李昊宸',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '112221@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '37',
+                "Student_number": '318021',
+                "Name": '王宏元',
+                "gender": '男性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '318021@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '38',
+                "Student_number": '318004',
+                "Name": '羅沛芸',
+                "gender": '女性',
+                "Birthday": '',
+                "constellation": '',
+                "email": '318004@goog.ptsh.ntct.edu.tw',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '39',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二戊',
+                "Seat_number": '40',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '',
+                "Seat_number": '',
+                "Student_number": '',
+                "Name": '',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '1',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '2',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '3',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '4',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '5',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '6',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '7',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '8',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '9',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '10',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '11',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '12',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '13',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '14',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '15',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '16',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '17',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '18',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '19',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '20',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '21',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '22',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '23',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '24',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '25',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '26',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '27',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '28',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '29',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '30',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '31',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '32',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '33',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '34',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '35',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '36',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '37',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '38',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '39',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+            },
+            {
+                "class": '國二辛',
+                "Seat_number": '40',
+                "Student_number": '未知',
+                "Name": '未知',
+                "gender": '',
+                "Birthday": '',
+                "constellation": '',
+                "email": '',
+                "telephone_number": '',
+                "home": ''
+
+            }
+        ];
+
+        // 查詢功能
+        function searchStudents() {
+            const classInput = document.getElementById('class').value;
+            const seatInput = document.getElementById('seat').value;
+            const studentIdInput = document.getElementById('studentId').value;
+            const nameInput = document.getElementById('name').value;
+            const genderInput = document.getElementById('gender').value;
+            const birthdayInput = document.getElementById('birthday').value;
+            const zodiacInput = document.getElementById('zodiac').value;
+            const emailInput = document.getElementById('email').value;
+            const phoneInput = document.getElementById('phone').value;
+            const addressInput = document.getElementById('address').value;
+
+            let results = students.filter(student => {
+                return (!classInput || student["class"].includes(classInput)) &&
+                    (!seatInput || student["Seat_number"].toString().includes(seatInput)) &&
+                    (!studentIdInput || student["Student_number"].includes(studentIdInput)) &&
+                    (!nameInput || student["Name"].includes(nameInput)) &&
+                    (!genderInput || student["gender"].includes(genderInput)) &&
+                    (!birthdayInput || student["Birthday"].includes(birthdayInput)) &&
+                    (!zodiacInput || student["constellation"].includes(zodiacInput)) &&
+                    (!emailInput || student["email"].includes(emailInput)) &&
+                    (!phoneInput || student["telephone_number"].includes(phoneInput)) &&
+                    (!addressInput || student["home"].includes(addressInput));
+            });
+
+            // 計算符合度
+            results.forEach(student => {
+                student.matchScore = 0;
+                if (classInput && student["class"].includes(classInput)) student.matchScore++;
+                if (seatInput && student["Seat_number"].toString().includes(seatInput)) student.matchScore++;
+                if (studentIdInput && student["Student_number"].includes(studentIdInput)) student.matchScore++;
+                if (nameInput && student["Name"].includes(nameInput)) student.matchScore++;
+                if (genderInput && student["gender"].includes(genderInput)) student.matchScore++;
+                if (birthdayInput && student["Birthday"].includes(birthdayInput)) student.matchScore++;
+                if (zodiacInput && student["constellation"].includes(zodiacInput)) student.matchScore++;
+                if (emailInput && student["email"].includes(emailInput)) student.matchScore++;
+                if (phoneInput && student["telephone_number"].includes(phoneInput)) student.matchScore++;
+                if (addressInput && student["home"].includes(addressInput)) student.matchScore++;
+            });
+
+            // 按照符合度排序，然後按照班級順序排序
+            results.sort((a, b) => {
+                if (b.matchScore === a.matchScore) {
+                    const classes = ['國二甲', '國二乙', '國二丙', '國二丁', '國二戊', '國二己', '國二庚', '國二辛'];
+                    return classes.indexOf(a["class"]) - classes.indexOf(b["class"]);
+                } else {
+                    return b.matchScore - a.matchScore;
+                }
+            });
+
+            // 顯示結果
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = ''; // 清空先前的結果
+            results.forEach(student => {
+                const studentInfo = `<p><span>班級:</span> ${student["class"]} | <span>座號:</span> ${student["Seat_number"]} | <span>學號:</span> ${student["Student_number"]} | <span>姓名:</span> ${student["Name"]} | <span>性別:</span> ${student["gender"]} | <span>電子郵件:</span> ${student["email"]}</p>`;
+                resultsDiv.innerHTML += studentInfo;
+            });
+
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<p class="no-results">無符合條件的學生資料</p>';
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>學生資料查詢系統</h1>
+    <form onsubmit="event.preventDefault(); searchStudents();">
+        <label for="class">班級:</label>
+        <input type="text" id="class" name="class"><br>
+
+        <label for="seat">座號:</label>
+        <input type="text" id="seat" name="seat"><br>
+
+        <label for="studentId">學號:</label>
+        <input type="text" id="studentId" name="studentId"><br>
+
+        <label for="name">姓名:</label>
+        <input type="text" id="name" name="name"><br>
+
+        <label for="gender">性別:</label>
+        <input type="text" id="gender" name="gender"><br>
+
+        <label for="birthday">生日:</label>
+        <input type="text" id="birthday" name="birthday"><br>
+
+        <label for="zodiac">星座:</label>
+        <input type="text" id="zodiac" name="zodiac"><br>
+
+        <label for="email">電子郵件:</label>
+        <input type="text" id="email" name="email"><br>
+
+        <label for="phone">電話號碼:</label>
+        <input type="text" id="phone" name="phone"><br>
+
+        <label for="address">住家:</label>
+        <input type="text" id="address" name="address"><br>
+
+        <input type="submit" value="查詢">
+    </form>
+
+    <h2>查詢結果</h2>
+    <div id="results"></div>
+</body>
+
+</html>

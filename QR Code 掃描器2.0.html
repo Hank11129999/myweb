@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code 掃描器</title>
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <style>
+        #reader {
+            width: 80%; /* 使用百分比以適應手機 */
+            max-width: 300px; /* 最大寬度 */
+            height: auto; /* 高度自動調整 */
+            margin: 0 auto;
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #output {
+            font-size: 1.2em;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">QR Code 掃描器</h1>
+    <div id="reader"></div>
+    <div id="result">
+        <h2>掃描結果：</h2>
+        <p id="output">等待掃描中...</p>
+    </div>
+
+    <script>
+        function onScanSuccess(decodedText, decodedResult) {
+            document.getElementById('output').innerText = decodedText;
+        }
+
+        function onScanFailure(error) {
+            console.warn(`QR Code scan error: ${error}`);
+        }
+
+        let html5QrCode = new Html5Qrcode("reader");
+
+        html5QrCode.start(
+            { facingMode: "environment" }, // 後置相機
+            {
+                fps: 10,    // 每秒幀數
+                qrbox: { width: 250, height: 250 }  // 掃描框大小
+            },
+            onScanSuccess,
+            onScanFailure
+        ).catch(err => {
+            console.error(`無法開始掃描，錯誤: ${err}`);
+        });
+    </script>
+</body>
+</html>

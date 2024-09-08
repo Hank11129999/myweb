@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>條形碼掃描器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #reader {
+            width: 400px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        #result {
+            font-size: 18px;
+            color: #006400;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>條形碼掃描器</h1>
+    <div id="reader"></div>
+    <p id="result">掃描結果：<span id="barcode-result"></span></p>
+
+    <footer>
+        <p>Powered by html5-qrcode</p>
+    </footer>
+
+    <!-- 引入 html5-qrcode 庫 -->
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <script>
+        // 初始化 html5-qrcode 掃描器
+        function onScanSuccess(decodedText, decodedResult) {
+            // 當掃描成功時觸發
+            document.getElementById('barcode-result').textContent = decodedText;
+            console.log(`掃描成功: ${decodedText}`, decodedResult);
+        }
+
+        function onScanFailure(error) {
+            // 失敗時不做處理，繼續掃描
+            console.warn(`掃描失敗: ${error}`);
+        }
+
+        let html5QrCode = new Html5Qrcode("reader");
+        html5QrCode.start(
+            { facingMode: "environment" }, // 使用環境攝像頭
+            {
+                fps: 10,    // 每秒處理 10 幀
+                qrbox: { width: 300, height: 300 }  // 掃描區域大小
+            },
+            onScanSuccess,
+            onScanFailure
+        ).catch((err) => {
+            console.error("初始化相機失敗: ", err);
+        });
+    </script>
+</body>
+</html>

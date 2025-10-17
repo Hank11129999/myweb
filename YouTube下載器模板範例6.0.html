@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PHMHFF9ER4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-PHMHFF9ER4');
+  </script>
+  <meta charset="UTF-8">
+  <title>下載區域選單範例</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: "Microsoft JhengHei", sans-serif;
+      padding: 40px;
+    }
+
+    .modal {
+      background-color: white;
+      max-width: 700px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 影片標題和時間區域 */
+    .video-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .video-thumbnail {
+      width: 160px;
+      height: 90px;
+      background-color: #ddd;
+      margin-right: 16px;
+      border-radius: 6px;
+    }
+
+    .video-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #000;
+    }
+
+    .video-duration {
+      font-size: 14px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    /* 表單區域 */
+    .form-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin-right: 20px;
+    }
+
+    .form-group:last-child {
+      margin-right: 0;
+    }
+
+    label {
+      margin-bottom: 5px;
+      color: #444;
+    }
+
+    select,
+    input[type="text"] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .options-area {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .form-group-inline {
+      flex: 1;
+      margin-right: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group-inline:last-child {
+      margin-right: 0;
+    }
+
+    .resolution-list {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .resolution-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .resolution-item:last-child {
+      border-bottom: none;
+    }
+
+    .resolution-item:hover {
+      background-color: #f9f9f9;
+    }
+
+    .resolution-radio {
+      margin-right: 15px;
+    }
+
+    .resolution-info {
+      flex: 1;
+    }
+
+    .resolution-title {
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .resolution-meta {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .resolution-size {
+      font-weight: bold;
+      color: #000;
+      white-space: nowrap;
+    }
+
+    .filename-row {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .filename-input {
+      flex: 1;
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .filename-input input {
+      width: 100%;
+    }
+
+    .folder-icon {
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .btn-cancel {
+      background-color: #ddd;
+      margin-right: 10px;
+    }
+
+    .btn-download {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="modal">
+    <!-- 影片標題和時間區域 -->
+    <div class="video-header">
+      <div class="video-thumbnail"></div>
+      <div>
+        <div class="video-title">Brawl Stars OST | Season 37 | *NEW* Brawler LUMI | Menu Music</div>
+        <div class="video-duration">02:13</div>
+      </div>
+    </div>
+
+    <!-- 原本的表單區域 -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="downloadType">下載</label>
+        <select id="downloadType">
+          <option>影片</option>
+          <option>音訊</option>
+          <option>字幕</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="container">容器</label>
+        <select id="container">
+          <option>MP4</option>
+          <option>MKV</option>
+          <option>WEBM</option>
+          <option>MP3</option>
+          <option>AAC</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="options-area">
+      <div class="form-group-inline">
+        <label for="codec">轉碼器</label>
+        <select id="codec">
+          <option>自動</option>
+          <option>H264</option>
+          <option>H265</option>
+          <option>VP9</option>
+          <option>AV1</option>
+        </select>
+      </div>
+      <div class="form-group-inline">
+        <label for="framerate">畫面播放速率</label>
+        <select id="framerate">
+          <option>最高</option>
+          <option>60fps</option>
+          <option>30fps</option>
+          <option>24fps</option>
+        </select>
+      </div>
+      <div class="form-group-inline">
+        <label for="audioTrack">音軌</label>
+        <select id="audioTrack">
+          <option>預設</option>
+          <option>英文</option>
+          <option>日文</option>
+          <option>中文</option>
+        </select>
+      </div>
+      <div class="form-group-inline">
+        <label for="subtitle">字幕</label>
+        <select id="subtitle">
+          <option>無</option>
+          <option>中文字幕</option>
+          <option>英文字幕</option>
+          <option>繁體中文</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="resolution-list">
+      <div class="resolution-item">
+        <input class="resolution-radio" type="radio" name="resolution" checked>
+        <div class="resolution-info">
+          <div class="resolution-title">4K</div>
+          <div class="resolution-meta">MP4・AV01・AAC・60fps</div>
+        </div>
+        <div class="resolution-size">49.6 MB</div>
+      </div>
+      <div class="resolution-item">
+        <input class="resolution-radio" type="radio" name="resolution">
+        <div class="resolution-info">
+          <div class="resolution-title">2K</div>
+          <div class="resolution-meta">MP4・H264・AAC・60fps</div>
+        </div>
+        <div class="resolution-size">25.2 MB</div>
+      </div>
+      <div class="resolution-item">
+        <input class="resolution-radio" type="radio" name="resolution">
+        <div class="resolution-info">
+          <div class="resolution-title">1080p</div>
+          <div class="resolution-meta">MP4・H264・AAC・60fps</div>
+        </div>
+        <div class="resolution-size">14.9 MB</div>
+      </div>
+      <div class="resolution-item">
+        <input class="resolution-radio" type="radio" name="resolution">
+        <div class="resolution-info">
+          <div class="resolution-title">720p</div>
+          <div class="resolution-meta">MP4・H264・AAC・60fps</div>
+        </div>
+        <div class="resolution-size">10.3 MB</div>
+      </div>
+    </div>
+
+    <div class="filename-row">
+      <div class="filename-input">
+        <input type="text" value="影片名稱.mp4" id="filename">
+        <span class="folder-icon" title="選擇資料夾" onclick="chooseFolder()">📁</span>
+        <input type="file" id="folderInput" style="display:none;" webkitdirectory directory>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="btn btn-cancel">取消</button>
+      <button class="btn btn-download">下載</button>
+    </div>
+  </div>
+
+  <script>
+    function chooseFolder() {
+      document.getElementById("folderInput").click();
+    }
+
+    document.getElementById("folderInput").addEventListener("change", function (event) {
+      const folderPath = event.target.files[0].webkitRelativePath.split("/")[0];
+      const filenameInput = document.getElementById("filename");
+      filenameInput.value = folderPath;  // 只顯示資料夾路徑，不加影片名稱
+    });
+  </script>
+</body>
+
+</html>
